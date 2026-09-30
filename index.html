@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dragon Triko | الكتالوج الرقمي</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,222 +11,655 @@
 
   <style>
     :root{
-      --accent-red:#e62323;
-      --bg0:#0c0d10;
-      --bg1:#101217;
-      --card:#161822;
-      --muted:#b8b8c2;
-      --text:#ffffff;
+      --red:#e62323;
+      --bg:#08090c;
+      --card:rgba(255,255,255,.05);
+      --border:rgba(255,255,255,.10);
+      --text:#fff;
+      --muted:rgba(255,255,255,.68);
       --radius:18px;
-      --radius2:26px;
-      --shadow: 0 18px 45px rgba(0,0,0,.35);
-      --shadow2: 0 10px 30px rgba(0,0,0,.22);
-      --border: rgba(255,255,255,.08);
     }
-
-    *{ box-sizing:border-box; margin:0; padding:0; font-family:'Tajawal',sans-serif; -webkit-tap-highlight-color:transparent; }
-    body{ background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
-                     radial-gradient(900px 500px at 90% 10%, rgba(197,168,128,.14), transparent 55%),
-                     linear-gradient(180deg, var(--bg0), #07080b 70%);
-          color:var(--text); min-height:100vh; }
-
-    .container{ width:min(1200px, 92%); margin:0 auto; }
-
-    /* Header */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Tajawal,sans-serif}
+    body{
+      min-height:100vh;color:var(--text);
+      background:
+        radial-gradient(900px 500px at 80% 0%,rgba(230,35,35,.20),transparent 60%),
+        linear-gradient(180deg,#0d0e12,#06070a 75%);
+    }
+    .container{width:min(1200px,92%);margin:auto}
     header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(10,11,16,.9), rgba(10,11,16,.6));
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      position:sticky;top:0;z-index:20;
+      background:rgba(10,11,15,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border)
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      text-decoration:none; color:var(--text); user-select:none;
-    }
+    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+    .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
     .logo{
-      width:42px; height:42px; border-radius:14px;
-      background: linear-gradient(135deg, rgba(230,35,35,.95), rgba(197,168,128,.7));
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.2);
-      box-shadow: 0 8px 20px rgba(230,35,35,.25);
+      width:45px;height:45px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(135deg,#ff3b3b,#9d1111);
+      box-shadow:0 10px 25px rgba(230,35,35,.25)
     }
-    .brand strong{
-      font-family: 'Montserrat', sans-serif;
-      font-weight:900; font-size:16px; line-height:1.1;
-    }
-    .brand span{ color:rgba(255,255,255,.7); font-size:11px; display:block; margin-top:2px; }
-
-    .menu{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
-    .menu a{
-      color:rgba(255,255,255,.8); text-decoration:none; padding:8px 12px;
-      border-radius:12px; font-weight:700; font-size:13px; transition:.2s ease;
-    }
-    .menu a:hover{ color:var(--text); background: rgba(255,255,255,.06); }
-
-    .cta{ display:flex; align-items:center; gap:10px; }
+    .brand strong{font-family:Montserrat;font-weight:900}
+    .brand span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+    .menu{display:flex;gap:8px}
+    .menu a{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:12px;font-weight:800}
+    .menu a:hover{background:var(--card);color:#fff}
     .btn{
-      cursor:pointer; border:none; padding:10px 16px; border-radius: var(--radius2);
-      font-weight:900; transition:.2s ease; color:var(--text);
-      background: linear-gradient(135deg, #ff3b3b, #c91212);
-      border:1px solid rgba(255,255,255,.14);
-      display:inline-flex; align-items:center; gap:8px;
-      white-space:nowrap; text-decoration:none; font-size:13px;
+      border:0;border-radius:999px;padding:12px 18px;
+      color:#fff;background:linear-gradient(135deg,#ff3b3b,#c71212);
+      font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex
     }
-    .btn:hover{ transform: translateY(-1px); filter:saturate(1.05); }
-    .btn.secondary{
-      background: rgba(255,255,255,.06); color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
+    .btn.secondary{background:var(--card);border:1px solid var(--border)}
+    .hero{padding:45px 0 25px}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
+    .panel{
+      background:var(--card);border:1px solid var(--border);
+      border-radius:26px;padding:24px;overflow:hidden
     }
-
-    /* Hero */
-    .hero{ position:relative; padding: 30px 0 20px; }
-    .hero-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:20px; align-items:stretch; }
-    @media (max-width: 900px){
-      .hero-grid{ grid-template-columns:1fr; }
-      .menu{ display:none; }
+    .badge{
+      display:inline-flex;padding:9px 13px;border-radius:999px;
+      background:rgba(230,35,35,.13);border:1px solid rgba(230,35,35,.35);
+      font-weight:900;font-size:13px;margin-bottom:15px
     }
-
-    .hero-card{
-      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      padding: 20px;
+    h1{font-family:Montserrat;font-size:40px;line-height:1.15;margin-bottom:14px}
+    .hero p{color:var(--muted);line-height:1.9;margin-bottom:20px}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+    .spec{padding:13px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.03)}
+    .spec b{display:block;font-size:13px}.spec span{display:block;color:var(--muted);font-size:12px;line-height:1.6;margin-top:5px}
+    .hero-image{height:330px;border-radius:18px;overflow:hidden;background:#15171d}
+    .hero-image img{width:100%;height:100%;object-fit:cover}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+    .chip{padding:9px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04);font-size:12px;font-weight:800}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 12px}
+    .search{flex:1;min-width:240px}
+    .search input,.select{
+      width:100%;padding:13px 15px;border-radius:15px;
+      border:1px solid var(--border);background:rgba(255,255,255,.05);
+      color:#fff;outline:0;font-weight:700
     }
-    .hero-badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 12px; border-radius: 999px;
-      background: rgba(230,35,35,.15); border:1px solid rgba(230,35,35,.35);
-      color: rgba(255,255,255,.95); font-weight:800; font-size:12px; margin-bottom:12px;
-    }
-    .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent-red); }
-
-    .hero h1{ font-family:'Montserrat',sans-serif; font-size: 32px; line-height:1.2; margin-bottom:10px; font-weight:900; }
-    @media (max-width: 520px){ .hero h1{ font-size:26px; } }
-
-    .hero p{ color: rgba(255,255,255,.8); font-size:14px; line-height:1.8; margin-bottom:16px; }
-
-    .hero-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-
-    .specs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 18px; }
-    @media (max-width: 520px){ .specs{ grid-template-columns:1fr; } }
-
-    .spec{ padding:12px; border-radius: var(--radius); background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
-    .spec strong{ font-size:12px; display:block; font-weight:900; color: rgba(255,255,255,.95); }
-    .spec span{ display:block; margin-top:4px; color: rgba(255,255,255,.7); font-size:11.5px; line-height:1.5; }
-
-    .hero-media{
-      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.03); padding:14px; display:flex; flex-direction:column; gap:12px;
-    }
-    .hero-media .img{
-      height: 220px; border-radius: 18px; overflow:hidden;
-      border:1px solid rgba(255,255,255,.1); position:relative;
-    }
-    .hero-media .img img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-
-    .chip{
-      padding:8px 12px; border-radius: 999px; border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04); color: rgba(255,255,255,.85);
-      font-weight:800; font-size:11px; display:inline-flex; align-items:center; gap:6px;
-    }
-
-    /* Controls */
-    .controls{
-      margin: 20px 0 14px; display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
-    }
-
-    .search{
-      flex:1; min-width: 240px; display:flex; gap:10px; align-items:center;
-      padding: 10px 14px; border-radius: 16px; border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-    }
-    .search input{
-      width:100%; border:none; outline:none; background: transparent;
-      color: var(--text); font-weight:700; font-size:13.5px;
-    }
-
-    .filters{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-
-    .select{
-      appearance:none; border-radius: 16px; padding: 10px 14px;
-      border:1px solid rgba(255,255,255,.12); background: rgba(16, 18, 23, 0.95);
-      color: var(--text); font-weight:800; font-size:12.5px; outline:none;
-    }
-
-    .toggle{
-      display:flex; align-items:center; gap:8px; padding: 10px 14px;
-      border-radius: 16px; border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04); font-weight:800; font-size:12.5px; cursor:pointer;
-    }
-
-    /* Grid cards */
-    .section-title{ font-family:'Montserrat',sans-serif; font-size: 18px; font-weight:900; margin: 18px 0 10px; }
-
-    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; padding-bottom: 40px; }
-    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr;} }
-
+    .select{width:auto;min-width:170px}
+    .select option{background:#101217;color:#fff}
+    .toggle{display:flex;align-items:center;gap:8px;padding:0 12px;font-weight:800;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:40px}
     .card{
-      border-radius: var(--radius); border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04); overflow:hidden; transition: .2s ease;
-      position:relative; cursor:pointer;
+      position:relative;overflow:hidden;cursor:pointer;
+      background:var(--card);border:1px solid var(--border);border-radius:20px;
+      transition:.2s
     }
-    .card:hover{ transform: translateY(-2px); border-color: rgba(230,35,35,.4); }
-
-    .thumb{
-      height: 280px; background: rgba(255,255,255,.02);
-      border-bottom: 1px solid rgba(255,255,255,.08); position:relative; overflow:hidden;
+    .card:hover{transform:translateY(-3px);border-color:rgba(230,35,35,.4)}
+    .thumb{height:280px;background:#12141a}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .card-body{padding:14px}
+    .card-title{font-family:Montserrat;font-weight:900;font-size:16px;margin-bottom:10px}
+    .row{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin:7px 0}
+    .row b{color:#fff}
+    .card-badge{
+      position:absolute;top:10px;right:10px;z-index:2;
+      padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.75);
+      border:1px solid rgba(230,35,35,.45);font-size:11px;font-weight:900
     }
-    .thumb img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-
-    .card-body{ padding: 14px; display:flex; flex-direction:column; gap:8px; }
-    .title{ font-family:'Montserrat',sans-serif; font-weight:900; font-size: 15px; color: rgba(255,255,255,.95); }
-
-    .meta{ display:grid; gap:6px; }
-    .row{ display:flex; align-items:center; justify-content:space-between; gap:10px; color: rgba(255,255,255,.8); font-size: 12.5px; font-weight:700; }
-    .row span:first-child{ color: rgba(255,255,255,.55); font-weight:800; }
-
-    .btn-wa-card {
-      margin-top: 6px; width: 100%; padding: 10px; border-radius: 12px;
-      background: #25d366; color: #fff; text-decoration: none; text-align: center;
-      font-weight: 800; font-size: 13px; display: block;
+    .wa{
+      display:block;text-align:center;margin-top:12px;padding:11px;
+      border-radius:12px;background:#25d366;color:#fff;text-decoration:none;font-weight:900
     }
-
-    .card .badge{
-      position:absolute; top:10px; right:10px; padding:4px 10px; border-radius: 999px;
-      background: rgba(10,11,16,.85); border:1px solid rgba(230,35,35,.4);
-      font-weight:800; font-size:11px; backdrop-filter: blur(8px); z-index:2;
-    }
-
-    /* Footer */
-    footer{ padding: 20px 0 30px; border-top:1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.6); text-align:center; font-size:12px; }
-
-    /* Modal */
+    .state{text-align:center;padding:45px;color:var(--muted);grid-column:1/-1}
+    footer{border-top:1px solid var(--border);padding:25px;text-align:center;color:var(--muted)}
     .modal{
-      position:fixed; inset:0; background: rgba(0,0,0,.85); display:none;
-      align-items:center; justify-content:center; padding:12px; z-index:999;
-      backdrop-filter: blur(8px);
+      position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+      padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(6px)
     }
-    .modal.open{ display:flex; }
-    .modal-card{
-      width:min(500px, 100%); max-height: 90vh; border-radius: 20px;
-      background: #12141c; border:1px solid rgba(255,255,255,.15);
-      box-shadow: 0 20px 60px rgba(0,0,0,.9); overflow:hidden;
-      display:flex; flex-direction:column; position:relative;
+    .modal.open{display:flex}
+    .modal-card{width:min(800px,100%);background:#101217;border:1px solid var(--border);border-radius:24px;overflow:hidden}
+    .modal-top{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--border)}
+    .close{width:38px;height:38px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:#fff;font-size:22px;cursor:pointer}
+    .modal-body{display:grid;grid-template-columns:1fr 1fr}
+    .modal-img{min-height:330px}.modal-img img{width:100%;height:100%;object-fit:cover}
+    .modal-info{padding:20px}.modal-info h2{font-family:Montserrat;margin-bottom:15px}
+    .info{padding:12px;border:1px solid var(--border);border-radius:13px;margin:8px 0;color:var(--muted)}
+    .info b{display:block;color:#fff;font-size:12px;margin-bottom:3px}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.menu{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){h1{font-size:32px}.grid{grid-template-columns:1fr}.specs{grid-template-columns:1fr}.modal-body{grid-template-columns:1fr}.modal-img{height:300px}.select{width:100%}}
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top">
+      <div class="logo">🐉</div>
+      <div>
+        <strong>Dragon Triko</strong>
+        <span>ألبسة شتوية • كتالوج رقمي</span>
+      </div>
+    </a>
+    <nav class="menu">
+      <a href="#products">المنتجات</a>
+      <a href="#about">عن الورشة</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+    <a class="btn secondary" href="#products">عرض الكتالوج</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="panel">
+        <div class="badge">● أحدث موديلات التريكو</div>
+        <h1>كتالوج Dragon Triko<br>للألبسة الشتوية</h1>
+        <p>تصفح الموديلات مباشرة من جدول المنتجات، وابحث بالاسم أو الكود، أو فلتر حسب التصنيف.</p>
+        <div class="actions">
+          <a class="btn" href="#products">ابدأ التصفح</a>
+          <button class="btn secondary" id="btnReset">تصفير الفلاتر</button>
+        </div>
+        <div class="specs">
+          <div class="spec"><b>خامات ممتازة</b><span>صوف وبوليستر وخامات شتوية.</span></div>
+          <div class="spec"><b>جودة عالية</b><span>موديلات ومقاسات متعددة.</span></div>
+          <div class="spec"><b>طلبات الجملة</b><span>التواصل مباشرة عبر واتساب.</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="hero-image">
+          <img src="https://i.ibb.co/jPCg5byx/1790718743552.jpg" alt="Dragon Triko">
+        </div>
+        <div class="chips">
+          <span class="chip">تريكو بياقة بولو</span>
+          <span class="chip">مقاسات متعددة</span>
+          <span class="chip">كتالوج محدث</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="container">
+    <div class="controls">
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="ابحث باسم الموديل أو الكود...">
+      </div>
+      <select id="categorySelect" class="select">
+        <option value="all">كل التصنيفات</option>
+      </select>
+      <label class="toggle">
+        <input id="onlyWithImage" type="checkbox">
+        مع صورة فقط
+      </label>
+    </div>
+
+    <h2 style="font-family:Montserrat;margin:18px 0 10px">تشكيلة الموديلات</h2>
+    <div id="productsGrid" class="grid">
+      <div class="state">جاري تحميل الكتالوج...</div>
+    </div>
+  </section>
+
+  <section id="about" class="container" style="padding:20px 0 45px">
+    <div class="panel">
+      <h2 style="font-family:Montserrat;margin-bottom:10px">عن Dragon Triko</h2>
+      <p style="color:var(--muted);line-height:1.9">
+        ورشة متخصصة في تصنيع وإنتاج موديلات التريكو والألبسة الشتوية والجملة.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  جميع الحقوق محفوظة © Dragon Triko 2026
+</footer>
+
+<div id="detailsModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-top">
+      <strong id="modalCode">كود الموديل</strong>
+      <button class="close" id="modalCloseBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-img">
+        <img id="modalImg" src="" alt="الموديل">
+      </div>
+      <div class="modal-info">
+        <h2 id="modalTitle">اسم الموديل</h2>
+        <div class="info"><b>الخامة</b><span id="modalFabric">-</span></div>
+        <div class="info"><b>المقاسات المتاحة</b><span id="modalSizes">-</span></div>
+        <div class="info"><b>أقل كمية للطلب</b><span id="modalMoq">-</span></div>
+        <div class="info"><b>ملاحظات</b><span id="modalNotes">-</span></div>
+        <a id="modalWaBtn" class="wa" href="#" target="_blank">طلب هذا الموديل عبر الواتساب</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* =========================================================
+     إعدادات Google Sheets
+     ========================================================= */
+
+  const SHEET_ID = '1ME-jisk80zWyzcqYXePUZo8YshoDweToq_LgZIKVLSM';
+
+  // اسم التبويب الظاهر عندك في Google Sheets
+  const SHEET_NAME = 'الورقة1';
+
+  const WHATSAPP_NUMBER = '905343265940';
+
+  let productsData = [];
+
+  /* =========================================================
+     تحويل رابط Google Drive إلى صورة قابلة للعرض
+     ========================================================= */
+
+  function formatImageUrl(url) {
+    if (!url) return '';
+
+    url = String(url).trim();
+
+    if (!url) return '';
+
+    if (url.includes('drive.google.com')) {
+      const match =
+        url.match(/\/d\/([a-zA-Z0-9_-]+)/) ||
+        url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+
+      if (match && match[1]) {
+        const fileId = match[1];
+
+        // الطريقة الأفضل لعرض صور Google Drive في الموقع
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`;
+      }
     }
-    .modal-top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 12px 16px; border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+
+    return url;
+  }
+
+  /* =========================================================
+     تنظيف أسماء الأعمدة والبيانات
+     ========================================================= */
+
+  function normalizeRow(row) {
+    const result = {};
+
+    Object.keys(row || {}).forEach(key => {
+      const cleanKey = String(key).trim();
+
+      let value = row[key];
+
+      if (typeof value === 'string') {
+        value = value.trim();
+      }
+
+      result[cleanKey] = value;
+    });
+
+    return result;
+  }
+
+  /* =========================================================
+     الاتصال بـ OpenSheet
+     ========================================================= */
+
+  async function fetchFromOpenSheet() {
+    const url =
+      `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+
+    const response = await fetch(url, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenSheet HTTP ${response.status}`);
     }
-    .modal-top strong{ font-family:'Montserrat',sans-serif; font-weight:900; color: #fff; font-size:14px; }
-    .xbtn{
-      border:none; cursor:pointer; width:34px; height:34px; border-radius: 10px;
-      background: rgba(230,35,35,.2); border:1px solid rgba(230,35,35,.4);
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error('OpenSheet لم يرجع بيانات صحيحة');
+    }
+
+    return data.map(normalizeRow);
+  }
+
+  /* =========================================================
+     اتصال احتياطي عبر Google Visualization
+     ========================================================= */
+
+  async function fetchFromGoogleSheets() {
+    const url =
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq` +
+      `?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    const response = await fetch(url, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets HTTP ${response.status}`);
+    }
+
+    const text = await response.text();
+
+    const match = text.match(
+      /google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/
+    );
+
+    if (!match) {
+      throw new Error('تعذر قراءة بيانات Google Sheets');
+    }
+
+    const json = JSON.parse(match[1]);
+
+    const columns =
+      (json.table?.cols || []).map(
+        (column, index) =>
+          column.label || `column_${index + 1}`
+      );
+
+    const rows = json.table?.rows || [];
+
+    return rows.map(row => {
+      const object = {};
+
+      columns.forEach((columnName, index) => {
+        object[columnName] =
+          row.c?.[index]?.v ?? '';
+      });
+
+      return normalizeRow(object);
+    });
+  }
+
+  /* =========================================================
+     تحميل البيانات
+     ========================================================= */
+
+  async function loadSheetData() {
+    try {
+      const data = await fetchFromOpenSheet();
+
+      if (data.length > 0) {
+        return data;
+      }
+
+      throw new Error('الجدول فارغ');
+    } catch (openSheetError) {
+
+      console.warn(
+        'فشل OpenSheet، سيتم استخدام الاتصال الاحتياطي:',
+        openSheetError
+      );
+
+      const data = await fetchFromGoogleSheets();
+
+      if (!data.length) {
+        throw new Error('لا توجد بيانات في الجدول');
+      }
+
+      return data;
+    }
+  }
+
+  /* =========================================================
+     تحميل المنتجات من الجدول
+     أعمدة الجدول عندك:
+     A المعرف
+     B اسم الموديل
+     C الكود
+     D التصنيف
+     E الخامة
+     F المقاسات
+     G أقل كمية
+     H ملاحظات
+     I كود اللون
+     J الصورة
+     ========================================================= */
+
+  async function fetchCatalog() {
+    const grid = document.getElementById('productsGrid');
+
+    try {
+      grid.innerHTML =
+        '<div class="state">جاري تحميل الكتالوج...</div>';
+
+      const rows = await loadSheetData();
+
+      const grouped = {};
+      const categories = new Set();
+
+      rows.forEach(row => {
+
+        const id =
+          row['المعرف'] ||
+          row['id'] ||
+          row['الكود'];
+
+        if (!id) return;
+
+        const category =
+          row['التصنيف'] ||
+          row['tag'] ||
+          'عام';
+
+        categories.add(category);
+
+        if (!grouped[id]) {
+
+          grouped[id] = {
+            id: String(id),
+
+            title:
+              row['اسم الموديل'] ||
+              row['title'] ||
+              'موديل بدون اسم',
+
+            code:
+              row['الكود'] ||
+              row['code'] ||
+              String(id),
+
+            tag: category,
+
+            fabric:
+              row['الخامة'] ||
+              row['fabric'] ||
+              '-',
+
+            sizes:
+              row['المقاسات'] ||
+              row['sizes'] ||
+              '-',
+
+            moq:
+              row['أقل كمية'] ||
+              row['اقل كمية'] ||
+              row['moq'] ||
+              '-',
+
+            notes:
+              row['ملاحظات'] ||
+              row['notes'] ||
+              '-',
+
+            variants: []
+          };
+        }
+
+        let color =
+          row['كود اللون'] ||
+          row['color_hex'] ||
+          '#e62323';
+
+        color = String(color).trim();
+
+        if (
+          color &&
+          !color.startsWith('#') &&
+          /^[0-9a-fA-F]{6}$/.test(color)
+        ) {
+          color = '#' + color;
+        }
+
+        const image =
+          row['الصورة'] ||
+          row['رابط الصورة'] ||
+          row['image_url'] ||
+          '';
+
+        grouped[id].variants.push({
+          color: color,
+          image: formatImageUrl(image)
+        });
+      });
+
+      productsData = Object.values(grouped);
+
+      populateCategories([...categories]);
+
+      renderGrid();
+
+    } catch (error) {
+
+      console.error(
+        'خطأ تحميل الكتالوج:',
+        error
+      );
+
+      grid.innerHTML = `
+        <div class="state">
+          تعذر تحميل المنتجات من Google Sheets.
+          <br><br>
+          تأكد من أن اسم الورقة هو:
+          <strong>الورقة1</strong>
+          <br>
+          وتأكد من أن الجدول متاح للقراءة.
+        </div>
+      `;
+    }
+  }
+
+  /* =========================================================
+     إضافة التصنيفات إلى القائمة
+     ========================================================= */
+
+  function populateCategories(categories) {
+
+    const select =
+      document.getElementById('categorySelect');
+
+    select.innerHTML =
+      '<option value="all">كل التصنيفات</option>';
+
+    categories.forEach(category => {
+
+      if (!category) return;
+
+      const option =
+        document.createElement('option');
+
+      option.value = category;
+      option.textContent = category;
+
+      select.appendChild(option);
+    });
+  }
+
+  /* =========================================================
+     عرض المنتجات
+     ========================================================= */
+
+  function renderGrid() {
+
+    const grid =
+      document.getElementById('productsGrid');
+
+    const search =
+      document
+        .getElementById('searchInput')
+        .value
+        .toLowerCase()
+        .trim();
+
+    const selectedCategory =
+      document.getElementById('categorySelect')
+        .value;
+
+    const onlyImages =
+      document.getElementById('onlyWithImage')
+        .checked;
+
+    const filtered =
+      productsData.filter(product => {
+
+        const title =
+          String(product.title)
+            .toLowerCase();
+
+        const code =
+          String(product.code)
+            .toLowerCase();
+
+        const searchMatch =
+          title.includes(search) ||
+          code.includes(search);
+
+        const categoryMatch =
+          selectedCategory === 'all' ||
+          product.tag === selectedCategory;
+
+        const hasImage =
+          product.variants.some(
+            variant =>
+              variant.image &&
+              variant.image.length > 5
+          );
+
+        const imageMatch =
+          !onlyImages || hasImage;
+
+        return (
+          searchMatch &&
+          categoryMatch &&
+          imageMatch
+        );
+      });
+
+    if (!filtered.length) {
+
+      grid.innerHTML =
+        '<div class="state">لا توجد موديلات مطابقة للبحث.</div>';
+
+      return;
+    }
+
+    grid.innerHTML =
+      filtered.map(product => {
+
+        const dataIndex =
+          productsData.indexOf(product);
+
+        const firstVariant =
+          product.variants[0] || {
+            image: '',
+            color: '#e62323'
+          };
+
+        const fallback =
+          'https://via.placeholder.com/600x700/101217/e62323?text=Dragon+Triko';
+
+        const image =
+          firstVariant.image ||
+          fallback;
+
+        const message =
+          encodeURIComponent(
+            `السلام عليكم، أود الاستفسار عن موديل: ${product.title} (كود: ${product.code})`
+          );
+
+        const colors =
+          product.variants.length > 1
+            ? `
+              <div class="row">
+                <span>الألوان:</span>
+                <span>
+                  ${product.var5,35,.4);
       color: #fff; font-size:20px; font-weight:bold; display:grid; place-items:center;
     }
     .modal-body{
