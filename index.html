@@ -659,6 +659,444 @@
               <div class="row">
                 <span>الألوان:</span>
                 <span>
+                  ${product.vars">-</span></div>
+        <div class="info"><b>أقل كمية للطلب</b><span id="modalMoq">-</span></div>
+        <div class="info"><b>ملاحظات</b><span id="modalNotes">-</span></div>
+        <a id="modalWaBtn" class="wa" href="#" target="_blank">طلب هذا الموديل عبر الواتساب</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* =========================================================
+     إعدادات Google Sheets
+     ========================================================= */
+
+  const SHEET_ID = '1ME-jisk80zWyzcqYXePUZo8YshoDweToq_LgZIKVLSM';
+
+  // اسم التبويب الظاهر عندك في Google Sheets
+  const SHEET_NAME = 'الورقة1';
+
+  const WHATSAPP_NUMBER = '905343265940';
+
+  let productsData = [];
+
+  /* =========================================================
+     تحويل رابط Google Drive إلى صورة قابلة للعرض
+     ========================================================= */
+
+  function formatImageUrl(url) {
+    if (!url) return '';
+
+    url = String(url).trim();
+
+    if (!url) return '';
+
+    if (url.includes('drive.google.com')) {
+      const match =
+        url.match(/\/d\/([a-zA-Z0-9_-]+)/) ||
+        url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+
+      if (match && match[1]) {
+        const fileId = match[1];
+
+        // الطريقة الأفضل لعرض صور Google Drive في الموقع
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`;
+      }
+    }
+
+    return url;
+  }
+
+  /* =========================================================
+     تنظيف أسماء الأعمدة والبيانات
+     ========================================================= */
+
+  function normalizeRow(row) {
+    const result = {};
+
+    Object.keys(row || {}).forEach(key => {
+      const cleanKey = String(key).trim();
+
+      let value = row[key];
+
+      if (typeof value === 'string') {
+        value = value.trim();
+      }
+
+      result[cleanKey] = value;
+    });
+
+    return result;
+  }
+
+  /* =========================================================
+     الاتصال بـ OpenSheet
+     ========================================================= */
+
+  async function fetchFromOpenSheet() {
+    const url =
+      `https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(SHEET_NAME)}`;
+
+    const response = await fetch(url, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(`OpenSheet HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!Array.isArray(data)) {
+      throw new Error('OpenSheet لم يرجع بيانات صحيحة');
+    }
+
+    return data.map(normalizeRow);
+  }
+
+  /* =========================================================
+     اتصال احتياطي عبر Google Visualization
+     ========================================================= */
+
+  async function fetchFromGoogleSheets() {
+    const url =
+      `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq` +
+      `?tqx=out:json&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+    const response = await fetch(url, {
+      cache: 'no-store'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Google Sheets HTTP ${response.status}`);
+    }
+
+    const text = await response.text();
+
+    const match = text.match(
+      /google\.visualization\.Query\.setResponse\(([\s\S]*)\);?\s*$/
+    );
+
+    if (!match) {
+      throw new Error('تعذر قراءة بيانات Google Sheets');
+    }
+
+    const json = JSON.parse(match[1]);
+
+    const columns =
+      (json.table?.cols || []).map(
+        (column, index) =>
+          column.label || `column_${index + 1}`
+      );
+
+    const rows = json.table?.rows || [];
+
+    return rows.map(row => {
+      const object = {};
+
+      columns.forEach((columnName, index) => {
+        object[columnName] =
+          row.c?.[index]?.v ?? '';
+      });
+
+      return normalizeRow(object);
+    });
+  }
+
+  /* =========================================================
+     تحميل البيانات
+     ========================================================= */
+
+  async function loadSheetData() {
+    try {
+      const data = await fetchFromOpenSheet();
+
+      if (data.length > 0) {
+        return data;
+      }
+
+      throw new Error('الجدول فارغ');
+    } catch (openSheetError) {
+
+      console.warn(
+        'فشل OpenSheet، سيتم استخدام الاتصال الاحتياطي:',
+        openSheetError
+      );
+
+      const data = await fetchFromGoogleSheets();
+
+      if (!data.length) {
+        throw new Error('لا توجد بيانات في الجدول');
+      }
+
+      return data;
+    }
+  }
+
+  /* =========================================================
+     تحميل المنتجات من الجدول
+     أعمدة الجدول عندك:
+     A المعرف
+     B اسم الموديل
+     C الكود
+     D التصنيف
+     E الخامة
+     F المقاسات
+     G أقل كمية
+     H ملاحظات
+     I كود اللون
+     J الصورة
+     ========================================================= */
+
+  async function fetchCatalog() {
+    const grid = document.getElementById('productsGrid');
+
+    try {
+      grid.innerHTML =
+        '<div class="state">جاري تحميل الكتالوج...</div>';
+
+      const rows = await loadSheetData();
+
+      const grouped = {};
+      const categories = new Set();
+
+      rows.forEach(row => {
+
+        const id =
+          row['المعرف'] ||
+          row['id'] ||
+          row['الكود'];
+
+        if (!id) return;
+
+        const category =
+          row['التصنيف'] ||
+          row['tag'] ||
+          'عام';
+
+        categories.add(category);
+
+        if (!grouped[id]) {
+
+          grouped[id] = {
+            id: String(id),
+
+            title:
+              row['اسم الموديل'] ||
+              row['title'] ||
+              'موديل بدون اسم',
+
+            code:
+              row['الكود'] ||
+              row['code'] ||
+              String(id),
+
+            tag: category,
+
+            fabric:
+              row['الخامة'] ||
+              row['fabric'] ||
+              '-',
+
+            sizes:
+              row['المقاسات'] ||
+              row['sizes'] ||
+              '-',
+
+            moq:
+              row['أقل كمية'] ||
+              row['اقل كمية'] ||
+              row['moq'] ||
+              '-',
+
+            notes:
+              row['ملاحظات'] ||
+              row['notes'] ||
+              '-',
+
+            variants: []
+          };
+        }
+
+        let color =
+          row['كود اللون'] ||
+          row['color_hex'] ||
+          '#e62323';
+
+        color = String(color).trim();
+
+        if (
+          color &&
+          !color.startsWith('#') &&
+          /^[0-9a-fA-F]{6}$/.test(color)
+        ) {
+          color = '#' + color;
+        }
+
+        const image =
+          row['الصورة'] ||
+          row['رابط الصورة'] ||
+          row['image_url'] ||
+          '';
+
+        grouped[id].variants.push({
+          color: color,
+          image: formatImageUrl(image)
+        });
+      });
+
+      productsData = Object.values(grouped);
+
+      populateCategories([...categories]);
+
+      renderGrid();
+
+    } catch (error) {
+
+      console.error(
+        'خطأ تحميل الكتالوج:',
+        error
+      );
+
+      grid.innerHTML = `
+        <div class="state">
+          تعذر تحميل المنتجات من Google Sheets.
+          <br><br>
+          تأكد من أن اسم الورقة هو:
+          <strong>الورقة1</strong>
+          <br>
+          وتأكد من أن الجدول متاح للقراءة.
+        </div>
+      `;
+    }
+  }
+
+  /* =========================================================
+     إضافة التصنيفات إلى القائمة
+     ========================================================= */
+
+  function populateCategories(categories) {
+
+    const select =
+      document.getElementById('categorySelect');
+
+    select.innerHTML =
+      '<option value="all">كل التصنيفات</option>';
+
+    categories.forEach(category => {
+
+      if (!category) return;
+
+      const option =
+        document.createElement('option');
+
+      option.value = category;
+      option.textContent = category;
+
+      select.appendChild(option);
+    });
+  }
+
+  /* =========================================================
+     عرض المنتجات
+     ========================================================= */
+
+  function renderGrid() {
+
+    const grid =
+      document.getElementById('productsGrid');
+
+    const search =
+      document
+        .getElementById('searchInput')
+        .value
+        .toLowerCase()
+        .trim();
+
+    const selectedCategory =
+      document.getElementById('categorySelect')
+        .value;
+
+    const onlyImages =
+      document.getElementById('onlyWithImage')
+        .checked;
+
+    const filtered =
+      productsData.filter(product => {
+
+        const title =
+          String(product.title)
+            .toLowerCase();
+
+        const code =
+          String(product.code)
+            .toLowerCase();
+
+        const searchMatch =
+          title.includes(search) ||
+          code.includes(search);
+
+        const categoryMatch =
+          selectedCategory === 'all' ||
+          product.tag === selectedCategory;
+
+        const hasImage =
+          product.variants.some(
+            variant =>
+              variant.image &&
+              variant.image.length > 5
+          );
+
+        const imageMatch =
+          !onlyImages || hasImage;
+
+        return (
+          searchMatch &&
+          categoryMatch &&
+          imageMatch
+        );
+      });
+
+    if (!filtered.length) {
+
+      grid.innerHTML =
+        '<div class="state">لا توجد موديلات مطابقة للبحث.</div>';
+
+      return;
+    }
+
+    grid.innerHTML =
+      filtered.map(product => {
+
+        const dataIndex =
+          productsData.indexOf(product);
+
+        const firstVariant =
+          product.variants[0] || {
+            image: '',
+            color: '#e62323'
+          };
+
+        const fallback =
+          'https://via.placeholder.com/600x700/101217/e62323?text=Dragon+Triko';
+
+        const image =
+          firstVariant.image ||
+          fallback;
+
+        const message =
+          encodeURIComponent(
+            `السلام عليكم، أود الاستفسار عن موديل: ${product.title} (كود: ${product.code})`
+          );
+
+        const colors =
+          product.variants.length > 1
+            ? `
+              <div class="row">
+                <span>الألوان:</span>
+                <span>
                   ${product.var5,35,.4);
       color: #fff; font-size:20px; font-weight:bold; display:grid; place-items:center;
     }
