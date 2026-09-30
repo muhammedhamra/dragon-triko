@@ -1,227 +1,1624 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Dragon Triko | الكتالوج الرقمي</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- الخطوط -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    :root{
-      --red:#e62323;
-      --bg:#08090c;
-      --card:rgba(255,255,255,.05);
-      --border:rgba(255,255,255,.10);
-      --text:#fff;
-      --muted:rgba(255,255,255,.68);
-      --radius:18px;
+
+    /* =====================================================
+       الإعدادات العامة
+    ===================================================== */
+
+    :root {
+
+      --accent-red: #e62323;
+
+      --bg0: #0c0d10;
+      --bg1: #08090c;
+
+      --card: rgba(255,255,255,0.05);
+
+      --text: #ffffff;
+
+      --muted: rgba(255,255,255,0.68);
+
+      --border: rgba(255,255,255,0.10);
+
+      --radius: 18px;
+
+      --radius2: 26px;
+
+      --shadow:
+        0 18px 45px rgba(0,0,0,0.35);
+
     }
-    *{box-sizing:border-box;margin:0;padding:0;font-family:Tajawal,sans-serif}
-    body{
-      min-height:100vh;color:var(--text);
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+      font-family: "Tajawal", sans-serif;
+
+      -webkit-tap-highlight-color: transparent;
+
+    }
+
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
       background:
-        radial-gradient(900px 500px at 80% 0%,rgba(230,35,35,.20),transparent 60%),
-        linear-gradient(180deg,#0d0e12,#06070a 75%);
+
+        radial-gradient(
+          1000px 500px at 20% -10%,
+          rgba(230,35,35,0.20),
+          transparent 60%
+        ),
+
+        radial-gradient(
+          800px 450px at 90% 10%,
+          rgba(197,168,128,0.10),
+          transparent 60%
+        ),
+
+        linear-gradient(
+          180deg,
+          var(--bg0),
+          var(--bg1) 75%
+        );
+
+      color: var(--text);
+
     }
-    .container{width:min(1200px,92%);margin:auto}
-    header{
-      position:sticky;top:0;z-index:20;
-      background:rgba(10,11,15,.88);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--border)
+
+
+    img {
+
+      max-width: 100%;
+
     }
-    .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-    .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
-    .logo{
-      width:45px;height:45px;border-radius:14px;display:grid;place-items:center;
-      background:linear-gradient(135deg,#ff3b3b,#9d1111);
-      box-shadow:0 10px 25px rgba(230,35,35,.25)
+
+
+    button,
+    input,
+    select {
+
+      font-family: inherit;
+
     }
-    .brand strong{font-family:Montserrat;font-weight:900}
-    .brand span{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-    .menu{display:flex;gap:8px}
-    .menu a{color:var(--muted);text-decoration:none;padding:10px 12px;border-radius:12px;font-weight:800}
-    .menu a:hover{background:var(--card);color:#fff}
-    .btn{
-      border:0;border-radius:999px;padding:12px 18px;
-      color:#fff;background:linear-gradient(135deg,#ff3b3b,#c71212);
-      font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex
+
+
+    .container {
+
+      width: min(1200px, 92%);
+
+      margin: 0 auto;
+
     }
-    .btn.secondary{background:var(--card);border:1px solid var(--border)}
-    .hero{padding:45px 0 25px}
-    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}
-    .panel{
-      background:var(--card);border:1px solid var(--border);
-      border-radius:26px;padding:24px;overflow:hidden
+
+
+    /* =====================================================
+       الهيدر
+    ===================================================== */
+
+    header {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 50;
+
+      background:
+        rgba(10,11,16,0.88);
+
+      backdrop-filter:
+        blur(15px);
+
+      border-bottom:
+        1px solid var(--border);
+
     }
-    .badge{
-      display:inline-flex;padding:9px 13px;border-radius:999px;
-      background:rgba(230,35,35,.13);border:1px solid rgba(230,35,35,.35);
-      font-weight:900;font-size:13px;margin-bottom:15px
+
+
+    .nav {
+
+      min-height: 76px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
     }
-    h1{font-family:Montserrat;font-size:40px;line-height:1.15;margin-bottom:14px}
-    .hero p{color:var(--muted);line-height:1.9;margin-bottom:20px}
-    .actions{display:flex;gap:10px;flex-wrap:wrap}
-    .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
-    .spec{padding:13px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.03)}
-    .spec b{display:block;font-size:13px}.spec span{display:block;color:var(--muted);font-size:12px;line-height:1.6;margin-top:5px}
-    .hero-image{height:330px;border-radius:18px;overflow:hidden;background:#15171d}
-    .hero-image img{width:100%;height:100%;object-fit:cover}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
-    .chip{padding:9px 12px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04);font-size:12px;font-weight:800}
-    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 12px}
-    .search{flex:1;min-width:240px}
-    .search input,.select{
-      width:100%;padding:13px 15px;border-radius:15px;
-      border:1px solid var(--border);background:rgba(255,255,255,.05);
-      color:#fff;outline:0;font-weight:700
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      color: #fff;
+
+      text-decoration: none;
+
     }
-    .select{width:auto;min-width:170px}
-    .select option{background:#101217;color:#fff}
-    .toggle{display:flex;align-items:center;gap:8px;padding:0 12px;font-weight:800;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:40px}
-    .card{
-      position:relative;overflow:hidden;cursor:pointer;
-      background:var(--card);border:1px solid var(--border);border-radius:20px;
-      transition:.2s
+
+
+    .logo {
+
+      width: 45px;
+
+      height: 45px;
+
+      border-radius: 14px;
+
+      display: grid;
+
+      place-items: center;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          #ff3b3b,
+          #a50e0e
+        );
+
+      box-shadow:
+        0 10px 30px rgba(230,35,35,0.25);
+
+      font-size: 24px;
+
     }
-    .card:hover{transform:translateY(-3px);border-color:rgba(230,35,35,.4)}
-    .thumb{height:280px;background:#12141a}
-    .thumb img{width:100%;height:100%;object-fit:cover}
-    .card-body{padding:14px}
-    .card-title{font-family:Montserrat;font-weight:900;font-size:16px;margin-bottom:10px}
-    .row{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:13px;margin:7px 0}
-    .row b{color:#fff}
-    .card-badge{
-      position:absolute;top:10px;right:10px;z-index:2;
-      padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.75);
-      border:1px solid rgba(230,35,35,.45);font-size:11px;font-weight:900
+
+
+    .brand strong {
+
+      font-family: "Montserrat", sans-serif;
+
+      font-weight: 900;
+
+      font-size: 16px;
+
     }
-    .wa{
-      display:block;text-align:center;margin-top:12px;padding:11px;
-      border-radius:12px;background:#25d366;color:#fff;text-decoration:none;font-weight:900
+
+
+    .brand span {
+
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin-top: 3px;
+
     }
-    .state{text-align:center;padding:45px;color:var(--muted);grid-column:1/-1}
-    footer{border-top:1px solid var(--border);padding:25px;text-align:center;color:var(--muted)}
-    .modal{
-      position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
-      padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(6px)
+
+
+    .menu {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 5px;
+
     }
-    .modal.open{display:flex}
-    .modal-card{width:min(800px,100%);background:#101217;border:1px solid var(--border);border-radius:24px;overflow:hidden}
-    .modal-top{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--border)}
-    .close{width:38px;height:38px;border:1px solid var(--border);border-radius:12px;background:var(--card);color:#fff;font-size:22px;cursor:pointer}
-    .modal-body{display:grid;grid-template-columns:1fr 1fr}
-    .modal-img{min-height:330px}.modal-img img{width:100%;height:100%;object-fit:cover}
-    .modal-info{padding:20px}.modal-info h2{font-family:Montserrat;margin-bottom:15px}
-    .info{padding:12px;border:1px solid var(--border);border-radius:13px;margin:8px 0;color:var(--muted)}
-    .info b{display:block;color:#fff;font-size:12px;margin-bottom:3px}
-    @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.menu{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:600px){h1{font-size:32px}.grid{grid-template-columns:1fr}.specs{grid-template-columns:1fr}.modal-body{grid-template-columns:1fr}.modal-img{height:300px}.select{width:100%}}
+
+
+    .menu a {
+
+      color: var(--muted);
+
+      text-decoration: none;
+
+      padding: 10px 12px;
+
+      border-radius: 12px;
+
+      font-weight: 800;
+
+      font-size: 13px;
+
+    }
+
+
+    .menu a:hover {
+
+      background:
+        rgba(255,255,255,0.05);
+
+      color: #fff;
+
+    }
+
+
+    /* =====================================================
+       الأزرار
+    ===================================================== */
+
+    .btn {
+
+      border: 1px solid rgba(255,255,255,0.12);
+
+      border-radius: 999px;
+
+      padding: 12px 18px;
+
+      color: #fff;
+
+      background:
+
+        linear-gradient(
+          135deg,
+          #ff3b3b,
+          #c71212
+        );
+
+      font-weight: 900;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      transition: 0.2s;
+
+    }
+
+
+    .btn:hover {
+
+      transform: translateY(-1px);
+
+    }
+
+
+    .btn.secondary {
+
+      background:
+        rgba(255,255,255,0.05);
+
+      border-color:
+        var(--border);
+
+    }
+
+
+    /* =====================================================
+       Hero
+    ===================================================== */
+
+    .hero {
+
+      padding: 48px 0 25px;
+
+    }
+
+
+    .hero-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        1.05fr 0.95fr;
+
+      gap: 20px;
+
+    }
+
+
+    .hero-card {
+
+      background:
+        rgba(255,255,255,0.05);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius2);
+
+      padding: 24px;
+
+      box-shadow:
+        0 14px 35px rgba(0,0,0,0.20);
+
+      overflow: hidden;
+
+    }
+
+
+    .hero-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 9px 13px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(230,35,35,0.13);
+
+      border:
+        1px solid rgba(230,35,35,0.35);
+
+      font-weight: 900;
+
+      font-size: 13px;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .hero-badge .dot {
+
+      width: 9px;
+
+      height: 9px;
+
+      border-radius: 50%;
+
+      background:
+        var(--accent-red);
+
+      box-shadow:
+        0 0 0 5px rgba(230,35,35,0.15);
+
+    }
+
+
+    .hero h1 {
+
+      font-family: "Montserrat", sans-serif;
+
+      font-size: 40px;
+
+      line-height: 1.15;
+
+      font-weight: 900;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .hero-text {
+
+      color: var(--muted);
+
+      line-height: 1.9;
+
+      margin-bottom: 20px;
+
+      font-size: 15px;
+
+    }
+
+
+    .hero-actions {
+
+      display: flex;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+    }
+
+
+    .specs {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 10px;
+
+      margin-top: 22px;
+
+    }
+
+
+    .spec {
+
+      padding: 13px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,0.03);
+
+    }
+
+
+    .spec strong {
+
+      display: block;
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+    }
+
+
+    .spec span {
+
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.6;
+
+      margin-top: 5px;
+
+    }
+
+
+    .hero-media {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+    .hero-image {
+
+      height: 330px;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      background:
+        #14161c;
+
+      border:
+        1px solid var(--border);
+
+    }
+
+
+    .hero-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+    }
+
+
+    .chips {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+    }
+
+
+    .chip {
+
+      padding: 9px 12px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,0.04);
+
+      border-radius: 999px;
+
+      color:
+        rgba(255,255,255,0.85);
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+    }
+
+
+    /* =====================================================
+       أدوات البحث
+    ===================================================== */
+
+    .controls {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin: 22px 0 14px;
+
+    }
+
+
+    .search-box {
+
+      flex: 1;
+
+      min-width: 250px;
+
+      position: relative;
+
+    }
+
+
+    .search-box input {
+
+      width: 100%;
+
+      padding: 14px 16px;
+
+      border-radius: 16px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,0.05);
+
+      color: #fff;
+
+      outline: none;
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+    }
+
+
+    .search-box input::placeholder {
+
+      color:
+        rgba(255,255,255,0.50);
+
+    }
+
+
+    .search-box input:focus {
+
+      border-color:
+        rgba(230,35,35,0.55);
+
+    }
+
+
+    .select {
+
+      min-width: 180px;
+
+      padding: 14px 15px;
+
+      border-radius: 16px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        #12141a;
+
+      color: #fff;
+
+      outline: none;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+    }
+
+
+    .select option {
+
+      background:
+        #101217;
+
+      color: #fff;
+
+    }
+
+
+    .toggle {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding: 12px 14px;
+
+      color: var(--muted);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,0.04);
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+    }
+
+
+    .toggle input {
+
+      accent-color:
+        var(--accent-red);
+
+    }
+
+
+    /* =====================================================
+       عنوان المنتجات
+    ===================================================== */
+
+    .section-title {
+
+      font-family:
+        "Montserrat", sans-serif;
+
+      font-size: 19px;
+
+      font-weight: 900;
+
+      margin: 20px 0 12px;
+
+    }
+
+
+    /* =====================================================
+       شبكة المنتجات
+    ===================================================== */
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 15px;
+
+      padding-bottom: 45px;
+
+    }
+
+
+    .card {
+
+      position: relative;
+
+      overflow: hidden;
+
+      cursor: pointer;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 21px;
+
+      transition:
+        transform 0.2s,
+        border-color 0.2s;
+
+    }
+
+
+    .card:hover {
+
+      transform:
+        translateY(-3px);
+
+      border-color:
+        rgba(230,35,35,0.40);
+
+    }
+
+
+    .card-badge {
+
+      position: absolute;
+
+      z-index: 3;
+
+      top: 11px;
+
+      right: 11px;
+
+      padding: 6px 10px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(0,0,0,0.78);
+
+      border:
+        1px solid rgba(230,35,35,0.40);
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      backdrop-filter:
+        blur(8px);
+
+    }
+
+
+    .thumb {
+
+      height: 285px;
+
+      background:
+        #13151b;
+
+      border-bottom:
+        1px solid var(--border);
+
+      overflow: hidden;
+
+    }
+
+
+    .thumb img {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      transition:
+        transform 0.35s;
+
+    }
+
+
+    .card:hover .thumb img {
+
+      transform:
+        scale(1.04);
+
+    }
+
+
+    .card-body {
+
+      padding: 15px;
+
+    }
+
+
+    .product-title {
+
+      font-family:
+        "Montserrat", sans-serif;
+
+      font-size: 15px;
+
+      line-height: 1.45;
+
+      font-weight: 900;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 10px;
+
+      color: var(--muted);
+
+      font-size: 12.8px;
+
+      margin: 7px 0;
+
+    }
+
+
+    .row strong {
+
+      color: #fff;
+
+    }
+
+
+    .colors {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+    }
+
+
+    .color-dot {
+
+      width: 16px;
+
+      height: 16px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid rgba(255,255,255,0.45);
+
+      box-shadow:
+        0 2px 5px rgba(0,0,0,0.3);
+
+    }
+
+
+    .wa-button {
+
+      display: block;
+
+      width: 100%;
+
+      text-align: center;
+
+      text-decoration: none;
+
+      color: #fff;
+
+      background:
+        #25d366;
+
+      padding: 11px;
+
+      margin-top: 12px;
+
+      border-radius: 12px;
+
+      font-weight: 900;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+
+    }
+
+
+    .wa-button:hover {
+
+      background:
+        #1eb954;
+
+    }
+
+
+    .state-msg {
+
+      grid-column:
+        1 / -1;
+
+      text-align: center;
+
+      padding: 55px 20px;
+
+      color: var(--muted);
+
+      line-height: 2;
+
+    }
+
+
+    .error-box {
+
+      color: #ffb3b3;
+
+      background:
+        rgba(230,35,35,0.08);
+
+      border:
+        1px solid rgba(230,35,35,0.25);
+
+      border-radius: 16px;
+
+      padding: 20px;
+
+      margin-bottom: 30px;
+
+    }
+
+
+    /* =====================================================
+       عن الورشة
+    ===================================================== */
+
+    .about {
+
+      padding-bottom: 45px;
+
+    }
+
+
+    .about-card {
+
+      padding: 22px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,0.04);
+
+      border-radius: 22px;
+
+      color: var(--muted);
+
+      line-height: 1.9;
+
+    }
+
+
+    /* =====================================================
+       Footer
+    ===================================================== */
+
+    footer {
+
+      border-top:
+        1px solid var(--border);
+
+      padding:
+        25px 0 40px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+
+    /* =====================================================
+       النافذة المنبثقة
+    ===================================================== */
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 18px;
+
+      background:
+        rgba(0,0,0,0.80);
+
+      backdrop-filter:
+        blur(7px);
+
+    }
+
+
+    .modal.open {
+
+      display: flex;
+
+    }
+
+
+    .modal-card {
+
+      width:
+        min(850px, 100%);
+
+      max-height:
+        92vh;
+
+      overflow:
+        auto;
+
+      background:
+        #101217;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 24px;
+
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.80);
+
+    }
+
+
+    .modal-top {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      padding: 15px 18px;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .modal-top strong {
+
+      font-family:
+        "Montserrat", sans-serif;
+
+      font-size: 14px;
+
+    }
+
+
+    .close-button {
+
+      width: 38px;
+
+      height: 38px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 12px;
+
+      background:
+        rgba(255,255,255,0.05);
+
+      color: #fff;
+
+      font-size: 23px;
+
+      cursor: pointer;
+
+    }
+
+
+    .modal-body {
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+    }
+
+
+    .modal-image {
+
+      min-height: 360px;
+
+      background:
+        #14161b;
+
+    }
+
+
+    .modal-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+    }
+
+
+    .modal-info {
+
+      padding: 22px;
+
+    }
+
+
+    .modal-title {
+
+      font-family:
+        "Montserrat", sans-serif;
+
+      font-size: 21px;
+
+      line-height: 1.4;
+
+      font-weight: 900;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .info-item {
+
+      padding: 12px;
+
+      border:
+        1px solid var(--border);
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border-radius: 14px;
+
+      margin-bottom: 9px;
+
+      color: var(--muted);
+
+      line-height: 1.7;
+
+      font-size: 13px;
+
+    }
+
+
+    .info-item b {
+
+      display: block;
+
+      color: rgba(255,255,255,0.50);
+
+      font-size: 11px;
+
+      margin-bottom: 2px;
+
+    }
+
+
+    /* =====================================================
+       الهاتف
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+      .hero-grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+      .menu {
+
+        display: none;
+
+      }
+
+      .grid {
+
+        grid-template-columns:
+          repeat(2, 1fr);
+
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .hero {
+
+        padding-top: 28px;
+
+      }
+
+      .hero h1 {
+
+        font-size: 31px;
+
+      }
+
+      .specs {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+      .grid {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+      .thumb {
+
+        height: 330px;
+
+      }
+
+      .modal-body {
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+      .modal-image {
+
+        min-height: 300px;
+
+        height: 300px;
+
+      }
+
+      .select {
+
+        width: 100%;
+
+      }
+
+    }
+
   </style>
+
 </head>
 
+
 <body>
-<header>
-  <div class="container nav">
-    <a class="brand" href="#top">
-      <div class="logo">🐉</div>
-      <div>
-        <strong>Dragon Triko</strong>
-        <span>ألبسة شتوية • كتالوج رقمي</span>
-      </div>
-    </a>
-    <nav class="menu">
-      <a href="#products">المنتجات</a>
-      <a href="#about">عن الورشة</a>
-      <a href="#contact">تواصل</a>
-    </nav>
-    <a class="btn secondary" href="#products">عرض الكتالوج</a>
-  </div>
-</header>
 
-<main id="top">
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="panel">
-        <div class="badge">● أحدث موديلات التريكو</div>
-        <h1>كتالوج Dragon Triko<br>للألبسة الشتوية</h1>
-        <p>تصفح الموديلات مباشرة من جدول المنتجات، وابحث بالاسم أو الكود، أو فلتر حسب التصنيف.</p>
-        <div class="actions">
-          <a class="btn" href="#products">ابدأ التصفح</a>
-          <button class="btn secondary" id="btnReset">تصفير الفلاتر</button>
+
+  <!-- =====================================================
+       HEADER
+  ===================================================== -->
+
+  <header>
+
+    <div class="container nav">
+
+      <a
+        href="#top"
+        class="brand"
+      >
+
+        <div class="logo">
+          🐉
         </div>
-        <div class="specs">
-          <div class="spec"><b>خامات ممتازة</b><span>صوف وبوليستر وخامات شتوية.</span></div>
-          <div class="spec"><b>جودة عالية</b><span>موديلات ومقاسات متعددة.</span></div>
-          <div class="spec"><b>طلبات الجملة</b><span>التواصل مباشرة عبر واتساب.</span></div>
+
+        <div>
+
+          <strong>
+            Dragon Triko
+          </strong>
+
+          <span>
+            ألبسة شتوية • كتالوج رقمي
+          </span>
+
         </div>
-      </div>
 
-      <div class="panel">
-        <div class="hero-image">
-          <img src="https://i.ibb.co/jPCg5byx/1790718743552.jpg" alt="Dragon Triko">
+      </a>
+
+
+      <nav class="menu">
+
+        <a href="#products">
+          المنتجات
+        </a>
+
+        <a href="#about">
+          عن الورشة
+        </a>
+
+        <a href="#contact">
+          تواصل
+        </a>
+
+      </nav>
+
+
+      <a
+        href="#products"
+        class="btn secondary"
+      >
+        عرض الكتالوج
+      </a>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       MAIN
+  ===================================================== -->
+
+  <main id="top">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="container hero-grid">
+
+
+        <div class="hero-card">
+
+          <div class="hero-badge">
+
+            <span class="dot"></span>
+
+            أحدث موديلات التريكو
+
+          </div>
+
+
+          <h1>
+
+            كتالوج Dragon Triko
+
+            <br>
+
+            للألبسة الشتوية
+
+          </h1>
+
+
+          <p class="hero-text">
+
+            تصفح الموديلات بسهولة، وابحث باسم الموديل
+            أو الكود، أو استخدم فلتر التصنيف.
+
+            جميع المنتجات يتم تحميلها مباشرة من جدول
+            Google Sheets.
+
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              href="#products"
+              class="btn"
+            >
+              ابدأ التصفح
+            </a>
+
+
+            <button
+              type="button"
+              id="btnReset"
+              class="btn secondary"
+            >
+              تصفير الفلاتر
+            </button>
+
+          </div>
+
+
+          <div class="specs">
+
+
+            <div class="spec">
+
+              <strong>
+                خامات ممتازة
+              </strong>
+
+              <span>
+                خامات شتوية مناسبة للموديلات.
+              </span>
+
+            </div>
+
+
+            <div class="spec">
+
+              <strong>
+                مقاسات متعددة
+              </strong>
+
+              <span>
+                عرض المقاسات الموجودة في الجدول.
+              </span>
+
+            </div>
+
+
+            <div class="spec">
+
+              <strong>
+                طلبات الجملة
+              </strong>
+
+              <span>
+                تواصل مباشر عبر واتساب.
+              </span>
+
+            </div>
+
+
+          </div>
+
         </div>
-        <div class="chips">
-          <span class="chip">تريكو بياقة بولو</span>
-          <span class="chip">مقاسات متعددة</span>
-          <span class="chip">كتالوج محدث</span>
+
+
+
+        <div class="hero-card hero-media">
+
+          <div class="hero-image">
+
+            <img
+              src="https://i.ibb.co/jPCg5byx/1790718743552.jpg"
+              alt="Dragon Triko"
+            >
+
+          </div>
+
+
+          <div class="chips">
+
+            <span class="chip">
+              تريكو بياقة بولو
+            </span>
+
+            <span class="chip">
+              مقاسات متعددة
+            </span>
+
+            <span class="chip">
+              جودة عالية
+            </span>
+
+            <span class="chip">
+              طلبات الجملة
+            </span>
+
+          </div>
+
         </div>
+
+
       </div>
-    </div>
-  </section>
 
-  <section id="products" class="container">
-    <div class="controls">
-      <div class="search">
-        <input id="searchInput" type="search" placeholder="ابحث باسم الموديل أو الكود...">
-      </div>
-      <select id="categorySelect" class="select">
-        <option value="all">كل التصنيفات</option>
-      </select>
-      <label class="toggle">
-        <input id="onlyWithImage" type="checkbox">
-        مع صورة فقط
-      </label>
-    </div>
+    </section>
 
-    <h2 style="font-family:Montserrat;margin:18px 0 10px">تشكيلة الموديلات</h2>
-    <div id="productsGrid" class="grid">
-      <div class="state">جاري تحميل الكتالوج...</div>
-    </div>
-  </section>
 
-  <section id="about" class="container" style="padding:20px 0 45px">
-    <div class="panel">
-      <h2 style="font-family:Montserrat;margin-bottom:10px">عن Dragon Triko</h2>
-      <p style="color:var(--muted);line-height:1.9">
-        ورشة متخصصة في تصنيع وإنتاج موديلات التريكو والألبسة الشتوية والجملة.
-      </p>
-    </div>
-  </section>
-</main>
 
-<footer id="contact">
-  جميع الحقوق محفوظة © Dragon Triko 2026
-</footer>
+    <!-- =====================================================
+         PRODUCTS
+    ===================================================== -->
 
-<div id="detailsModal" class="modal">
-  <div class="modal-card">
-    <div class="modal-top">
-      <strong id="modalCode">كود الموديل</strong>
-      <button class="close" id="modalCloseBtn">&times;</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-img">
-        <img id="modalImg" src="" alt="الموديل">
-      </div>
-      <div class="modal-info">
-        <h2 id="modalTitle">اسم الموديل</h2>
-        <div class="info"><b>الخامة</b><span id="modalFabric">-</span></div>
-        <div class="info"><b>المقاسات المتاحة</b><span id="modalSizes">-</span></div>
+    <section
+      id="products"
+      class="container"
+    >
+
+
+      <div class="controls">
+
+
+        <div class="search-box">
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="ابحث باسم الموديل أو الكود..."
+            autocomplete="off"
+          >
+
+        </dis">-</span></div>
         <div class="info"><b>أقل كمية للطلب</b><span id="modalMoq">-</span></div>
         <div class="info"><b>ملاحظات</b><span id="modalNotes">-</span></div>
         <a id="modalWaBtn" class="wa" href="#" target="_blank">طلب هذا الموديل عبر الواتساب</a>
