@@ -364,7 +364,7 @@
     }
 
     .thumb{
-      height: 220px;
+      height: 260px;
       background: rgba(255,255,255,.05);
       border-bottom: 1px solid rgba(255,255,255,.08);
       display:flex; align-items:center; justify-content:center;
@@ -719,9 +719,27 @@
   <script>
     const SHEET_ID = '1ME-jisk80zWyzcqYXePUZo8YshoDweToq_LgZIKVLSM';
     const API_URL = `https://opensheet.elk.sh/${SHEET_ID}/1`;
-    const WHATSAPP_NUMBER = '905343265940'; // تم التحديث إلى رقم الواتساب الخاص بالورشة
+    const WHATSAPP_NUMBER = '905343265940';
 
     let productsData = [];
+
+    // دالة تحويل جميع أنواع روابط الصور إلى روابط مباشرة قابلة للعرض
+    function formatImageUrl(url) {
+      if (!url) return '';
+      url = url.trim();
+
+      // إذا كان الرابط من Google Drive
+      if (url.includes('drive.google.com')) {
+        let fileId = '';
+        const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (matchId && matchId[1]) {
+          fileId = matchId[1];
+          return `https://lh3.googleusercontent.com/d/${fileId}`;
+        }
+      }
+
+      return url;
+    }
 
     async function fetchCatalog() {
       try {
@@ -753,6 +771,7 @@
           }
 
           let rawImg = (row['الصورة'] || row['رابط الصورة'] || row['image_url'] || '').trim();
+          let formattedImg = formatImageUrl(rawImg);
           let hexColor = row['كود اللون'] || row['color_hex'] || '#e62323';
 
           if (hexColor && !hexColor.startsWith('#') && hexColor.length === 6) {
@@ -761,7 +780,7 @@
 
           grouped[id].variants.push({
             color: hexColor,
-            image: rawImg
+            image: formattedImg
           });
         });
 
@@ -815,7 +834,7 @@
           <div class="card" onclick="openModal(${index})">
             ${item.tag ? `<span class="badge">${item.tag}</span>` : ''}
             <div class="thumb">
-              <img src="${displayImg}" alt="${item.title}" onerror="this.src='${fallbackImg}'">
+              <img src="${displayImg}" alt="${item.title}" onerror="this.src='${fallbackImg}'" loading="lazy">
             </div>
             <div class="card-body">
               <div class="title">${item.title}</div>
