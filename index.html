@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dragon Triko | الكتالوج الرقمي</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent-red:#e62323;
+      --bg0:#0c0d10;
+      --bg1:#101217;
+      --card:#f5f5f7;
+      --muted:#b8b8c2;
+      --text:#ffffff;
+      --dark:#0f1117;
+      --radius:18px;
+      --radius2:26px;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --shadow2: 0 10px 30px rgba(0,0,0,.22);
+      --border: rgba(255,255,255,.08);
+    }
+
+    *{ box-sizing:border-box; margin:0; padding:0; font-family:'Tajawal',sans-serif; -webkit-tap-highlight-color:transparent; }
+    body{ background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
+                     radial-gradient(900px 500px at 90% 10%, rgba(197,168,128,.14), transparent 55%),
+                     linear-gradient(180deg, var(--bg0), #07080b 70%);
+          color:var(--text); min-height:100vh; }
+
+    .container{ width:min(1200px, 92%); margin:0 auto; }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(10,11,16,.75), rgba(10,11,16,.35));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--text);
+      user-select:none;
+    }
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background: radial-gradient(circle at 25% 25%, rgba(255,255,255,.25), transparent 35%),
+                  linear-gradient(135deg, rgba(230,35,35,.95), rgba(197,168,128,.7));
+      box-shadow: 0 12px 30px rgba(230,35,35,.25);
+      position:relative; overflow:hidden;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.16);
+    }
+    .logo svg{ filter: drop-shadow(0 8px 16px rgba(0,0,0,.4)); }
+    .brand strong{
+      font-family: 'Montserrat', sans-serif;
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:16px;
+      line-height:1.1;
+    }
+    .brand span{ color:rgba(255,255,255,.75); font-size:12px; display:block; margin-top:2px; }
+
+    .menu{
+      display:flex; align-items:center; gap:14px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .menu a{
+      color:rgba(255,255,255,.78);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid transparent;
+      transition:.2s ease;
+      font-weight:700;
+      font-size:13px;
+    }
+    .menu a:hover{
+      color:var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+
+    .cta{
+      display:flex; align-items:center; gap:10px;
+    }
+    .btn{
+      cursor:pointer; border:none;
+      padding:12px 16px; border-radius: var(--radius2);
+      font-weight:900; letter-spacing:.2px;
+      transition:.2s ease; color:var(--text);
+      box-shadow: 0 14px 30px rgba(230,35,35,.22);
+      background: linear-gradient(135deg, #ff3b3b, #c91212);
+      border:1px solid rgba(255,255,255,.14);
+      display:inline-flex; align-items:center; gap:10px;
+      white-space:nowrap;
+      text-decoration:none;
+    }
+    .btn:hover{ transform: translateY(-1px); filter:saturate(1.05); }
+    .btn.secondary{
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      box-shadow:none;
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding: 54px 0 36px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(900px 500px at 70% 20%, rgba(230,35,35,.28), transparent 55%),
+        radial-gradient(900px 500px at 10% 20%, rgba(197,168,128,.20), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .menu{ display:none; }
+    }
+
+    .hero-card{
+      border-radius: calc(var(--radius) + 10px);
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: var(--shadow2);
+      padding: 22px;
+      overflow:hidden;
+    }
+
+    .hero-badge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius: 999px;
+      background: rgba(230,35,35,.12);
+      border:1px solid rgba(230,35,35,.35);
+      color: rgba(255,255,255,.95);
+      font-weight:900;
+      font-size:13px;
+      margin-bottom:14px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 0 6px rgba(230,35,35,.18);
+    }
+
+    .hero h1{
+      font-family:'Montserrat',sans-serif;
+      font-size: 40px;
+      line-height:1.1;
+      letter-spacing:-.3px;
+      margin-bottom:10px;
+      font-weight:900;
+    }
+    @media (max-width: 520px){
+      .hero h1{ font-size:32px; }
+    }
+
+    .hero p{
+      color: rgba(255,255,255,.78);
+      font-size:15px;
+      line-height:1.9;
+      margin-bottom:18px;
+      max-width: 55ch;
+    }
+
+    .hero-actions{
+      display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .specs{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+      margin-top: 20px;
+    }
+    @media (max-width: 520px){
+      .specs{ grid-template-columns:1fr; }
+    }
+
+    .spec{
+      padding:14px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .spec strong{
+      font-size:13px;
+      display:block;
+      font-weight:900;
+      color: rgba(255,255,255,.92);
+    }
+    .spec span{
+      display:block; margin-top:6px;
+      color: rgba(255,255,255,.70);
+      font-size:12.5px;
+      line-height:1.6;
+    }
+
+    .hero-media{
+      border-radius: calc(var(--radius) + 10px);
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+      padding:18px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .hero-media .img{
+      height: 320px;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(135deg, rgba(230,35,35,.35), rgba(197,168,128,.20));
+      position:relative;
+    }
+    .hero-media .img img{
+      width:100%; height:100%; object-fit:cover; object-position:top;
+      opacity:.95;
+      filter:saturate(1.05) contrast(1.02);
+    }
+    .hero-media .overlay{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.45));
+      pointer-events:none;
+    }
+    .hero-media .tagrow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      justify-content:flex-start;
+    }
+    .chip{
+      padding:10px 12px; border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.85);
+      font-weight:900;
+      font-size:12px;
+      display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .chip i{
+      width:10px; height:10px; border-radius:50%;
+      background: rgba(197,168,128,.95);
+      box-shadow: 0 0 0 6px rgba(197,168,128,.16);
+      display:inline-block;
+    }
+
+    /* Controls */
+    .controls{
+      margin: 22px 0 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .search{
+      flex:1;
+      min-width: 260px;
+      display:flex; gap:12px; align-items:center;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .search svg{ opacity:.85; }
+    .search input{
+      width:100%;
+      border:none; outline:none;
+      background: transparent;
+      color: var(--text);
+      font-weight:700;
+      font-size:14px;
+    }
+    .search input::placeholder{ color: rgba(255,255,255,.55); }
+
+    .filters{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+
+    .select{
+      appearance:none;
+      border-radius: 18px;
+      padding: 12px 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(16, 18, 23, 0.9);
+      color: var(--text);
+      font-weight:900;
+      font-size:13px;
+      outline:none;
+    }
+
+    .toggle{
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-weight:900;
+      font-size:13px;
+      color: rgba(255,255,255,.9);
+      user-select:none;
+      cursor:pointer;
+    }
+    .toggle input{ accent-color: var(--accent-red); }
+
+    /* Grid cards */
+    .section-title{
+      font-family:'Montserrat',sans-serif;
+      font-size: 18px;
+      font-weight:900;
+      margin: 20px 0 10px;
+      color: rgba(255,255,255,.92);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      padding-bottom: 42px;
+    }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr;} }
+
+    .card{
+      border-radius: calc(var(--radius) + 4px);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      box-shadow: 0 14px 35px rgba(0,0,0,.22);
+      transition: .22s ease;
+      position:relative;
+      cursor:pointer;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(230,35,35,.30);
+    }
+
+    .thumb{
+      height: 220px;
+      background: rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:.95;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .thumb img{
+      transform: scale(1.05);
+    }
+
+    .card-body{
+      padding: 14px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+
+    .title{
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size: 15px;
+      line-height:1.45;
+      color: rgba(255,255,255,.95);
+    }
+
+    .meta{
+      display:grid; gap:8px;
+    }
+    .row{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      color: rgba(255,255,255,.80);
+      font-size: 12.8px;
+      font-weight:800;
+    }
+    .row span:first-child{ color: rgba(255,255,255,.60); font-weight:900; }
+    
+    .color-swatches-card {
+      display: flex;
+      gap: 6px;
+    }
+    .color-pill{
+      width:16px; height:16px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    }
+
+    .btn-wa-card {
+      margin-top: 8px;
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      font-weight: 800;
+      font-size: 13px;
+      display: block;
+      transition: background 0.2s;
+    }
+    .btn-wa-card:hover {
+      background: #1eb954;
+    }
+
+    .card .badge{
+      position:absolute; top:12px; right:12px;
+      padding:6px 12px;
+      border-radius: 999px;
+      background: rgba(10,11,16,.85);
+      border:1px solid rgba(230,35,35,.4);
+      font-weight:900;
+      font-size:11px;
+      color: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      z-index:2;
+    }
+
+    /* Footer */
+    footer{
+      padding: 24px 0 40px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.65);
+      text-align:center;
+      font-weight:700;
+      font-size:13px;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.75);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:100;
+      backdrop-filter: blur(6px);
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width:min(800px, 100%);
+      border-radius: 24px;
+      background: rgba(16,18,23,.95);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 25px 80px rgba(0,0,0,.8);
+      overflow:hidden;
+    }
+    .modal-top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 16px 20px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .modal-top strong{
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      color: rgba(255,255,255,.95);
+      font-size:15px;
+    }
+    .xbtn{
+      border:none; cursor:pointer;
+      width:38px; height:38px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-size:18px;
+    }
+    .modal-body{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:0;
+    }
+    @media (max-width: 780px){
+      .modal-body{ grid-template-columns:1fr; }
+    }
+    .modal-img{
+      min-height: 300px;
+      background: rgba(255,255,255,.04);
+      border-left:1px solid rgba(255,255,255,.08);
+    }
+    .modal-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .modal-info{
+      padding: 20px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .big{
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;
+      font-size: 20px;
+      line-height:1.3;
+      color: rgba(255,255,255,.98);
+    }
+    .info-grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .info-item{
+      padding: 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-weight:800;
+      color: rgba(255,255,255,.85);
+      font-size: 13.5px;
+      line-height:1.6;
+    }
+    .info-item b{ color: rgba(255,255,255,.5); font-weight:900; display:block; margin-bottom:2px; font-size:12px; }
+
+    .state-msg {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Dragon Triko">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2c2.2 1.6 3.4 3.6 3.7 6.1.2 1.6-.1 3-.7 4.2 1.9-.5 3.3-1.4 4.3-2.7-.1 4.6-2.9 8.2-7.3 9.1-5 .9-9-2.6-9.1-7.6 1.4 1.3 3.1 2 5 1.8-1.7-1.3-2.7-3-2.8-5.2 1.5 1.3 3.2 2.1 5.1 2.2C9.2 6.6 10.2 4.2 12 2Z" fill="rgba(255,255,255,.92)"/>
+          </svg>
+        </div>
+        <div>
+          <strong>Dragon Triko</strong>
+          <span>ألبسة شتوية • كتالوج رقمي</span>
+        </div>
+      </a>
+
+      <div class="menu" role="navigation" aria-label="التنقل">
+        <a href="#products">المنتجات</a>
+        <a href="#about">عنّ ورشة Dragon</a>
+        <a href="#contact">تواصل مع الورشة</a>
+      </div>
+
+      <div class="cta">
+        <a href="#products" class="btn secondary">
+          <span>عرض الكتالوج</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 5v14m0 0-6-6m6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="hero">
+    <div class="container hero-grid">
+      <section class="hero-card" aria-label="مقدمة">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>أحدث موديلات التريكو • جودة خامات • تصنيع محترف</span>
+        </div>
+
+        <h1>كتالوج Dragon Triko<br/>لألبسة الشتاء</h1>
+        <p>
+          تصفح الموديلات بسهولة، فلتر حسب التصنيف والبحث بالاسم أو الكود.
+          اضغط على أي موديل لعرض كامل التفاصيل (المقاسات، الخامة، وملاحظات الإنتاج).
+        </p>
+
+        <div class="hero-actions">
+          <a href="#products" class="btn">
+            <span>ابدأ التصفح</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M10 14l2-2 2 2-2 2-2-2Z" fill="currentColor"/>
+              <path d="M4 6h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+
+          <button class="btn secondary" id="btnReset">
+            تصفير الفلاتر
+          </button>
+        </div>
+
+        <div class="specs" aria-label="مميزات">
+          <div class="spec">
+            <strong>خامات ممتازة</strong>
+            <span>صوف/بوليستر/بولار محبوك بعناية عالية.</span>
+          </div>
+          <div class="spec">
+            <strong>غرزة متقنة</strong>
+            <span>ثبات شكل وجودة عالية مع الاستخدام المتكرر.</span>
+          </div>
+          <div class="spec">
+            <strong>طلبات الجملة</strong>
+            <span>حد أدنى مناسب وتلبية طلبات الورش والمحلات.</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="hero-media" aria-label="صورة وإحصائيات">
+        <div class="img">
+          <img alt="صورة كنزة تريكو بولو" src="https://i.ibb.co/jPCg5byx/1790718743552.jpg">
+          <div class="overlay"></div>
+        </div>
+
+        <div class="tagrow">
+          <div class="chip"><i></i> تريكو بياقة بولو</div>
+          <div class="chip"><i></i> خيط ضد الانكماش</div>
+          <div class="chip"><i></i> مقاسات متعددة</div>
+        </div>
+
+        <div class="tagrow">
+          <div class="chip" style="background:rgba(230,35,35,.12); border-color:rgba(230,35,35,.35)">
+            <i style="background:rgba(230,35,35,.95); box-shadow:0 0 0 6px rgba(230,35,35,.18)"></i>
+            كتالوج سريع ومحدث باستمرار
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="container" id="products">
+      <div class="controls">
+        <div class="search" role="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <input id="searchInput" type="text" placeholder="ابحث باسم الموديل أو الكود..."/>
+        </div>
+
+        <div class="filters">
+          <select class="select" id="categorySelect" aria-label="فلتر التصنيف">
+            <option value="all">كل التصنيفات</option>
+          </select>
+
+          <label class="toggle" title="إظهار فقط المنتجات التي لديها صورة">
+            <input type="checkbox" id="onlyWithImage">
+            <span>مع صورة فقط</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="section-title">تشكيلة الموديلات</div>
+      <div class="grid" id="productsGrid" aria-live="polite">
+        <div class="state-msg">جاري تحميل الكتالوج...</div>
+      </div>
+    </div>
+
+    <div class="container" id="about" style="padding-top: 12px; margin-bottom: 40px;">
+      <div class="section-title">عن Dragon Triko</div>
+      <div class="hero-card" style="padding:22px;">
+        <p style="color:rgba(255,255,255,.85); line-height: 1.8;">
+          ورشة <strong>Dragon Triko</strong> متخصصة في تصنيع وإنتاج أحدث موديلات التريكو والألبسة الشتوية والجملة، مع التركيز على دقة الغرزة، ثبات الألوان، وتوفير خيارات مقاسات وألوان متعددة لتلبية احتياجات السوق والمحلات التجارية.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container" id="contact">
+      <p>جميع الحقوق محفوظة © Dragon Triko 2026</p>
+    </div>
+  </footer>
+
+  <!-- Modal التفاصيل -->
+  <div class="modal" id="detailsModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <strong id="modalCode">كود الموديل</strong>
+        <button class="xbtn" id="modalCloseBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-img">
+          <img id="modalImg" src="" alt="الموديل">
+        </div>
+        <div class="modal-info">
+          <div class="big" id="modalTitle">اسم الموديل</div>
+          <div class="info-grid">
+            <div class="info-item"><b>الخامة</b> <span id="modalFabric">-</span></div>
+            <div class="info-item"><b>المقاسات المتاحة</b> <span id="modalSizes">-</span></div>
+            <div class="info-item"><b>أقل كمية للطلب (MOQ)</b> <span id="modalMoq">-</span></div>
+            <div class="info-item"><b>ملاحظات</b> <span id="modalNotes">-</span></div>
+          </div>
+          <a id="modalWaBtn" href="#" target="_blank" class="btn-wa-card" style="margin-top:10px; padding:12px; font-size:14px;">
+            طلب هذا الموديل عبر الواتساب
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SHEET_ID = '1ME-jisk80zWyzcqYXePUZo8YshoDweToq_LgZIKVLSM';
+    const API_URL = `https://opensheet.elk.sh/${SHEET_ID}/1`;
+    const WHATSAPP_NUMBER = '905343265940'; // تم التحديث إلى رقم الواتساب الخاص بالورشة
+
+    let productsData = [];
+
+    async function fetchCatalog() {
+      try {
+        const response = await fetch(API_URL);
+        const rawData = await response.json();
+
+        const grouped = {};
+        const categories = new Set();
+
+        rawData.forEach(row => {
+          const id = row['المعرف'] || row['id'] || row['الكود'] || Object.values(row)[0];
+          if (!id) return;
+
+          const cat = row['التصنيف'] || row['tag'] || 'عام';
+          if (cat) categories.add(cat);
+
+          if (!grouped[id]) {
+            grouped[id] = {
+              id: id,
+              title: row['اسم الموديل'] || row['title'] || 'موديل بدون اسم',
+              code: row['الكود'] || row['code'] || id,
+              tag: cat,
+              fabric: row['الخامة'] || row['fabric'] || '-',
+              sizes: row['المقاسات'] || row['sizes'] || '-',
+              moq: row['أقل كمية'] || row['moq'] || row['اقل كمية'] || '-',
+              notes: row['ملاحظات'] || row['notes'] || '-',
+              variants: []
+            };
+          }
+
+          let rawImg = (row['الصورة'] || row['رابط الصورة'] || row['image_url'] || '').trim();
+          let hexColor = row['كود اللون'] || row['color_hex'] || '#e62323';
+
+          if (hexColor && !hexColor.startsWith('#') && hexColor.length === 6) {
+            hexColor = '#' + hexColor;
+          }
+
+          grouped[id].variants.push({
+            color: hexColor,
+            image: rawImg
+          });
+        });
+
+        productsData = Object.values(grouped);
+        populateCategories(Array.from(categories));
+        renderGrid();
+
+      } catch (error) {
+        console.error(error);
+        document.getElementById('productsGrid').innerHTML = '<div class="state-msg">تعذر تحميل الكتالوج. يرجى التأكد من توفر الاتصال بالإنترنت.</div>';
+      }
+    }
+
+    function populateCategories(cats) {
+      const select = document.getElementById('categorySelect');
+      cats.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderGrid() {
+      const grid = document.getElementById('productsGrid');
+      const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+      const selectedCat = document.getElementById('categorySelect').value;
+      const onlyWithImg = document.getElementById('onlyWithImage').checked;
+
+      const filtered = productsData.filter(p => {
+        const matchesSearch = p.title.toLowerCase().includes(searchVal) || p.code.toLowerCase().includes(searchVal);
+        const matchesCat = (selectedCat === 'all' || p.tag === selectedCat);
+        const hasImg = p.variants.some(v => v.image && v.image.length > 5);
+        const matchesImgFilter = onlyWithImg ? hasImg : true;
+
+        return matchesSearch && matchesCat && matchesImgFilter;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="state-msg">لا توجد موديلات مطابقة لخيارات البحث.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item, index) => {
+        const firstVar = item.variants[0] || { color: '#e62323', image: '' };
+        const fallbackImg = 'https://via.placeholder.com/400x500/101217/e62323?text=Dragon+Triko';
+        const displayImg = firstVar.image ? firstVar.image : fallbackImg;
+        const waMessage = encodeURIComponent(`السلام عليكم، أود الاستفسار عن موديل: ${item.title} (كود: ${item.code})`);
+
+        return `
+          <div class="card" onclick="openModal(${index})">
+            ${item.tag ? `<span class="badge">${item.tag}</span>` : ''}
+            <div class="thumb">
+              <img src="${displayImg}" alt="${item.title}" onerror="this.src='${fallbackImg}'">
+            </div>
+            <div class="card-body">
+              <div class="title">${item.title}</div>
+              <div class="meta">
+                <div class="row"><span>الكود:</span> <span>${item.code}</span></div>
+                <div class="row"><span>الخامة:</span> <span>${item.fabric}</span></div>
+                ${item.variants.length > 1 ? `
+                  <div class="row">
+                    <span>الألوان:</span>
+                    <div class="color-swatches-card">
+                      ${item.variants.map(v => `<div class="color-pill" style="background:${v.color}"></div>`).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+              </div>
+              <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}" target="_blank" onclick="event.stopPropagation();" class="btn-wa-card">
+                طلب بالجملة
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openModal(index) {
+      const item = productsData[index];
+      if (!item) return;
+
+      const firstVar = item.variants[0] || { image: '' };
+      const fallbackImg = 'https://via.placeholder.com/400x500/101217/e62323?text=Dragon+Triko';
+
+      document.getElementById('modalCode').textContent = `الكود: ${item.code}`;
+      document.getElementById('modalTitle').textContent = item.title;
+      document.getElementById('modalFabric').textContent = item.fabric;
+      document.getElementById('modalSizes').textContent = item.sizes;
+      document.getElementById('modalMoq').textContent = item.moq;
+      document.getElementById('modalNotes').textContent = item.notes;
+      document.getElementById('modalImg').src = firstVar.image ? firstVar.image : fallbackImg;
+      
+      const waMsg = encodeURIComponent(`السلام عليكم، أود طلب موديل: ${item.title} (كود: ${item.code})`);
+      document.getElementById('modalWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+      document.getElementById('detailsModal').classList.add('open');
+    }
+
+    document.getElementById('modalCloseBtn').onclick = () => {
+      document.getElementById('detailsModal').classList.remove('open');
+    };
+
+    document.getElementById('detailsModal').onclick = (e) => {
+      if (e.target === document.getElementById('detailsModal')) {
+        document.getElementById('detailsModal').classList.remove('open');
+      }
+    };
+
+    document.getElementById('searchInput').addEventListener('input', renderGrid);
+    document.getElementById('categorySelect').addEventListener('change', renderGrid);
+    document.getElementById('onlyWithImage').addEventListener('change', renderGrid);
+
+    document.getElementById('btnReset').onclick = () => {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categorySelect').value = 'all';
+      document.getElementById('onlyWithImage').checked = false;
+      renderGrid();
+    };
+
+    fetchCatalog();
+  </script>
+</body>
+</html>
