@@ -378,7 +378,7 @@
   </div>
 
   <script>
-    // رابط Apps Script المحدث خصيصاً لجدولك
+    // استخدام رابط Apps Script الجديد المباشر
     const API_URL = `https://script.google.com/macros/s/AKfycbzr3WYeBhe6YAZp3Ur7QvhE3xiI2SZ2vDRrDD3wlXkuu3OH7168q06h5LIsb82Pf7TE/exec?t=${new Date().getTime()}`;
     const WHATSAPP_NUMBER = '905343265940';
 
@@ -447,8 +447,8 @@
         renderGrid();
 
       } catch (error) {
-        console.error("Error fetching sheet:", error);
-        document.getElementById('productsGrid').innerHTML = '<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر تحميل الكتالوج. يرجى التأكد من أن نشر Apps Script مضبوط على صلاحية "أي شخص / Anyone".</div>';
+        console.error("Fetch Error:", error);
+        document.getElementById('productsGrid').innerHTML = `<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر الاتصال بالبيانات.<br>تأكدي من إعادة نشر Apps Script واختيار "Anyone / أي شخص" للوصول.<br>الخطأ: ${error.message}</div>`;
       }
     }
 
@@ -487,4 +487,73 @@
         const firstVar = item.variants[0] || { color: '#e62323', image: '' };
         const fallbackImg = 'https://via.placeholder.com/400x500/101217/e62323?text=Dragon+Triko';
         const displayImg = firstVar.image ? firstVar.image : fallbackImg;
-        const waMessage = encodeURICompon
+        const waMessage = encodeURIComponent(`السلام عليكم، أود الاستفسار عن موديل: ${item.title} (كود: ${item.code})`);
+
+        return `
+          <div class="card" onclick="openModal(${index})">
+            ${item.tag ? `<span class="badge">${item.tag}</span>` : ''}
+            <div class="thumb">
+              <img src="${displayImg}" alt="${item.title}" onerror="this.src='${fallbackImg}'" loading="lazy">
+            </div>
+            <div class="card-body">
+              <div class="title">${item.title}</div>
+              <div class="meta">
+                <div class="row"><span>الكود:</span> <span>${item.code}</span></div>
+                <div class="row"><span>الخامة:</span> <span>${item.fabric}</span></div>
+              </div>
+              <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}" target="_blank" onclick="event.stopPropagation();" class="btn-wa-card">
+                طلب بالجملة
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openModal(index) {
+      const item = productsData[index];
+      if (!item) return;
+
+      const firstVar = item.variants[0] || { image: '' };
+      const fallbackImg = 'https://via.placeholder.com/400x500/101217/e62323?text=Dragon+Triko';
+
+      document.getElementById('modalCode').textContent = `الكود: ${item.code}`;
+      document.getElementById('modalTitle').textContent = item.title;
+      document.getElementById('modalFabric').textContent = item.fabric;
+      document.getElementById('modalSizes').textContent = item.sizes;
+      document.getElementById('modalMoq').textContent = item.moq;
+      document.getElementById('modalNotes').textContent = item.notes;
+      document.getElementById('modalImg').src = firstVar.image ? firstVar.image : fallbackImg;
+      
+      const waMsg = encodeURIComponent(`السلام عليكم، أود طلب موديل: ${item.title} (كود: ${item.code})`);
+      document.getElementById('modalWaBtn').href = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
+
+      document.getElementById('detailsModal').classList.add('open');
+    }
+
+    function closeModal() {
+      document.getElementById('detailsModal').classList.remove('open');
+    }
+
+    document.getElementById('detailsModal').onclick = (e) => {
+      if (e.target === document.getElementById('detailsModal')) {
+        closeModal();
+      }
+    };
+
+    document.getElementById('searchInput').addEventListener('input', renderGrid);
+    document.getElementById('categorySelect').addEventListener('change', renderGrid);
+    document.getElementById('onlyWithImage').addEventListener('change', renderGrid);
+
+    document.getElementById('btnReset').onclick = () => {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('categorySelect').value = 'all';
+      document.getElementById('onlyWithImage').checked = false;
+      renderGrid();
+    };
+
+    fetchCatalog();
+  </script>
+</body>
+</html>
+
