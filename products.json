@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "title": "ظفر بولو",
+    "code": "m100",
+    "tag": "احدث الموديلات",
+    "fabric": "بوليستر",
+    "sizes": "S-M-L-Xl-2XL",
+    "moq": "400",
+    "notes": "كنزات تريكو",
+    "color": "#e62323",
+    "image": "https://lh3.googleusercontent.com/d/1odDfM90c3CwsJXgLgj22gwBV5ajuXz7j"
+  },
+  {
+    "id": "2",
+    "title": "Casablanca",
+    "code": "m101",
+    "tag": "احدث الموديلات",
+    "fabric": "بوليستر",
+    "sizes": "S-M-L",
+    "moq": "400",
+    "notes": "كنزات تريكو",
+    "color": "#e62323",
+    "image": "https://lh3.googleusercontent.com/d/1n8JEsVIWAvmiwkUw71AxgBsKuCSSJv20"
+  },
+  {
+    "id": "3",
+    "title": "polo",
+    "code": "m102",
+    "tag": "أحدث الموديلات",
+    "fabric": "بوليستر",
+    "sizes": "S-M-L",
+    "moq": "300",
+    "notes": "كنزات تريكو",
+    "color": "#e62323",
+    "image": "https://lh3.googleusercontent.com/d/1n8JEsVIWAvmiwkUw71AxgBsKuCSSJv20"
+  }
+]
