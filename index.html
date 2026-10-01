@@ -378,8 +378,7 @@
   </div>
 
   <script>
-    // استخدام رابط Apps Script الجديد المباشر
-    const API_URL = `https://script.google.com/macros/s/AKfycbzr3WYeBhe6YAZp3Ur7QvhE3xiI2SZ2vDRrDD3wlXkuu3OH7168q06h5LIsb82Pf7TE/exec?t=${new Date().getTime()}`;
+    const API_URL = `https://script.google.com/macros/s/AKfycbySabnA8ZAWozycFF4fLRRuHyiFJhe48y7e59xoZdOqSd2Yz_j14jAYRqk5I_70qjBC/exec?t=${new Date().getTime()}`;
     const WHATSAPP_NUMBER = '905343265940';
 
     let productsData = [];
@@ -447,8 +446,8 @@
         renderGrid();
 
       } catch (error) {
-        console.error("Fetch Error:", error);
-        document.getElementById('productsGrid').innerHTML = `<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر الاتصال بالبيانات.<br>تأكدي من إعادة نشر Apps Script واختيار "Anyone / أي شخص" للوصول.<br>الخطأ: ${error.message}</div>`;
+        console.error("Error fetching sheet:", error);
+        document.getElementById('productsGrid').innerHTML = '<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر تحميل الكتالوج. يرجى التأكد من نشر Apps Script بصلاحية "أي شخص / Anyone".</div>';
       }
     }
 
@@ -556,4 +555,3 @@
   </script>
 </body>
 </html>
-
