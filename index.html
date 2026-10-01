@@ -4,173 +4,487 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Dragon Triko | الكتالوج الرقمي</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --accent-red:#e62323;
       --bg0:#0c0d10;
-      --border: rgba(255,255,255,.08);
-      --text:#ffffff;
+      --bg1:#101217;
+      --card:#161822;
       --muted:#b8b8c2;
+      --text:#ffffff;
+      --radius:18px;
+      --radius2:26px;
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --shadow2: 0 10px 30px rgba(0,0,0,.22);
+      --border: rgba(255,255,255,.08);
     }
+
     *{ box-sizing:border-box; margin:0; padding:0; font-family:'Tajawal',sans-serif; -webkit-tap-highlight-color:transparent; }
-    body{ 
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
-                  linear-gradient(180deg, var(--bg0), #07080b 70%);
-      color:var(--text); min-height:100vh; 
-    }
+    body{ background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
+                     radial-gradient(900px 500px at 90% 10%, rgba(197,168,128,.14), transparent 55%),
+                     linear-gradient(180deg, var(--bg0), #07080b 70%);
+          color:var(--text); min-height:100vh; }
+
     .container{ width:min(1200px, 92%); margin:0 auto; }
+
+    /* Header */
     header{
-      position:sticky; top:0; z-index:50; backdrop-filter: blur(14px);
-      background: rgba(10,11,16,.85); border-bottom: 1px solid var(--border);
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(10,11,16,.9), rgba(10,11,16,.6));
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
-    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
-    .brand{ display:flex; align-items:center; gap:12px; }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none; color:var(--text); user-select:none;
+    }
     .logo{
-      width:40px; height:40px; border-radius:12px;
-      background: linear-gradient(135deg, #e62323, #c5a880);
-      display:grid; place-items:center; font-weight:900;
+      width:42px; height:42px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(230,35,35,.95), rgba(197,168,128,.7));
+      display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow: 0 8px 20px rgba(230,35,35,.25);
     }
-    .brand strong{ font-family: 'Montserrat', sans-serif; font-size:16px; }
-    .controls{ margin: 20px 0; display:flex; gap:10px; flex-wrap:wrap; }
+    .brand strong{
+      font-family: 'Montserrat', sans-serif;
+      font-weight:900; font-size:16px; line-height:1.1;
+    }
+    .brand span{ color:rgba(255,255,255,.7); font-size:11px; display:block; margin-top:2px; }
+
+    .menu{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    .menu a{
+      color:rgba(255,255,255,.8); text-decoration:none; padding:8px 12px;
+      border-radius:12px; font-weight:700; font-size:13px; transition:.2s ease;
+    }
+    .menu a:hover{ color:var(--text); background: rgba(255,255,255,.06); }
+
+    .cta{ display:flex; align-items:center; gap:10px; }
+    .btn{
+      cursor:pointer; border:none; padding:10px 16px; border-radius: var(--radius2);
+      font-weight:900; transition:.2s ease; color:var(--text);
+      background: linear-gradient(135deg, #ff3b3b, #c91212);
+      border:1px solid rgba(255,255,255,.14);
+      display:inline-flex; align-items:center; gap:8px;
+      white-space:nowrap; text-decoration:none; font-size:13px;
+    }
+    .btn:hover{ transform: translateY(-1px); filter:saturate(1.05); }
+    .btn.secondary{
+      background: rgba(255,255,255,.06); color:var(--text);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    /* Hero */
+    .hero{ position:relative; padding: 30px 0 20px; }
+    .hero-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:20px; align-items:stretch; }
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns:1fr; }
+      .menu{ display:none; }
+    }
+
+    .hero-card{
+      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      padding: 20px;
+    }
+    .hero-badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius: 999px;
+      background: rgba(230,35,35,.15); border:1px solid rgba(230,35,35,.35);
+      color: rgba(255,255,255,.95); font-weight:800; font-size:12px; margin-bottom:12px;
+    }
+    .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent-red); }
+
+    .hero h1{ font-family:'Montserrat',sans-serif; font-size: 32px; line-height:1.2; margin-bottom:10px; font-weight:900; }
+    @media (max-width: 520px){ .hero h1{ font-size:26px; } }
+
+    .hero p{ color: rgba(255,255,255,.8); font-size:14px; line-height:1.8; margin-bottom:16px; }
+
+    .hero-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+
+    .specs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 18px; }
+    @media (max-width: 520px){ .specs{ grid-template-columns:1fr; } }
+
+    .spec{ padding:12px; border-radius: var(--radius); background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+    .spec strong{ font-size:12px; display:block; font-weight:900; color: rgba(255,255,255,.95); }
+    .spec span{ display:block; margin-top:4px; color: rgba(255,255,255,.7); font-size:11.5px; line-height:1.5; }
+
+    .hero-media{
+      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.03); padding:14px; display:flex; flex-direction:column; gap:12px;
+    }
+    .hero-media .img{
+      height: 220px; border-radius: 18px; overflow:hidden;
+      border:1px solid rgba(255,255,255,.1); position:relative;
+    }
+    .hero-media .img img{ width:100%; height:100%; object-fit:cover; object-position:top; }
+
+    .chip{
+      padding:8px 12px; border-radius: 999px; border:1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04); color: rgba(255,255,255,.85);
+      font-weight:800; font-size:11px; display:inline-flex; align-items:center; gap:6px;
+    }
+
+    /* Controls */
+    .controls{
+      margin: 20px 0 14px; display:flex; align-items:center; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+    }
+
     .search{
-      flex:1; min-width: 220px; display:flex; align-items:center;
-      padding: 10px 14px; border-radius: 14px; border:1px solid var(--border);
-      background: rgba(255,255,255,.05);
+      flex:1; min-width: 240px; display:flex; gap:10px; align-items:center;
+      padding: 10px 14px; border-radius: 16px; border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
     }
-    .search input{ width:100%; border:none; outline:none; background: transparent; color:#fff; font-size:14px; }
+    .search input{
+      width:100%; border:none; outline:none; background: transparent;
+      color: var(--text); font-weight:700; font-size:13.5px;
+    }
+
+    .filters{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
     .select{
-      border-radius: 14px; padding: 10px 14px; border:1px solid var(--border);
-      background: #161822; color: #fff; font-weight:700; outline:none;
+      appearance:none; border-radius: 16px; padding: 10px 14px;
+      border:1px solid rgba(255,255,255,.12); background: rgba(16, 18, 23, 0.95);
+      color: var(--text); font-weight:800; font-size:12.5px; outline:none;
     }
-    .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:16px; padding-bottom: 40px; }
+
+    .toggle{
+      display:flex; align-items:center; gap:8px; padding: 10px 14px;
+      border-radius: 16px; border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04); font-weight:800; font-size:12.5px; cursor:pointer;
+    }
+
+    /* Grid cards */
+    .section-title{ font-family:'Montserrat',sans-serif; font-size: 18px; font-weight:900; margin: 18px 0 10px; }
+
+    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; padding-bottom: 40px; }
+    @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 560px){ .grid{ grid-template-columns: 1fr;} }
+
     .card{
-      border-radius: 16px; border:1px solid var(--border);
-      background: rgba(255,255,255,.03); overflow:hidden; display:flex; flex-direction:column;
+      border-radius: var(--radius); border:1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04); overflow:hidden; transition: .2s ease;
+      position:relative; cursor:pointer;
     }
-    .thumb{ height: 260px; width:100%; background: #000; position:relative; }
-    .thumb img{ width:100%; height:100%; object-fit:cover; }
-    .badge{
-      position:absolute; top:10px; right:10px; padding:4px 10px; border-radius:999px;
-      background: rgba(10,11,16,.85); border:1px solid var(--accent-red); font-size:11px; font-weight:800;
+    .card:hover{ transform: translateY(-2px); border-color: rgba(230,35,35,.4); }
+
+    .thumb{
+      height: 280px; background: rgba(255,255,255,.02);
+      border-bottom: 1px solid rgba(255,255,255,.08); position:relative; overflow:hidden;
     }
+    .thumb img{ width:100%; height:100%; object-fit:cover; object-position:top; }
+
     .card-body{ padding: 14px; display:flex; flex-direction:column; gap:8px; }
-    .title{ font-weight:900; font-size: 16px; }
-    .meta{ display:grid; gap:4px; font-size:13px; color:rgba(255,255,255,.8); }
-    .row{ display:flex; justify-content:space-between; }
-    .row span:first-child{ color: var(--muted); }
-    .btn-wa{
-      margin-top: 10px; width: 100%; padding: 10px; border-radius: 12px;
+    .title{ font-family:'Montserrat',sans-serif; font-weight:900; font-size: 15px; color: rgba(255,255,255,.95); }
+
+    .meta{ display:grid; gap:6px; }
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:10px; color: rgba(255,255,255,.8); font-size: 12.5px; font-weight:700; }
+    .row span:first-child{ color: rgba(255,255,255,.55); font-weight:800; }
+
+    .btn-wa-card {
+      margin-top: 6px; width: 100%; padding: 10px; border-radius: 12px;
       background: #25d366; color: #fff; text-decoration: none; text-align: center;
-      font-weight: 800; font-size: 13px; display:block;
+      font-weight: 800; font-size: 13px; display: block;
     }
-    #loading{ text-align:center; padding: 40px; font-weight:800; }
+
+    .card .badge{
+      position:absolute; top:10px; right:10px; padding:4px 10px; border-radius: 999px;
+      background: rgba(10,11,16,.85); border:1px solid rgba(230,35,35,.4);
+      font-weight:800; font-size:11px; backdrop-filter: blur(8px); z-index:2;
+    }
+
+    /* Footer */
+    footer{ padding: 20px 0 30px; border-top:1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.6); text-align:center; font-size:12px; }
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0; background: rgba(0,0,0,.85); display:none;
+      align-items:center; justify-content:center; padding:12px; z-index:999;
+      backdrop-filter: blur(8px);
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width:min(500px, 100%); max-height: 90vh; border-radius: 20px;
+      background: #12141c; border:1px solid rgba(255,255,255,.15);
+      box-shadow: 0 20px 60px rgba(0,0,0,.9); overflow:hidden;
+      display:flex; flex-direction:column; position:relative;
+    }
+    .modal-top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 16px; border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+    }
+    .modal-top strong{ font-family:'Montserrat',sans-serif; font-weight:900; color: #fff; font-size:14px; }
+    .xbtn{
+      border:none; cursor:pointer; width:34px; height:34px; border-radius: 10px;
+      background: rgba(230,35,35,.2); border:1px solid rgba(230,35,35,.4);
+      color: #fff; font-size:20px; font-weight:bold; display:grid; place-items:center;
+    }
+    .modal-body{
+      overflow-y:auto; padding:0; display:flex; flex-direction:column;
+    }
+    .modal-img{
+      width:100%; max-height: 340px; background: #000; overflow:hidden; text-align:center;
+    }
+    .modal-img img{ width:100%; height:100%; object-fit:contain; max-height:340px; display:block; margin:0 auto; }
+    .modal-info{ padding: 16px; display:flex; flex-direction:column; gap:10px; }
+    .big{ font-family:'Montserrat',sans-serif; font-weight:900; font-size: 18px; color: #fff; }
+    .info-grid{ display:grid; gap:8px; }
+    .info-item{
+      padding: 10px; border-radius: 12px; border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03); font-weight:700; color: rgba(255,255,255,.85); font-size: 13px;
+    }
+    .info-item b{ color: rgba(255,255,255,.5); font-weight:800; display:block; margin-bottom:2px; font-size:11px; }
+
+    .state-msg { grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.6); font-size: 14px; }
   </style>
 </head>
-<body>
 
+<body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <div class="logo">DT</div>
-        <div><strong>Dragon Triko</strong></div>
+      <a class="brand" href="#top">
+        <div class="logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2c2.2 1.6 3.4 3.6 3.7 6.1.2 1.6-.1 3-.7 4.2 1.9-.5 3.3-1.4 4.3-2.7-.1 4.6-2.9 8.2-7.3 9.1-5 .9-9-2.6-9.1-7.6 1.4 1.3 3.1 2 5 1.8-1.7-1.3-2.7-3-2.8-5.2 1.5 1.3 3.2 2.1 5.1 2.2C9.2 6.6 10.2 4.2 12 2Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <strong>Dragon Triko</strong>
+          <span>ألبسة شتوية • كتالوج رقمي</span>
+        </div>
+      </a>
+
+      <div class="menu">
+        <a href="#products">المنتجات</a>
+        <a href="#about">عنّ ورشة Dragon</a>
+      </div>
+
+      <div class="cta">
+        <a href="#products" class="btn secondary">عرض الكتالوج</a>
       </div>
     </div>
   </header>
 
-  <div class="container">
-    <div class="controls">
-      <div class="search">
-        <input type="text" id="searchInput" placeholder="ابحث باسم الموديل، الكود، أو الخامة..." oninput="filterData()">
-      </div>
-      <select id="categoryFilter" class="select" onchange="filterData()">
-        <option value="">كل التصنيفات</option>
-      </select>
+  <main id="top" class="hero">
+    <div class="container hero-grid">
+      <section class="hero-card">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>أحدث موديلات التريكو • جودة خامات</span>
+        </div>
+
+        <h1>كتالوج Dragon Triko<br/>لألبسة الشتاء</h1>
+        <p>تصفح الموديلات بسهولة، اضغط على أي موديل لعرض كامل التفاصيل واقتناء الكمية المطلوبة للجملة.</p>
+
+        <div class="hero-actions">
+          <a href="#products" class="btn">ابدأ التصفح</a>
+          <button class="btn secondary" id="btnReset">تصفير الفلاتر</button>
+        </div>
+
+        <div class="specs">
+          <div class="spec"><strong>خامات ممتازة</strong><span>صوف/بوليستر محبوك</span></div>
+          <div class="spec"><strong>غرزة متقنة</strong><span>ثبات شكل وجودة</span></div>
+          <div class="spec"><strong>طلبات الجملة</strong><span>حد أدنى مناسب</span></div>
+        </div>
+      </section>
+
+      <aside class="hero-media">
+        <div class="img">
+          <img alt="صورة كنزة" src="https://i.ibb.co/jPCg5byx/1790718743552.jpg">
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <div class="chip">تريكو بياقة بولو</div>
+          <div class="chip">مقاسات متعددة</div>
+        </div>
+      </aside>
     </div>
 
-    <div id="loading">جاري تحميل المنتجات...</div>
-    <div id="productsGrid" class="grid"></div>
+    <div class="container" id="products">
+      <div class="controls">
+        <div class="search">
+          <input id="searchInput" type="text" placeholder="ابحث باسم الموديل أو الكود..."/>
+        </div>
+
+        <div class="filters">
+          <select class="select" id="categorySelect">
+            <option value="all">كل التصنيفات</option>
+          </select>
+
+          <label class="toggle">
+            <input type="checkbox" id="onlyWithImage">
+            <span>مع صورة فقط</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="section-title">تشكيلة الموديلات</div>
+      <div class="grid" id="productsGrid">
+        <div class="state-msg">جاري تحميل الكتالوج...</div>
+      </div>
+    </div>
+
+    <div class="container" id="about" style="margin-bottom: 30px;">
+      <div class="section-title">عن Dragon Triko</div>
+      <div class="hero-card">
+        <p style="color:rgba(255,255,255,.85);">
+          ورشة <strong>Dragon Triko</strong> متخصصة في تصنيع وإنتاج أحدث موديلات التريكو والألبسة الشتوية والجملة.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>جميع الحقوق محفوظة © Dragon Triko 2026</p>
+    </div>
+  </footer>
+
+  <!-- Modal التفاصيل -->
+  <div class="modal" id="detailsModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <strong id="modalCode">كود الموديل</strong>
+        <button class="xbtn" id="modalCloseBtn" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-img">
+          <img id="modalImg" src="" alt="الموديل">
+        </div>
+        <div class="modal-info">
+          <div class="big" id="modalTitle">اسم الموديل</div>
+          <div class="info-grid">
+            <div class="info-item"><b>الخامة</b> <span id="modalFabric">-</span></div>
+            <div class="info-item"><b>المقاسات المتاحة</b> <span id="modalSizes">-</span></div>
+            <div class="info-item"><b>أقل كمية للطلب (MOQ)</b> <span id="modalMoq">-</span></div>
+            <div class="info-item"><b>ملاحظات</b> <span id="modalNotes">-</span></div>
+          </div>
+          <a id="modalWaBtn" href="#" target="_blank" class="btn-wa-card" style="margin-top:6px; padding:12px;">
+            طلب هذا الموديل عبر الواتساب
+          </a>
+          <button onclick="closeModal()" class="btn secondary" style="width:100%; justify-content:center; margin-top:4px;">إغلاق النافذة</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyKT1gEticoiB3mTJ_b8HpATVh-1MpGZ-4xyZTKNWf_VSXZR0XYSNAZ6CPGncobs-E/exec";
-    let products = [];
+    // رابط Apps Script المحدث خصيصاً لجدولك
+    const API_URL = `https://script.google.com/macros/s/AKfycbzr3WYeBhe6YAZp3Ur7QvhE3xiI2SZ2vDRrDD3wlXkuu3OH7168q06h5LIsb82Pf7TE/exec?t=${new Date().getTime()}`;
+    const WHATSAPP_NUMBER = '905343265940';
 
-    async function fetchData() {
+    let productsData = [];
+
+    function formatImageUrl(url) {
+      if (!url) return '';
+      url = url.trim();
+
+      if (url.includes('drive.google.com')) {
+        let fileId = '';
+        const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (matchId && matchId[1]) {
+          fileId = matchId[1];
+          return `https://lh3.googleusercontent.com/d/${fileId}`;
+        }
+      }
+      return url;
+    }
+
+    async function fetchCatalog() {
       try {
-        const response = await fetch(API_URL, { redirect: "follow" });
-        products = await response.json();
-        document.getElementById('loading').style.display = 'none';
-        populateCategories();
-        renderProducts(products);
+        const response = await fetch(API_URL);
+        const rawData = await response.json();
+
+        const grouped = {};
+        const categories = new Set();
+
+        rawData.forEach(row => {
+          const id = row['المعرف'] || row['id'] || Object.values(row)[0];
+          if (!id) return;
+
+          const cat = row['التصنيف'] || row['tag'] || 'عام';
+          if (cat) categories.add(cat);
+
+          if (!grouped[id]) {
+            grouped[id] = {
+              id: id,
+              title: row['اسم الموديل'] || row['title'] || 'موديل بدون اسم',
+              code: row['الكود'] || row['code'] || id,
+              tag: cat,
+              fabric: row['الخامة'] || row['fabric'] || '-',
+              sizes: row['المقاسات'] || row['sizes'] || '-',
+              moq: row['اقل كمية'] || row['أقل كمية'] || row['moq'] || '-',
+              notes: row['ملاحظات'] || row['notes'] || '-',
+              variants: []
+            };
+          }
+
+          let rawImg = (row['الصورة'] || row['رابط الصورة'] || row['image_url'] || '').trim();
+          let formattedImg = formatImageUrl(rawImg);
+          let hexColor = row['كود اللون'] || row['color_hex'] || '#e62323';
+
+          if (hexColor && !hexColor.startsWith('#') && hexColor.length === 6) {
+            hexColor = '#' + hexColor;
+          }
+
+          grouped[id].variants.push({
+            color: hexColor,
+            image: formattedImg
+          });
+        });
+
+        productsData = Object.values(grouped);
+        populateCategories(Array.from(categories));
+        renderGrid();
+
       } catch (error) {
-        document.getElementById('loading').innerHTML = "حدث خطأ أثناء تحميل البيانات، يرجى التأكد من اتصالك بالإنترنت.";
-        console.error(error);
+        console.error("Error fetching sheet:", error);
+        document.getElementById('productsGrid').innerHTML = '<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر تحميل الكتالوج. يرجى التأكد من أن نشر Apps Script مضبوط على صلاحية "أي شخص / Anyone".</div>';
       }
     }
 
-    function populateCategories() {
-      const select = document.getElementById('categoryFilter');
-      const categories = [...new Set(products.map(p => p["التصنيف"]).filter(Boolean))];
-      categories.forEach(cat => {
+    function populateCategories(cats) {
+      const select = document.getElementById('categorySelect');
+      select.innerHTML = '<option value="all">كل التصنيفات</option>';
+      cats.forEach(c => {
         const opt = document.createElement('option');
-        opt.value = cat;
-        opt.textContent = cat;
+        opt.value = c;
+        opt.textContent = c;
         select.appendChild(opt);
       });
     }
 
-    function renderProducts(items) {
+    function renderGrid() {
       const grid = document.getElementById('productsGrid');
-      grid.innerHTML = "";
-      
-      if(items.length === 0) {
-        grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>لا توجد منتجات مطابقة.</p>";
+      const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
+      const selectedCat = document.getElementById('categorySelect').value;
+      const onlyWithImg = document.getElementById('onlyWithImage').checked;
+
+      const filtered = productsData.filter(p => {
+        const matchesSearch = p.title.toLowerCase().includes(searchVal) || p.code.toLowerCase().includes(searchVal);
+        const matchesCat = (selectedCat === 'all' || p.tag === selectedCat);
+        const hasImg = p.variants.some(v => v.image && v.image.length > 5);
+        const matchesImgFilter = onlyWithImg ? hasImg : true;
+
+        return matchesSearch && matchesCat && matchesImgFilter;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="state-msg">لا توجد موديلات مطابقة لخيارات البحث.</div>';
         return;
       }
 
-      items.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="thumb">
-            <span class="badge">${p["التصنيف"] || 'عام'}</span>
-            <img src="${p["الصورة"] || 'https://via.placeholder.com/300'}" alt="${p["اسم الموديل"] || ''}">
-          </div>
-          <div class="card-body">
-            <div class="title">${p["اسم الموديل"] || 'بدون اسم'}</div>
-            <div class="meta">
-              <div class="row"><span>الكود:</span> <strong>${p["الكود"] || '-'}</strong></div>
-              <div class="row"><span>الخامة:</span> <strong>${p["الخامة"] || '-'}</strong></div>
-              <div class="row"><span>المقاسات:</span> <strong>${p["المقاسات"] || '-'}</strong></div>
-              <div class="row"><span>أقل كمية:</span> <strong>${p["أقل كمية"] || '-'}</strong></div>
-              <div class="row"><span>اللون:</span> <strong>${p["كود اللون"] || '-'}</strong></div>
-            </div>
-            <a href="https://wa.me/?text=${encodeURIComponent('مرحباً، أود الاستفسار عن موديل: ' + (p["اسم الموديل"] || '') + ' (كود: ' + (p["الكود"] || '') + ')')}" target="_blank" class="btn-wa">طلب عبر واتساب</a>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    function filterData() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const category = document.getElementById('categoryFilter').value;
-
-      const filtered = products.filter(p => {
-        const matchesQuery = (p["اسم الموديل"] || '').toString().toLowerCase().includes(query) ||
-                             (p["الكود"] || '').toString().toLowerCase().includes(query) ||
-                             (p["الخامة"] || '').toString().toLowerCase().includes(query);
-        const matchesCategory = category === "" || p["التصنيف"] === category;
-        return matchesQuery && matchesCategory;
-      });
-
-      renderProducts(filtered);
-    }
-
-    fetchData();
-  </script>
-</body>
-</html>
+      grid.innerHTML = filtered.map((item, index) => {
+        const firstVar = item.variants[0] || { color: '#e62323', image: '' };
+        const fallbackImg = 'https://via.placeholder.com/400x500/101217/e62323?text=Dragon+Triko';
+        const displayImg = firstVar.image ? firstVar.image : fallbackImg;
+        const waMessage = encodeURICompon
