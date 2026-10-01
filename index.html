@@ -4,11 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Dragon Triko | الكتالوج الرقمي</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --accent-red:#e62323;
@@ -20,213 +18,206 @@
       --radius:18px;
       --radius2:26px;
       --shadow: 0 18px 45px rgba(0,0,0,.35);
-      --shadow2: 0 10px 30px rgba(0,0,0,.22);
       --border: rgba(255,255,255,.08);
     }
-
     *{ box-sizing:border-box; margin:0; padding:0; font-family:'Tajawal',sans-serif; -webkit-tap-highlight-color:transparent; }
-    body{ background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
-                     radial-gradient(900px 500px at 90% 10%, rgba(197,168,128,.14), transparent 55%),
-                     linear-gradient(180deg, var(--bg0), #07080b 70%);
-          color:var(--text); min-height:100vh; }
-
+    body{ 
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(230,35,35,.18), transparent 55%),
+                  radial-gradient(900px 500px at 90% 10%, rgba(197,168,128,.14), transparent 55%),
+                  linear-gradient(180deg, var(--bg0), #07080b 70%);
+      color:var(--text); min-height:100vh; 
+    }
     .container{ width:min(1200px, 92%); margin:0 auto; }
-
-    /* Header */
+    
     header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
+      position:sticky; top:0; z-index:50; backdrop-filter: blur(14px);
       background: linear-gradient(180deg, rgba(10,11,16,.9), rgba(10,11,16,.6));
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid var(--border);
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:12px;
-      text-decoration:none; color:var(--text); user-select:none;
-    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+    .brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--text); }
     .logo{
       width:42px; height:42px; border-radius:14px;
       background: linear-gradient(135deg, rgba(230,35,35,.95), rgba(197,168,128,.7));
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.2);
-      box-shadow: 0 8px 20px rgba(230,35,35,.25);
+      display:grid; place-items:center; border:1px solid rgba(255,255,255,.2); font-weight:900;
     }
-    .brand strong{
-      font-family: 'Montserrat', sans-serif;
-      font-weight:900; font-size:16px; line-height:1.1;
-    }
-    .brand span{ color:rgba(255,255,255,.7); font-size:11px; display:block; margin-top:2px; }
-
-    .menu{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
-    .menu a{
-      color:rgba(255,255,255,.8); text-decoration:none; padding:8px 12px;
-      border-radius:12px; font-weight:700; font-size:13px; transition:.2s ease;
-    }
-    .menu a:hover{ color:var(--text); background: rgba(255,255,255,.06); }
-
-    .cta{ display:flex; align-items:center; gap:10px; }
-    .btn{
-      cursor:pointer; border:none; padding:10px 16px; border-radius: var(--radius2);
-      font-weight:900; transition:.2s ease; color:var(--text);
-      background: linear-gradient(135deg, #ff3b3b, #c91212);
-      border:1px solid rgba(255,255,255,.14);
-      display:inline-flex; align-items:center; gap:8px;
-      white-space:nowrap; text-decoration:none; font-size:13px;
-    }
-    .btn:hover{ transform: translateY(-1px); filter:saturate(1.05); }
-    .btn.secondary{
-      background: rgba(255,255,255,.06); color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    /* Hero */
-    .hero{ position:relative; padding: 30px 0 20px; }
-    .hero-grid{ display:grid; grid-template-columns: 1.1fr .9fr; gap:20px; align-items:stretch; }
-    @media (max-width: 900px){
-      .hero-grid{ grid-template-columns:1fr; }
-      .menu{ display:none; }
-    }
-
-    .hero-card{
-      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      padding: 20px;
-    }
-    .hero-badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 12px; border-radius: 999px;
-      background: rgba(230,35,35,.15); border:1px solid rgba(230,35,35,.35);
-      color: rgba(255,255,255,.95); font-weight:800; font-size:12px; margin-bottom:12px;
-    }
-    .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent-red); }
-
-    .hero h1{ font-family:'Montserrat',sans-serif; font-size: 32px; line-height:1.2; margin-bottom:10px; font-weight:900; }
-    @media (max-width: 520px){ .hero h1{ font-size:26px; } }
-
-    .hero p{ color: rgba(255,255,255,.8); font-size:14px; line-height:1.8; margin-bottom:16px; }
-
-    .hero-actions{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-
-    .specs{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top: 18px; }
-    @media (max-width: 520px){ .specs{ grid-template-columns:1fr; } }
-
-    .spec{ padding:12px; border-radius: var(--radius); background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
-    .spec strong{ font-size:12px; display:block; font-weight:900; color: rgba(255,255,255,.95); }
-    .spec span{ display:block; margin-top:4px; color: rgba(255,255,255,.7); font-size:11.5px; line-height:1.5; }
-
-    .hero-media{
-      border-radius: var(--radius2); border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.03); padding:14px; display:flex; flex-direction:column; gap:12px;
-    }
-    .hero-media .img{
-      height: 220px; border-radius: 18px; overflow:hidden;
-      border:1px solid rgba(255,255,255,.1); position:relative;
-    }
-    .hero-media .img img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-
-    .chip{
-      padding:8px 12px; border-radius: 999px; border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04); color: rgba(255,255,255,.85);
-      font-weight:800; font-size:11px; display:inline-flex; align-items:center; gap:6px;
-    }
-
-    /* Controls */
-    .controls{
-      margin: 20px 0 14px; display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
-    }
-
+    .brand strong{ font-family: 'Montserrat', sans-serif; font-size:16px; }
+    .brand span{ color:rgba(255,255,255,.7); font-size:11px; display:block; }
+    
+    .controls{ margin: 24px 0 16px; display:flex; gap:12px; flex-wrap:wrap; }
     .search{
-      flex:1; min-width: 240px; display:flex; gap:10px; align-items:center;
-      padding: 10px 14px; border-radius: 16px; border:1px solid rgba(255,255,255,.12);
+      flex:1; min-width: 240px; display:flex; align-items:center;
+      padding: 10px 14px; border-radius: 16px; border:1px solid var(--border);
       background: rgba(255,255,255,.04);
     }
     .search input{
       width:100%; border:none; outline:none; background: transparent;
-      color: var(--text); font-weight:700; font-size:13.5px;
+      color: var(--text); font-weight:700; font-size:14px;
     }
-
-    .filters{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-
     .select{
-      appearance:none; border-radius: 16px; padding: 10px 14px;
-      border:1px solid rgba(255,255,255,.12); background: rgba(16, 18, 23, 0.95);
-      color: var(--text); font-weight:800; font-size:12.5px; outline:none;
+      appearance:none; border-radius: 16px; padding: 10px 16px;
+      border:1px solid var(--border); background: #161822;
+      color: var(--text); font-weight:700; outline:none; cursor:pointer;
     }
 
-    .toggle{
-      display:flex; align-items:center; gap:8px; padding: 10px 14px;
-      border-radius: 16px; border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04); font-weight:800; font-size:12.5px; cursor:pointer;
-    }
-
-    /* Grid cards */
-    .section-title{ font-family:'Montserrat',sans-serif; font-size: 18px; font-weight:900; margin: 18px 0 10px; }
-
-    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; padding-bottom: 40px; }
+    .grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; padding-bottom: 40px; }
     @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
     @media (max-width: 560px){ .grid{ grid-template-columns: 1fr;} }
 
     .card{
-      border-radius: var(--radius); border:1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04); overflow:hidden; transition: .2s ease;
-      position:relative; cursor:pointer;
+      border-radius: var(--radius); border:1px solid var(--border);
+      background: rgba(255,255,255,.03); overflow:hidden; transition: .2s ease;
+      position:relative; display:flex; flex-direction:column;
     }
-    .card:hover{ transform: translateY(-2px); border-color: rgba(230,35,35,.4); }
-
-    .thumb{
-      height: 280px; background: rgba(255,255,255,.02);
-      border-bottom: 1px solid rgba(255,255,255,.08); position:relative; overflow:hidden;
+    .card:hover{ transform: translateY(-3px); border-color: rgba(230,35,35,.5); }
+    .thumb{ height: 280px; width:100%; background: #000; position:relative; overflow:hidden; }
+    .thumb img{ width:100%; height:100%; object-fit:cover; }
+    .badge{
+      position:absolute; top:10px; right:10px; padding:4px 10px; border-radius:999px;
+      background: rgba(10,11,16,.85); border:1px solid var(--accent-red);
+      font-size:11px; font-weight:800;
     }
-    .thumb img{ width:100%; height:100%; object-fit:cover; object-position:top; }
-
-    .card-body{ padding: 14px; display:flex; flex-direction:column; gap:8px; }
-    .title{ font-family:'Montserrat',sans-serif; font-weight:900; font-size: 15px; color: rgba(255,255,255,.95); }
-
-    .meta{ display:grid; gap:6px; }
-    .row{ display:flex; align-items:center; justify-content:space-between; gap:10px; color: rgba(255,255,255,.8); font-size: 12.5px; font-weight:700; }
-    .row span:first-child{ color: rgba(255,255,255,.55); font-weight:800; }
-
-    .btn-wa-card {
-      margin-top: 6px; width: 100%; padding: 10px; border-radius: 12px;
+    .card-body{ padding: 14px; display:flex; flex-direction:column; gap:8px; flex-grow:1; }
+    .title{ font-weight:900; font-size: 16px; }
+    .meta{ display:grid; gap:4px; font-size:13px; color:rgba(255,255,255,.8); }
+    .row{ display:flex; justify-content:space-between; }
+    .row span:first-child{ color: var(--muted); }
+    
+    .btn-wa{
+      margin-top: 10px; width: 100%; padding: 10px; border-radius: 12px;
       background: #25d366; color: #fff; text-decoration: none; text-align: center;
-      font-weight: 800; font-size: 13px; display: block;
+      font-weight: 800; font-size: 13px; border:none; cursor:pointer;
     }
 
-    .card .badge{
-      position:absolute; top:10px; right:10px; padding:4px 10px; border-radius: 999px;
-      background: rgba(10,11,16,.85); border:1px solid rgba(230,35,35,.4);
-      font-weight:800; font-size:11px; backdrop-filter: blur(8px); z-index:2;
-    }
-
-    /* Footer */
-    footer{ padding: 20px 0 30px; border-top:1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.6); text-align:center; font-size:12px; }
+    #loading{ text-align:center; padding: 40px; font-weight:800; font-size:16px; }
 
     /* Modal */
     .modal{
       position:fixed; inset:0; background: rgba(0,0,0,.85); display:none;
       align-items:center; justify-content:center; padding:12px; z-index:999;
-      backdrop-filter: blur(8px);
     }
     .modal.open{ display:flex; }
     .modal-card{
       width:min(500px, 100%); max-height: 90vh; border-radius: 20px;
       background: #12141c; border:1px solid rgba(255,255,255,.15);
-      box-shadow: 0 20px 60px rgba(0,0,0,.9); overflow:hidden;
-      display:flex; flex-direction:column; position:relative;
+      overflow-y:auto; padding:20px; position:relative;
     }
-    .modal-top{
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 12px 16px; border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03);
+    .close-btn{
+      position:absolute; top:15px; left:15px; background:rgba(255,255,255,.1);
+      border:none; color:#fff; width:30px; height:30px; border-radius:50%;
+      cursor:pointer; font-weight:bold;
     }
-    .modal-top strong{ font-family:'Montserrat',sans-serif; font-weight:900; color: #fff; font-size:14px; }
-    .xbtn{
-      border:none; cursor:pointer; width:34px; height:34px; border-radius: 10px;
-      background: rgba(230,35,35,.2); border:1px solid rgba(230,35,35,.4);
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">DT</div>
+        <div>
+          <strong>Dragon Triko</strong>
+          <span>الكتالوج الرقمي المباشر</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="controls">
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="ابحث باسم الموديل، الكود، أو الخامة..." oninput="filterData()">
+      </div>
+      <select id="categoryFilter" class="select" onchange="filterData()">
+        <option value="">كل التصنيفات</option>
+      </select>
+    </div>
+
+    <div id="loading">جاري تحميل المنتجات من الجدول...</div>
+    <div id="productsGrid" class="grid"></div>
+  </div>
+
+  <script>
+    // رابط Google Apps Script الخاص بك
+    const API_URL = "https://script.google.com/macros/s/AKfycbyKT1gEticoiB3mTJ_b8HpATVh-1MpGZ-4xyZTKNWf_VSXZR0XYSNAZ6CPGncobs-E/exec";
+    let products = [];
+
+    async function fetchData() {
+      try {
+        const response = await fetch(API_URL);
+        products = await response.json();
+        document.getElementById('loading').style.display = 'none';
+        populateCategories();
+        renderProducts(products);
+      } catch (error) {
+        document.getElementById('loading').innerHTML = "حدث خطأ أثناء تحميل البيانات، يرجى المحاولة لاحقاً.";
+      }
+    }
+
+    function populateCategories() {
+      const select = document.getElementById('categoryFilter');
+      const categories = [...new Set(products.map(p => p["التصنيف"]).filter(Boolean))];
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        select.appendChild(opt);
+      });
+    }
+
+    function renderProducts(items) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = "";
+      
+      if(items.length === 0) {
+        grid.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>لا توجد منتجات مطابقة.</p>";
+        return;
+      }
+
+      items.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="thumb">
+            <span class="badge">${p["التصنيف"] || 'عام'}</span>
+            <img src="${p["الصورة"] || 'https://via.placeholder.com/300'}" alt="${p["اسم الموديل"]}">
+          </div>
+          <div class="card-body">
+            <div class="title">${p["اسم الموديل"] || 'بدون اسم'}</div>
+            <div class="meta">
+              <div class="row"><span>الكود:</span> <strong>${p["الكود"] || '-'}</strong></div>
+              <div class="row"><span>الخامة:</span> <strong>${p["الخامة"] || '-'}</strong></div>
+              <div class="row"><span>المقاسات:</span> <strong>${p["المقاسات"] || '-'}</strong></div>
+              <div class="row"><span>أقل كمية:</span> <strong>${p["أقل كمية"] || '-'}</strong></div>
+              <div class="row"><span>اللون:</span> <strong>${p["كود اللون"] || '-'}</strong></div>
+            </div>
+            <a href="https://wa.me/?text=${encodeURIComponent('مرحباً، أود الاستفسار عن موديل: ' + p["اسم الموديل"] + ' (كود: ' + p["الكود"] + ')')}" target="_blank" class="btn-wa">طلب عبر واتساب</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterData() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const category = document.getElementById('categoryFilter').value;
+
+      const filtered = products.filter(p => {
+        const matchesQuery = (p["اسم الموديل"] || '').toString().toLowerCase().includes(query) ||
+                             (p["الكود"] || '').toString().toLowerCase().includes(query) ||
+                             (p["الخامة"] || '').toString().toLowerCase().includes(query);
+        const matchesCategory = category === "" || p["التصنيف"] === category;
+        return matchesQuery && matchesCategory;
+      });
+
+      renderProducts(filtered);
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>
+5,35,.4);
       color: #fff; font-size:20px; font-weight:bold; display:grid; place-items:center;
     }
     .modal-body{
