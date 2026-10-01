@@ -34,5 +34,18 @@
     "notes": "كنزات تريكو",
     "color": "#e62323",
     "image": "1001025271.jpg"
-  }
+  },
+  
+  {
+    "id": "4",
+    "title": "Casablanca",
+    "code": "m103",
+    "tag": "احدث الموديلات",
+    "fabric": "بوليستر",
+    "sizes": "S-M-L-Xl",
+    "moq": "400",
+    "notes": "كنزات تريكو",
+    "color": "سماوي بيج كحلي اسود",
+    "image": "https://lh3.googleusercontent.com/d/1odDfM90c3CwsJXgLgj22gwBV5ajuXz7j"
+  },
 ]
