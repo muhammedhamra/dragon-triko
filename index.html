@@ -8,6 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- مكتبة PapaParse لقراءة جدول جوجل مباشرة دون Apps Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
   <style>
     :root{
@@ -378,7 +381,9 @@
   </div>
 
   <script>
-    const API_URL = `https://script.google.com/macros/s/AKfycbySabnA8ZAWozycFF4fLRRuHyiFJhe48y7e59xoZdOqSd2Yz_j14jAYRqk5I_70qjBC/exec?t=${new Date().getTime()}`;
+    // رابط تحويل جدول Google Sheet الخاص بكِ مباشر وبدون Apps Script
+    const SPREADSHEET_ID = '1ME-jisk80zWyzcqYXePUZo8YshoDweToq_LgZIKVLSM';
+    const CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv`;
     const WHATSAPP_NUMBER = '905343265940';
 
     let productsData = [];
@@ -386,75 +391,74 @@
     function formatImageUrl(url) {
       if (!url) return '';
       url = url.trim();
-
-      if (url.includes('drive.google.com')) {
-        let fileId = '';
-        const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-        if (matchId && matchId[1]) {
-          fileId = matchId[1];
-          return `https://lh3.googleusercontent.com/d/${fileId}`;
-        }
+      const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (matchId && matchId[1]) {
+        return `https://lh3.googleusercontent.com/d/${matchId[1]}`;
       }
       return url;
     }
 
-    async function fetchCatalog() {
-      try {
-        const response = await fetch(API_URL);
-        const rawData = await response.json();
+    function fetchCatalog() {
+      Papa.parse(CSV_URL, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+          const rawData = results.data;
+          const grouped = {};
+          const categories = new Set();
 
-        const grouped = {};
-        const categories = new Set();
+          rawData.forEach(row => {
+            const id = row['المعرف'] || row['id'] || Object.values(row)[0];
+            if (!id) return;
 
-        rawData.forEach(row => {
-          const id = row['المعرف'] || row['id'] || Object.values(row)[0];
-          if (!id) return;
+            const cat = row['التصنيف'] || row['tag'] || 'عام';
+            if (cat) categories.add(cat.trim());
 
-          const cat = row['التصنيف'] || row['tag'] || 'عام';
-          if (cat) categories.add(cat);
+            if (!grouped[id]) {
+              grouped[id] = {
+                id: id,
+                title: row['اسم الموديل'] || row['title'] || 'موديل بدون اسم',
+                code: row['الكود'] || row['code'] || id,
+                tag: cat ? cat.trim() : 'عام',
+                fabric: row['الخامة'] || row['fabric'] || '-',
+                sizes: row['المقاسات'] || row['sizes'] || '-',
+                moq: row['اقل كمية'] || row['أقل كمية'] || row['moq'] || '-',
+                notes: row['ملاحظات'] || row['notes'] || '-',
+                variants: []
+              };
+            }
 
-          if (!grouped[id]) {
-            grouped[id] = {
-              id: id,
-              title: row['اسم الموديل'] || row['title'] || 'موديل بدون اسم',
-              code: row['الكود'] || row['code'] || id,
-              tag: cat,
-              fabric: row['الخامة'] || row['fabric'] || '-',
-              sizes: row['المقاسات'] || row['sizes'] || '-',
-              moq: row['اقل كمية'] || row['أقل كمية'] || row['moq'] || '-',
-              notes: row['ملاحظات'] || row['notes'] || '-',
-              variants: []
-            };
-          }
+            let rawImg = (row['الصورة'] || row['رابط الصورة'] || row['image_url'] || '').trim();
+            let formattedImg = formatImageUrl(rawImg);
+            let hexColor = row['كود اللون'] || row['color_hex'] || '#e62323';
 
-          let rawImg = (row['الصورة'] || row['رابط الصورة'] || row['image_url'] || '').trim();
-          let formattedImg = formatImageUrl(rawImg);
-          let hexColor = row['كود اللون'] || row['color_hex'] || '#e62323';
+            if (hexColor && !hexColor.startsWith('#') && hexColor.length === 6) {
+              hexColor = '#' + hexColor;
+            }
 
-          if (hexColor && !hexColor.startsWith('#') && hexColor.length === 6) {
-            hexColor = '#' + hexColor;
-          }
-
-          grouped[id].variants.push({
-            color: hexColor,
-            image: formattedImg
+            grouped[id].variants.push({
+              color: hexColor,
+              image: formattedImg
+            });
           });
-        });
 
-        productsData = Object.values(grouped);
-        populateCategories(Array.from(categories));
-        renderGrid();
-
-      } catch (error) {
-        console.error("Error fetching sheet:", error);
-        document.getElementById('productsGrid').innerHTML = '<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر تحميل الكتالوج. يرجى التأكد من نشر Apps Script بصلاحية "أي شخص / Anyone".</div>';
-      }
+          productsData = Object.values(grouped);
+          populateCategories(Array.from(categories));
+          renderGrid();
+        },
+        error: function(error) {
+          console.error("Error fetching sheet:", error);
+          document.getElementById('productsGrid').innerHTML = '<div class="state-msg" style="color:#ff6b6b;">⚠️ تعذر تحميل الجدول. تأكدي أن خيار "المشاركة" في الجدول مضبوط على (أي شخص لديه الرابط - Anyone with link).</div>';
+        }
+      });
     }
 
     function populateCategories(cats) {
       const select = document.getElementById('categorySelect');
       select.innerHTML = '<option value="all">كل التصنيفات</option>';
       cats.forEach(c => {
+        if (!c) return;
         const opt = document.createElement('option');
         opt.value = c;
         opt.textContent = c;
