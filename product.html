@@ -2,284 +2,325 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dragon Triko | تفاصيل الموديل</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --bg-main: #f8f9fa;
-      --text-main: #111111;
-      --text-muted: #666666;
-      --primary-red: #d90429;
-      --primary-black: #0f172a;
-      --accent-gray: #f1f5f9;
-      --border-color: #e2e8f0;
-      --radius-lg: 20px;
-      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-      --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+      --bg: #f6f4f5; --card: #fff; --ink: #111827; --muted: #6b7280;
+      --red: #d90429; --pink: #ff2e88; --gold: #ffb703; --navy: #0f172a; --night: #07070a;
+      --line: #e5e7eb; --chip: #f1f5f9;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; padding-bottom: 40px; }
+    body { background: var(--bg); color: var(--ink); min-height: 100vh; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
-    .container { width: min(1000px, 92%); margin: 0 auto; }
+    /* الشريط العلوي */
+    .bar {
+      position: sticky; top: 0; z-index: 50; background: rgba(7,7,10,.88);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .bar-in { width: min(1200px, 94%); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+    .icon-btn {
+      width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.1); color: #fff; transition: background .2s, transform .15s;
+    }
+    .icon-btn:hover { background: var(--red); }
+    .icon-btn:active { transform: scale(.92); }
+    .icon-btn svg { width: 20px; height: 20px; }
+    .bar-brand { display: flex; align-items: center; gap: 8px; color: #fff; }
+    .bar-brand img { height: 34px; border-radius: 6px; }
+    .bar-brand b { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 15px; letter-spacing: .5px; }
 
-    /* الهيدر */
-    header {
-      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 12px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm);
+    /* المسرح: معرض الصور */
+    .stage {
+      background: radial-gradient(ellipse at 50% 0%, #2a0a1c 0%, var(--night) 65%);
+      padding: 18px 0 70px;
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-main); }
-    .brand img { height: 40px; width: auto; border-radius: 6px; }
-
-    /* زر العودة بحواف متحركة خفيفة */
-    .back-btn-wrapper {
-      position: relative; border-radius: 8px; overflow: hidden; padding: 2px; display: inline-flex;
+    .wrap { width: min(1200px, 94%); margin: 0 auto; }
+    .layout { display: grid; gap: 0; }
+    .gallery { position: relative; }
+    .slides {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px;
+      scrollbar-width: none; border-radius: 20px;
     }
-    .back-btn-wrapper::before {
-      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, #d90429, #0f172a, #d90429);
-      animation: rotateGlow 4s linear infinite; z-index: 1;
+    .slides::-webkit-scrollbar { display: none; }
+    .slide {
+      flex: 0 0 100%; scroll-snap-align: center; aspect-ratio: 3/4; max-height: 70vh; width: 100%;
+      border-radius: 20px; overflow: hidden; background: #1b1b22; position: relative; cursor: zoom-in;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 20px 50px rgba(217,4,41,.18);
     }
-    .back-link {
-      position: relative; z-index: 2; text-decoration: none; color: #ffffff; background: var(--primary-black);
-      font-weight: 800; font-size: 13px; padding: 6px 14px; border-radius: 6px; display: flex; align-items: center; gap: 6px;
-    }
-
-    /* كرت المنتج الرئيسي */
-    .product-page {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: #ffffff;
-      padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-md);
-    }
-    @media (max-width: 768px) { .product-page { grid-template-columns: 1fr; padding: 16px; gap: 20px; } }
-
-    /* حاوية الصورة مع التزويم */
-    .image-container { display: flex; flex-direction: column; gap: 10px; }
-    .zoom-box {
-      width: 100%; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden;
-      background: #f1f5f9; position: relative; cursor: zoom-in; touch-action: none;
-    }
-    .zoom-box img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top;
-      transition: transform 0.2s ease-out; transform-origin: center center;
-    }
+    .slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
     .zoom-hint {
-      position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.65);
-      color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; pointer-events: none;
+      position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,.55); color: #fff;
+      font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 99px; backdrop-filter: blur(6px);
     }
+    .dots { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
+    .dot { width: 7px; height: 7px; border-radius: 99px; background: rgba(255,255,255,.3); transition: all .25s; }
+    .dot.on { width: 22px; background: linear-gradient(90deg, var(--red), var(--pink)); }
+    .thumbs { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+    .thumbs::-webkit-scrollbar { display: none; }
+    .thumb {
+      flex: 0 0 62px; aspect-ratio: 3/4; border-radius: 10px; overflow: hidden; opacity: .55;
+      border: 2px solid transparent; transition: opacity .2s, border-color .2s;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .thumb.on { opacity: 1; border-color: var(--pink); }
 
-    /* مصغرات الصور */
-    .thumbs-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
-    .thumb-item {
-      width: 65px; height: 80px; border-radius: 8px; border: 2px solid transparent;
-      overflow: hidden; cursor: pointer; flex-shrink: 0; opacity: 0.6; transition: all 0.2s;
+    /* بطاقة المعلومات تصعد فوق المسرح */
+    .info {
+      position: relative; margin-top: -48px; background: var(--card); border-radius: 28px 28px 0 0;
+      padding: 22px 18px 28px; box-shadow: 0 -10px 30px rgba(0,0,0,.18);
+      animation: rise .6s cubic-bezier(.2,.8,.2,1) both;
     }
-    .thumb-item.active { border-color: var(--primary-red); opacity: 1; transform: scale(1.03); }
-    .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+    @keyframes rise { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .info::before { content: ""; display: block; width: 44px; height: 4px; border-radius: 9px; background: var(--line); margin: -8px auto 14px; }
+    .tag { display: inline-block; background: var(--navy); color: #fff; font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 99px; }
+    .title { font-size: 24px; font-weight: 900; margin-top: 10px; line-height: 1.3; color: var(--navy); }
+    .price-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .price { font-size: 28px; font-weight: 900; background: linear-gradient(90deg, var(--red), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .code { font-size: 12px; font-weight: 800; background: var(--chip); padding: 5px 12px; border-radius: 8px; color: var(--navy); }
 
-    /* صندوق التفاصيل */
-    .details-box { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
-    .tag { display: inline-block; background: #ffe5e5; color: var(--primary-red); padding: 4px 12px; border-radius: 99px; font-weight: 800; font-size: 12px; width: fit-content; }
-    .title { font-size: 24px; font-weight: 900; color: var(--primary-black); }
-    .price { font-size: 22px; font-weight: 900; color: var(--primary-red); }
+    .sec { margin-top: 22px; }
+    .sec h3 { font-size: 14px; font-weight: 900; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .sec h3 small { color: var(--red); font-weight: 800; font-size: 12px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .color-chip {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 12px; border-radius: 99px;
+      background: var(--chip); border: 2px solid transparent; font-size: 13px; font-weight: 800; color: var(--navy);
+      transition: all .2s;
+    }
+    .color-chip i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(0,0,0,.15); background: var(--sw, #ccc); }
+    .color-chip:hover { border-color: var(--pink); }
+    .color-chip.on { background: #fff; border-color: var(--red); box-shadow: 0 4px 14px rgba(217,4,41,.2); }
+    .desc { font-size: 14px; line-height: 1.9; color: #374151; font-weight: 600; }
+    .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .spec { background: var(--chip); border-radius: 14px; padding: 12px; }
+    .spec span { display: block; font-size: 11px; color: var(--muted); font-weight: 800; }
+    .spec b { font-size: 14px; font-weight: 900; color: var(--navy); }
 
-    .info-list { display: grid; gap: 8px; margin: 6px 0; }
-    .info-item {
-      display: flex; justify-content: space-between; padding: 10px 14px;
-      background: var(--accent-gray); border-radius: 10px; font-weight: 700; font-size: 13.5px;
+    /* الأزرار */
+    .actions { display: grid; gap: 10px; margin-top: 24px; }
+    .cta {
+      --b: 2.5px; --r: 14px; position: relative; isolation: isolate; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 52px; border-radius: var(--r); color: #fff; font-size: 15px; font-weight: 900; background: var(--navy);
+      animation: pulse 2.6s ease-in-out infinite; transition: transform .15s;
     }
-    .info-item span { color: var(--text-muted); }
+    .cta::before {
+      content: ""; position: absolute; z-index: -2; inset: -80%;
+      background: conic-gradient(from 0deg, #d90429, #ff2e88 70deg, #ffb703 130deg, #fff 160deg, #ffb703 190deg, #ff2e88 250deg, #d90429 320deg, #d90429);
+      animation: spin 2.4s linear infinite;
+    }
+    .cta::after {
+      content: ""; position: absolute; z-index: -1; inset: var(--b); border-radius: calc(var(--r) - var(--b));
+      background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.16) 50%, transparent 65%) 0 0 / 250% 100% no-repeat, linear-gradient(135deg, #0b1020, #1a1030 55%, #2a0a1c);
+      animation: shine 3.2s ease-in-out infinite;
+    }
+    .cta svg { width: 20px; height: 20px; color: var(--gold); }
+    .cta:active { transform: scale(.97); }
+    .ghost { min-height: 48px; border-radius: 14px; border: 2px solid var(--line); display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--navy); transition: border-color .2s; }
+    .ghost:hover { border-color: var(--red); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes shine { 0% { background-position: 150% 0, 0 0; } 60%, 100% { background-position: -50% 0, 0 0; } }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 8px rgba(217,4,41,.35); } 50% { box-shadow: 0 0 20px rgba(217,4,41,.6), 0 6px 22px rgba(255,46,136,.3); } }
 
-    /* الأزرار بالحواف الملونة المتحركة (Animated Border Glow) */
-    .glow-btn-wrapper {
-      position: relative; margin-top: 10px; border-radius: 12px; overflow: hidden; padding: 2.5px; display: flex;
-    }
-    .glow-btn-wrapper::before {
-      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, #25d366, #ff007f, #3a86ef, #25d366);
-      animation: rotateGlow 3s linear infinite; z-index: 1;
-    }
+    /* موديلات مشابهة */
+    .related { width: min(1200px, 94%); margin: 0 auto; padding: 26px 0 10px; }
+    .related h2 { font-size: 17px; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
+    .rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 8px; scrollbar-width: none; }
+    .rail::-webkit-scrollbar { display: none; }
+    .mini { flex: 0 0 140px; scroll-snap-align: start; background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); transition: transform .2s; }
+    .mini:hover { transform: translateY(-3px); }
+    .mini img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top; display: block; background: var(--chip); }
+    .mini div { padding: 8px 10px; }
+    .mini b { display: block; font-size: 12.5px; font-weight: 800; }
+    .mini span { font-size: 13px; font-weight: 900; color: var(--red); }
 
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    /* الصورة الكبيرة */
+    .lb { position: fixed; inset: 0; z-index: 100; background: rgba(5,5,8,.96); display: none; align-items: center; justify-content: center; }
+    .lb.open { display: flex; }
+    .lb img { max-width: 94vw; max-height: 86vh; border-radius: 14px; object-fit: contain; }
+    .lb .icon-btn { position: absolute; }
+    .lb .x { top: 14px; right: 14px; } .lb .nx { left: 12px; top: 50%; } .lb .pv { right: 12px; top: 50%; }
 
-    .btn-wa-animated {
-      position: relative; z-index: 2; width: 100%; background: #25d366; color: #ffffff;
-      text-decoration: none; text-align: center; padding: 15px; border-radius: 10px;
-      font-weight: 900; font-size: 16px; border: none; cursor: pointer; transition: background 0.3s;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 99px; font-weight: 800; font-size: 13px; opacity: 0; pointer-events: none; transition: all .3s; z-index: 120; }
+    .toast.show { opacity: 1; transform: translateX(-50%); }
+    .empty { text-align: center; padding: 80px 20px; font-weight: 800; color: var(--muted); }
+    footer { text-align: center; padding: 25px 0 35px; color: var(--muted); font-size: 12px; font-weight: 700; }
+
+    /* الشاشات الكبيرة: عمودان */
+    @media (min-width: 900px) {
+      .stage { padding: 30px 0; }
+      .layout { grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
+      .gallery { position: sticky; top: 80px; }
+      .info { margin-top: 0; border-radius: 28px; padding: 30px; }
+      .info::before { display: none; }
+      .slide { max-height: 76vh; }
     }
-    .btn-wa-animated:hover { background: #1eb956; }
+    @media (prefers-reduced-motion: reduce) {
+      .cta, .cta::before, .cta::after, .info { animation: none; }
+      .slides { scroll-behavior: auto; }
+    }
   </style>
 </head>
 
 <body>
-
-  <header>
-    <div class="container nav">
-      <a class="brand" href="index.html">
-        <img src="logo.png" alt="Dragon Triko" onerror="this.style.display='none'">
-        <strong style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:18px;">DRAGON TRIKO</strong>
+  <div class="bar">
+    <div class="bar-in">
+      <a class="icon-btn" href="index.html" aria-label="رجوع للكتالوج">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      
-      <div class="back-btn-wrapper">
-        <a href="index.html" class="back-link">العودة للكتالوج ↵</a>
-      </div>
+      <a class="bar-brand" href="index.html">
+        <b>DRAGON TRIKO</b>
+        <img src="logo.png" alt="" onerror="this.style.display='none'">
+      </a>
+      <button class="icon-btn" id="shareBtn" aria-label="مشاركة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+      </button>
     </div>
-  </header>
+  </div>
 
-  <main class="container">
-    <div class="product-page" id="productContainer">
-      <div style="text-align:center; padding:40px; grid-column: 1 / -1; font-weight:800;">جاري تحميل تفاصيل الموديل...</div>
-    </div>
-  </main>
+  <main id="app"></main>
+
+  <footer>جميع الحقوق محفوظة Dragon Triko 2026 ©</footer>
+
+  <div class="lb" id="lb" role="dialog" aria-label="عرض الصورة">
+    <button class="icon-btn x" id="lbX" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="icon-btn pv" id="lbP" aria-label="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <img id="lbImg" alt="">
+    <button class="icon-btn nx" id="lbN" aria-label="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  </div>
+  <div class="toast" id="toast"></div>
 
   <script>
+    // رقم واتساب بصيغة دولية بدون + (مثال: 963912345678). اتركه فارغاً لإخفاء زر الطلب.
     const WHATSAPP_NUMBER = '905343265940';
 
-    async function loadProductDetails() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const searchKey = urlParams.get('code') || urlParams.get('id');
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const $ = id => document.getElementById(id);
+    const SW = {'أسود':'#111','اسود':'#111','أبيض':'#fff','ابيض':'#fff','أحمر':'#d90429','احمر':'#d90429','كحلي':'#14213d','أزرق':'#1d4ed8','ازرق':'#1d4ed8','رمادي':'#8b8f98','بيج':'#d9c6a5','بني':'#5b3a29','زيتي':'#556b2f','أخضر':'#2e7d32','اخضر':'#2e7d32','عنابي':'#6d0f2b','خمري':'#6d0f2b','نبيتي':'#5a1030','جملي':'#b5824a','سكري':'#e8d9bd','أصفر':'#facc15','اصفر':'#facc15','برتقالي':'#f97316','بنفسجي':'#7c3aed','وردي':'#f472b6','فيروزي':'#14b8a6','طحيني':'#c8b79b','موكا':'#8a6a55','أوف وايت':'#f3efe6','قهوتي':'#4b2e20'};
 
-      if (!searchKey) {
-        document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">عفواً، لم يتم تحديد الموديل المطلوب.</div>';
-        return;
-      }
+    const norm = it => ({
+      code: it.code || it['الكود'] || it.id,
+      title: it.title || it['اسم الموديل'] || 'موديل بدون اسم',
+      price: it.price || it['السعر'] || '',
+      colors: it.colors || it['الألوان'] || '',
+      tag: it.tag || it['التصنيف'] || 'أحدث الموديلات',
+      desc: it.description || it.desc || it['الوصف'] || '',
+      sizes: it.sizes || it['المقاسات'] || '',
+      fabric: it.fabric || it.material || it['القماش'] || it['الخامة'] || '',
+      images: Array.isArray(it.images) && it.images.length ? it.images : [it.image || 'M102.jpg']
+    });
 
-      try {
-        const response = await fetch('products.json?v=' + new Date().getTime());
-        const data = await response.json();
-        
-        // البحث عن طريق الكود أولاً ثم عن طريق ID
-        const item = data.find(p => 
-          (p.code && String(p.code).toLowerCase() === String(searchKey).toLowerCase()) ||
-          (p.id && String(p.id) === String(searchKey))
-        );
+    let P, imgs, idx = 0, color = '';
 
-        if (!item) {
-          document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">عفواً، الموديل غير موجود بالكتالوج.</div>';
-          return;
-        }
+    function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
 
-        // تجهيز مصفوفة الصور
-        let imagesList = [];
-        if (Array.isArray(item.images) && item.images.length > 0) {
-          imagesList = item.images;
-        } else if (item.image) {
-          imagesList = [item.image];
-        } else {
-          imagesList = ['logo.png'];
-        }
+    function render(all) {
+      const code = new URLSearchParams(location.search).get('code');
+      const list = all.map(norm);
+      P = list.find(p => String(p.code) === String(code));
+      if (!P) { $('app').innerHTML = '<div class="empty">لم يتم العثور على هذا الموديل.<br><br><a class="ghost" href="index.html" style="max-width:260px;margin:auto">العودة للكتالوج</a></div>'; return; }
 
-        const title = item.title || item['اسم الموديل'] || 'موديل بدون اسم';
-        const code = item.code || item['الكود'] || item.id;
-        const price = item.price || item['السعر'] || 'غير محدد';
-        const colors = item.colors || item['الألوان'] || 'متعددة';
-        const fabric = item.fabric || item['الخامة'] || 'تريكو';
-        const sizes = item.sizes || item['المقاسات'] || 'S-M-L-XL';
-        const moq = item.moq || item['اقل كمية'] || '350 قطعة';
-        const notes = item.notes || item['ملاحظات'] || '-';
-        const tag = item.tag || item['التصنيف'] || 'أحدث الموديلات';
+      document.title = P.title + ' | Dragon Triko';
+      imgs = P.images;
+      const colors = Array.isArray(P.colors) ? P.colors : String(P.colors).split(/[,،\/|\-–]+/).map(s => s.trim()).filter(Boolean);
+      const specs = [['المقاسات', P.sizes], ['الخامة', P.fabric], ['التصنيف', P.tag], ['الكود', P.code]].filter(s => s[1]);
+      const related = list.filter(p => p.tag === P.tag && String(p.code) !== String(P.code)).slice(0, 8);
+      const wa = WHATSAPP_NUMBER ? `<a class="cta" id="waBtn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .6l-.4.6c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.2 1.4 2.5 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.3z"/></svg><span>اطلب هذا الموديل عبر واتساب</span></a>` : '';
 
-        const waMsg = encodeURIComponent(`السلام عليكم، أود حجز/طلب موديل: ${title} (الكود: ${code}) بسعر: ${price}`);
-
-        document.title = `${title} | Dragon Triko`;
-
-        // توليد صور المصغرات إذا كانت متعددة
-        const thumbsHTML = imagesList.length > 1 ? `
-          <div class="thumbs-row">
-            ${imagesList.map((img, idx) => `
-              <div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="changeMainImage('${img}', this)">
-                <img src="${img}" alt="صورة ${idx + 1}" onerror="this.src='logo.png';">
-              </div>
-            `).join('')}
-          </div>
-        ` : '';
-
-        document.getElementById('productContainer').innerHTML = `
-          <div class="image-container">
-            <div class="zoom-box" id="detailZoomArea">
-              <img id="detailMainImg" src="${imagesList[0]}" alt="${title}" onerror="this.src='logo.png';">
-              <span class="zoom-hint">🔍 حركي لتكبير الخيوط</span>
+      $('app').innerHTML = `
+        <section class="stage"><div class="wrap layout">
+          <div class="gallery">
+            <div class="slides" id="slides">
+              ${imgs.map((s, i) => `<div class="slide" data-i="${i}"><img src="${esc(s)}" alt="${esc(P.title)} ${i + 1}" ${i ? 'loading="lazy"' : ''} onerror="this.src='logo.png'"><span class="zoom-hint">اضغطي للتكبير</span></div>`).join('')}
             </div>
-            ${thumbsHTML}
+            ${imgs.length > 1 ? `<div class="dots" id="dots">${imgs.map((_, i) => `<span class="dot ${i ? '' : 'on'}"></span>`).join('')}</div>
+            <div class="thumbs" id="thumbs">${imgs.map((s, i) => `<button class="thumb ${i ? '' : 'on'}" data-i="${i}" aria-label="صورة ${i + 1}"><img src="${esc(s)}" alt="" onerror="this.src='logo.png'"></button>`).join('')}</div>` : ''}
           </div>
 
-          <div class="details-box">
-            <span class="tag">${tag}</span>
-            <h1 class="title">${title}</h1>
-            <div class="price">السعر: ${price}</div>
+          <div class="info">
+            <span class="tag">${esc(P.tag)}</span>
+            <h1 class="title">${esc(P.title)}</h1>
+            <div class="price-row"><div class="price">${esc(P.price)}</div><span class="code">الكود: ${esc(P.code)}</span></div>
 
-            <div class="info-list">
-              <div class="info-item"><span>كود الموديل:</span> <strong>${code}</strong></div>
-              <div class="info-item"><span>الألوان المتوفرة:</span> <strong>${colors}</strong></div>
-              <div class="info-item"><span>الخامة:</span> <strong>${fabric}</strong></div>
-              <div class="info-item"><span>المقاسات المتاحة:</span> <strong>${sizes}</strong></div>
-              <div class="info-item"><span>أقل كمية للطلب (MOQ):</span> <strong>${moq}</strong></div>
-              <div class="info-item"><span>ملاحظات:</span> <strong>${notes}</strong></div>
-            </div>
+            ${colors.length ? `<div class="sec"><h3>الألوان المتوفرة <small id="pickedColor"></small></h3>
+              <div class="chips" id="colors">${colors.map(c => `<button class="color-chip" data-c="${esc(c)}" style="--sw:${SW[c] || '#ccc'}"><i></i>${esc(c)}</button>`).join('')}</div></div>` : ''}
 
-            <!-- زر الطلب بالحواف الملونة المتحركة -->
-            <div class="glow-btn-wrapper">
-              <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}" target="_blank" class="btn-wa-animated">
-                طلب هذا الموديل مباشرة عبر الواتساب 💬
-              </a>
-            </div>
+            ${P.desc ? `<div class="sec"><h3>عن الموديل</h3><p class="desc">${esc(P.desc)}</p></div>` : ''}
+            ${specs.length ? `<div class="sec"><h3>المواصفات</h3><div class="specs">${specs.map(s => `<div class="spec"><span>${s[0]}</span><b>${esc(s[1])}</b></div>`).join('')}</div></div>` : ''}
+
+            <div class="actions">${wa}<a class="ghost" href="index.html">← العودة للكتالوج</a></div>
           </div>
-        `;
+        </div></section>
 
-        initZoomLogic();
+        ${related.length ? `<section class="related"><h2>موديلات مشابهة</h2><div class="rail">${related.map(r => `<a class="mini" href="product.html?code=${encodeURIComponent(r.code)}"><img src="${esc(r.images[0])}" alt="${esc(r.title)}" loading="lazy" onerror="this.src='logo.png'"><div><b>${esc(r.title)}</b><span>${esc(r.price)}</span></div></a>`).join('')}</div></section>` : ''}`;
 
-      } catch (err) {
-        document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">حدث خطأ أثناء تحميل تفاصيل الموديل.</div>';
-      }
+      bind();
     }
 
-    function changeMainImage(imgSrc, thumbElem) {
-      const mainImg = document.getElementById('detailMainImg');
-      if (mainImg) {
-        mainImg.src = imgSrc;
-        document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
-        thumbElem.classList.add('active');
-        resetDetailZoom();
-      }
+    function setIdx(i) {
+      idx = i;
+      document.querySelectorAll('.dot').forEach((d, k) => d.classList.toggle('on', k === i));
+      document.querySelectorAll('.thumb').forEach((t, k) => t.classList.toggle('on', k === i));
     }
+    function goTo(i) { document.querySelectorAll('.slide')[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }
 
-    // منطق التزويم للصورة
-    function initZoomLogic() {
-      const zoomArea = document.getElementById('detailZoomArea');
-      const img = document.getElementById('detailMainImg');
-      if (!zoomArea || !img) return;
+    function bind() {
+      const slides = document.querySelectorAll('.slide');
+      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setIdx(+e.target.dataset.i); }), { root: $('slides'), threshold: .6 });
+      slides.forEach(s => io.observe(s));
+      slides.forEach(s => s.addEventListener('click', () => openLb(+s.dataset.i)));
+      document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => goTo(+t.dataset.i)));
 
-      function applyZoom(clientX, clientY) {
-        const rect = zoomArea.getBoundingClientRect();
-        const x = ((clientX - rect.left) / rect.width) * 100;
-        const y = ((clientY - rect.top) / rect.height) * 100;
-        img.style.transformOrigin = `${x}% ${y}%`;
-        img.style.transform = 'scale(2.2)';
-      }
-
-      window.resetDetailZoom = function() {
-        img.style.transform = 'scale(1)';
-        img.style.transformOrigin = 'center center';
-      };
-
-      zoomArea.addEventListener('mousemove', (e) => applyZoom(e.clientX, e.clientY));
-      zoomArea.addEventListener('mouseleave', resetDetailZoom);
-      zoomArea.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 0) applyZoom(e.touches[0].clientX, e.touches[0].clientY);
+      const cw = $('colors');
+      if (cw) cw.addEventListener('click', e => {
+        const b = e.target.closest('.color-chip'); if (!b) return;
+        color = color === b.dataset.c ? '' : b.dataset.c;
+        cw.querySelectorAll('.color-chip').forEach(x => x.classList.toggle('on', x.dataset.c === color));
+        $('pickedColor').textContent = color ? '• ' + color : '';
+        updateWa();
       });
-      zoomArea.addEventListener('touchend', resetDetailZoom);
+      updateWa();
     }
 
-    loadProductDetails();
+    function updateWa() {
+      const a = $('waBtn'); if (!a) return;
+      const msg = `مرحباً، أرغب بطلب الموديل: ${P.title}\nالكود: ${P.code}${color ? '\nاللون: ' + color : ''}\n${location.href}`;
+      a.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+
+    // الصورة الكبيرة
+    function openLb(i) { idx = i; showLb(); $('lb').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function showLb() { $('lbImg').src = imgs[idx]; $('lbP').style.display = $('lbN').style.display = imgs.length > 1 ? '' : 'none'; }
+    function closeLb() { $('lb').classList.remove('open'); document.body.style.overflow = ''; goTo(idx); }
+    function step(d) { idx = (idx + d + imgs.length) % imgs.length; showLb(); }
+    $('lbX').onclick = closeLb; $('lbN').onclick = () => step(1); $('lbP').onclick = () => step(-1);
+    $('lb').addEventListener('click', e => { if (e.target.id === 'lb') closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!$('lb').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') step(1);
+      if (e.key === 'ArrowRight') step(-1);
+    });
+
+    // المشاركة
+    $('shareBtn').addEventListener('click', async () => {
+      const data = { title: P ? P.title : 'Dragon Triko', url: location.href };
+      try {
+        if (navigator.share) await navigator.share(data);
+        else { await navigator.clipboard.writeText(location.href); toast('تم نسخ الرابط'); }
+      } catch (e) {}
+    });
+
+    fetch('products.json?v=' + Date.now()).then(r => r.json()).then(render)
+      .catch(() => { $('app').innerHTML = '<div class="empty">تعذر تحميل البيانات. حاولي مرة أخرى.</div>'; });
   </script>
 </body>
 </html>
