@@ -47,19 +47,66 @@
     .brand-text strong { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 18px; color: var(--primary-black); display: block; line-height: 1.1; }
     .brand-text span { color: var(--primary-red); font-size: 11px; font-weight: 800; display: block; }
 
-    /* البانر الرئيسي */
-    .hero { padding: 16px 0 10px; }
-    .hero-banner {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-      border-radius: var(--radius-lg); border: 1px solid var(--border-color);
-      padding: 18px 20px; display: flex; flex-direction: column; gap: 4px;
+    /* ===== البانر الرئيسي: صورة كبيرة والكتابة فوقها ===== */
+    .hero-cover {
+      position: relative; isolation: isolate; overflow: hidden;
+      min-height: clamp(340px, 56vh, 520px);
+      display: flex; align-items: flex-end;
+      background: linear-gradient(135deg, #0f172a 0%, #3a0a1a 60%, #d90429 140%);
     }
+    .hero-cover-img {
+      position: absolute; inset: 0; z-index: -2;
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+    }
+    .hero-cover::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background:
+        linear-gradient(to top, rgba(8,12,24,.88) 0%, rgba(8,12,24,.55) 45%, rgba(8,12,24,.12) 100%);
+    }
+    .hero-content { padding: 22px 0 22px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+    .hero-text { display: flex; flex-direction: column; gap: 6px; max-width: 560px; }
     .hero-tag {
-      display: inline-block; background: #ffe5e5; color: var(--primary-red);
-      font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 99px; width: fit-content;
+      display: inline-block; background: var(--primary-red); color: #fff;
+      font-size: 11px; font-weight: 800; padding: 3px 12px; border-radius: 99px; width: fit-content;
     }
-    .hero h1 { font-size: 22px; font-weight: 900; color: var(--primary-black); }
-    .hero p { color: var(--text-muted); font-size: 12.5px; font-weight: 600; }
+    .hero h1 { font-size: clamp(22px, 4.6vw, 38px); font-weight: 900; color: #fff; line-height: 1.25; text-shadow: 0 2px 12px rgba(0,0,0,.45); }
+    .hero p { color: rgba(255,255,255,.88); font-size: 13px; font-weight: 600; line-height: 1.7; }
+
+    /* البحث */
+    .search-box {
+      display: flex; align-items: center; width: min(460px, 100%);
+      background: #fff; border-radius: 99px; padding: 4px 4px 4px 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+    .search-box input {
+      flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+      font-size: 14px; font-weight: 700; color: var(--text-main); padding: 10px 14px 10px 6px;
+    }
+    .search-box input::placeholder { color: #94a3b8; font-weight: 600; }
+    .search-btn {
+      flex-shrink: 0; width: 44px; height: 44px; border: none; border-radius: 50%;
+      background: var(--primary-red); color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s ease, background .2s ease;
+    }
+    .search-btn:hover { background: #b80322; }
+    .search-btn:active { transform: scale(.94); }
+    .search-btn:focus-visible, .cat-chip:focus-visible { outline: 3px solid #ffb703; outline-offset: 2px; }
+    .search-btn svg { width: 20px; height: 20px; }
+
+    /* التصنيفات */
+    .cats-bar { background: #fff; border-bottom: 1px solid var(--border-color); }
+    .cats { display: flex; gap: 8px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      flex-shrink: 0; border: 1px solid var(--border-color); background: var(--accent-gray);
+      color: var(--primary-black); font-size: 13px; font-weight: 800; padding: 8px 16px;
+      border-radius: 99px; cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+    }
+    .cat-chip:hover { border-color: var(--primary-red); }
+    .cat-chip.active { background: var(--primary-red); border-color: var(--primary-red); color: #fff; }
+    .results-info { font-size: 12px; font-weight: 700; color: var(--text-muted); margin-top: 14px; }
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 50px 10px; color: var(--text-muted); font-weight: 800; }
 
     /* شبكة عرض الموديلات */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px; }
@@ -209,14 +256,30 @@ footer { text-align: center; padding: 25px 0; color: var(--text-muted); font-siz
     </div>
   </header>
 
-  <main class="hero">
-    <div class="container">
-      <div class="hero-banner">
-        <span class="hero-tag">الكتالوج التفاعلي</span>
-        <h1>كتالوج المنتجات بخصائص مطورة</h1>
-        <p>اضغطي على أي موديل للانتقال مباشرة إلى صفحته الخاصة واستعراض التفاصيل والتريكو.</p>
+  <main>
+    <section class="hero hero-cover">
+      <img src="hero.jpg" alt="Dragon Triko" class="hero-cover-img" onerror="this.remove()">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="hero-tag">الكتالوج التفاعلي</span>
+          <h1>كتالوج المنتجات بخصائص مطورة</h1>
+          <p>اضغطي على أي موديل للانتقال مباشرة إلى صفحته الخاصة واستعراض التفاصيل والتريكو.</p>
+        </div>
+        <form class="search-box" id="searchForm" role="search" autocomplete="off">
+          <input type="search" id="searchInput" placeholder="ابحثي بالاسم أو الكود..." aria-label="بحث">
+          <button type="submit" class="search-btn" aria-label="بحث">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          </button>
+        </form>
       </div>
+    </section>
 
+    <div class="cats-bar">
+      <div class="container"><div class="cats" id="cats" role="tablist" aria-label="التصنيفات"></div></div>
+    </div>
+
+    <div class="container">
+      <div class="results-info" id="resultsInfo"></div>
       <div class="grid" id="productsGrid"></div>
     </div>
   </main>
@@ -226,51 +289,103 @@ footer { text-align: center; padding: 25px 0; color: var(--text-muted); font-siz
   </footer>
 
   <script>
-    // جلب البيانات من ملف products.json والانتقال مباشرة لصفحة product.html عند الضغط
-    async function loadProducts() {
-      try {
-        const response = await fetch('products.json?v=' + new Date().getTime());
-        const products = await response.json();
+    let ALL = [];
+    let activeCat = 'الكل';
+    let query = '';
 
-        const grid = document.getElementById('productsGrid');
-        grid.innerHTML = products.map(item => {
-          const mainImg = Array.isArray(item.images) ? item.images[0] : (item.image || 'M102.jpg');
-          const code = item.code || item['الكود'] || item.id;
-          const title = item.title || item['اسم الموديل'] || 'موديل بدون اسم';
-          const price = item.price || item['السعر'] || '';
-          const colors = item.colors || item['الألوان'] || 'متعددة';
-          const tag = item.tag || item['التصنيف'] || 'أحدث الموديلات';
-          const url = `product.html?code=${encodeURIComponent(code)}`;
+    const norm = v => String(v ?? '').toLowerCase().trim();
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-          return `
-            <div class="product-card" onclick="goToProduct('${code}')">
-              <span class="badge-tag">${tag}</span>
+    function normalize(item) {
+      return {
+        mainImg: Array.isArray(item.images) ? item.images[0] : (item.image || 'M102.jpg'),
+        code: item.code || item['الكود'] || item.id,
+        title: item.title || item['اسم الموديل'] || 'موديل بدون اسم',
+        price: item.price || item['السعر'] || '',
+        colors: item.colors || item['الألوان'] || 'متعددة',
+        tag: item.tag || item['التصنيف'] || 'أحدث الموديلات'
+      };
+    }
+
+    function renderCats() {
+      const cats = ['الكل', ...new Set(ALL.map(p => p.tag))];
+      document.getElementById('cats').innerHTML = cats.map(c =>
+        `<button type="button" class="cat-chip ${c === activeCat ? 'active' : ''}" data-cat="${esc(c)}" role="tab" aria-selected="${c === activeCat}">${esc(c)}</button>`
+      ).join('');
+    }
+
+    function renderProducts() {
+      const q = norm(query);
+      const list = ALL.filter(p =>
+        (activeCat === 'الكل' || p.tag === activeCat) &&
+        (!q || norm(p.title).includes(q) || norm(p.code).includes(q) || norm(p.tag).includes(q))
+      );
+
+      document.getElementById('resultsInfo').textContent = list.length + ' موديل';
+      const grid = document.getElementById('productsGrid');
+
+      if (!list.length) {
+        grid.innerHTML = '<div class="empty-state">لا توجد موديلات مطابقة. جرّبي كلمة أخرى أو تصنيفاً آخر.</div>';
+        return;
+      }
+
+      grid.innerHTML = list.map(p => {
+        const url = `product.html?code=${encodeURIComponent(p.code)}`;
+        return `
+            <div class="product-card" data-url="${esc(url)}">
+              <span class="badge-tag">${esc(p.tag)}</span>
               <div class="product-thumb">
-                <img src="${mainImg}" alt="${title}" loading="lazy" onerror="this.src='logo.png';">
+                <img src="${esc(p.mainImg)}" alt="${esc(p.title)}" loading="lazy" onerror="this.src='logo.png';">
               </div>
               <div class="product-info">
-                <div class="product-title">${title}</div>
-                <div class="price-tag">${price}</div>
-                <div class="colors-info">الألوان: ${colors}</div>
-                <div class="product-code">الكود: ${code}</div>
+                <div class="product-title">${esc(p.title)}</div>
+                <div class="price-tag">${esc(p.price)}</div>
+                <div class="colors-info">الألوان: ${esc(p.colors)}</div>
+                <div class="product-code">الكود: ${esc(p.code)}</div>
 
-                <a class="btn-action" href="${url}" onclick="event.stopPropagation()" aria-label="عرض تفاصيل ${title}">
+                <a class="btn-action" href="${esc(url)}" aria-label="عرض تفاصيل ${esc(p.title)}">
                   <span>عرض التفاصيل</span>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
                 </a>
               </div>
-            </div>
-          `;
-        }).join('');
+            </div>`;
+      }).join('');
+    }
 
+    async function loadProducts() {
+      try {
+        const response = await fetch('products.json?v=' + new Date().getTime());
+        ALL = (await response.json()).map(normalize);
+        renderCats();
+        renderProducts();
       } catch (error) {
         console.error('خطأ في تحميل المنتجات:', error);
       }
     }
 
-    function goToProduct(code) {
-      window.location.href = `product.html?code=${encodeURIComponent(code)}`;
-    }
+    // البحث
+    document.getElementById('searchForm').addEventListener('submit', e => {
+      e.preventDefault();
+      query = document.getElementById('searchInput').value;
+      renderProducts();
+      document.getElementById('cats').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.getElementById('searchInput').addEventListener('input', e => { query = e.target.value; renderProducts(); });
+
+    // التصنيفات
+    document.getElementById('cats').addEventListener('click', e => {
+      const chip = e.target.closest('.cat-chip');
+      if (!chip) return;
+      activeCat = chip.dataset.cat;
+      renderCats();
+      renderProducts();
+    });
+
+    // الانتقال لصفحة المنتج عند الضغط على البطاقة
+    document.getElementById('productsGrid').addEventListener('click', e => {
+      const card = e.target.closest('.product-card');
+      if (card && !e.target.closest('a')) window.location.href = card.dataset.url;
+    });
 
     loadProducts();
   </script>
