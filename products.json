@@ -1,6 +1,5 @@
 [
   {
-    
     "id": "1",
     "title": "ظفر بولو",
     "code": "m100",
@@ -11,20 +10,24 @@
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو فاخرة خامة ممتازة",
-    "image": "https://lh3.googleusercontent.com/d/1odDfM90c3CwsJXgLgj22gwBV5ajuXz7j"
+    "images": [
+      "M102.jpg"
+    ]
   },
   {
     "id": "2",
     "title": "Casablanca",
     "code": "m101",
-    "tag": "احدث الموديلات",
+    "tag": "أحدث الموديلات",
     "fabric": "بوليستر",
-    "sizes": "S-M-L",
-    "moq": "400",
+    "sizes": "S - M - L",
+    "moq": "400 قطعة",
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو",
-    "image": "1001025271.jpg"
+    "images": [
+      "1001025271.jpg"
+    ]
   },
   {
     "id": "3",
@@ -32,38 +35,44 @@
     "code": "m102",
     "tag": "أحدث الموديلات",
     "fabric": "بوليستر",
-    "sizes": "S-M-L",
-    "moq": "350",
+    "sizes": "S - M - L",
+    "moq": "350 قطعة",
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو",
-    "image": "M102.jpg"
+    "images": [
+      "M102.jpg"
+    ]
   },
   {
     "id": "4",
     "title": "Casablanca 2 renk",
     "code": "m103",
-    "tag": "احدث الموديلات",
+    "tag": "أحدث الموديلات",
     "fabric": "بوليستر",
-    "sizes": "S-M-L-Xl",
-    "moq": "400",
+    "sizes": "S - M - L - XL",
+    "moq": "400 قطعة",
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو",
-    "image": "M103.jpg"
+    "images": [
+      "M103.jpg"
+    ]
   },
   {
     "id": "5",
     "title": "L'Européen",
     "code": "m104",
-    "tag": "احدث الموديلات",
+    "tag": "أحدث الموديلات",
     "fabric": "بوليستر",
-    "sizes": "S-M-L-Xl",
-    "moq": "400",
+    "sizes": "S - M - L - XL",
+    "moq": "400 قطعة",
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو",
-    "image": "M104.jpg"
+    "images": [
+      "M104.jpg"
+    ]
   },
   {
     "id": "6",
@@ -71,12 +80,13 @@
     "code": "m105",
     "tag": "أحدث الموديلات",
     "fabric": "بوليستر",
-    "sizes": "S-M-L-XL",
-    "moq": "350",
+    "sizes": "S - M - L - XL",
+    "moq": "350 قطعة",
     "price": "5.50 $",
     "colors": "أحمر، أسود، كحلي، رمادي",
     "notes": "كنزات تريكو",
-    "image": "M105.jpg"
+    "images": [
+      "M105.jpg"
+    ]
   }
-  
 ]
