@@ -89,65 +89,27 @@
     .colors-info { font-size: 11px; color: var(--text-muted); font-weight: 700; }
     .product-code { font-size: 11px; background: var(--accent-gray); padding: 2px 7px; border-radius: 4px; font-weight: 800; display: inline-block; width: fit-content; }
 
-    /* الأزرار */
+    /* الأزرار بحواف ملونة متحركة */
+    .glow-btn-wrapper {
+      position: relative; margin-top: 8px; border-radius: 8px; overflow: hidden; padding: 2px; display: flex;
+    }
+    .glow-btn-wrapper::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, #d90429, #0f172a, #ff007f, #d90429);
+      animation: rotateGlow 3.5s linear infinite; z-index: 1;
+    }
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .btn-action {
-      margin-top: 8px; width: 100%; padding: 10px; border-radius: 8px;
+      position: relative; z-index: 2; width: 100%; padding: 9px; border-radius: 6px;
       background: var(--primary-black); color: #ffffff; text-align: center;
-      font-weight: 800; font-size: 12px; border: none; cursor: pointer;
-      transition: all 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 6px;
+      font-weight: 800; font-size: 11.5px; border: none; cursor: pointer;
+      transition: background 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    .btn-action:hover, .btn-action:active { background: var(--primary-red); }
-
-    /* النافذة التفاعلية (Modal) والتزويم */
-    .modal-backdrop {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px);
-      z-index: 100; display: none; align-items: center; justify-content: center; padding: 12px;
-    }
-    .modal-backdrop.active { display: flex; }
-
-    .modal-card {
-      background: #ffffff; width: min(520px, 100%); max-height: 92vh;
-      border-radius: var(--radius-lg); overflow-y: auto; box-shadow: var(--shadow-md);
-      position: relative; animation: modalIn .2s ease-out;
-    }
-    @keyframes modalIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-    .modal-close {
-      position: absolute; top: 12px; left: 12px; z-index: 20;
-      width: 34px; height: 34px; background: rgba(0,0,0,0.6); color: #fff;
-      border: none; border-radius: 50%; font-size: 18px; cursor: pointer; display: grid; place-items: center;
-    }
-
-    .zoom-container {
-      width: 100%; height: 380px; background: #f1f5f9; position: relative;
-      overflow: hidden; cursor: zoom-in; touch-action: none;
-    }
-    .zoom-container img {
-      width: 100%; height: 100%; object-fit: cover; object-position: top;
-      transition: transform 0.2s ease-out; transform-origin: center center;
-    }
-    .zoom-hint {
-      position: absolute; bottom: 8px; right: 8px;
-      background: rgba(0, 0, 0, 0.65); color: #fff;
-      font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 6px; pointer-events: none;
-    }
-
-    .modal-thumbs { display: flex; gap: 8px; padding: 10px 14px; overflow-x: auto; background: #fafafa; border-bottom: 1px solid var(--border-color); }
-    .modal-thumb-item {
-      width: 60px; height: 75px; border-radius: 6px; border: 2px solid transparent;
-      overflow: hidden; cursor: pointer; flex-shrink: 0; opacity: 0.6; transition: all .2s;
-    }
-    .modal-thumb-item.active { border-color: var(--primary-red); opacity: 1; transform: scale(1.04); }
-    .modal-thumb-item img { width: 100%; height: 100%; object-fit: cover; }
-
-    .modal-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
-    .modal-title-row { display: flex; justify-content: space-between; align-items: center; }
-    .modal-title { font-size: 18px; font-weight: 900; }
-    .modal-price { font-size: 18px; font-weight: 900; color: var(--primary-red); }
-
-    .spec-box { background: var(--accent-gray); padding: 10px; border-radius: 8px; font-size: 12.5px; font-weight: 700; color: var(--text-muted); }
-    .spec-box span { color: var(--primary-black); font-weight: 800; }
+    .btn-action:hover { background: #1e293b; }
 
     footer { text-align: center; padding: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 700; margin-top: 30px; }
   </style>
@@ -174,156 +136,61 @@
       <div class="hero-banner">
         <span class="hero-tag">الكتالوج التفاعلي</span>
         <h1>كتالوج المنتجات بخصائص مطورة</h1>
-        <p>حركي الماوس أو الإصبع فوق الصورة لتكبير النسيج، واضغطي على الموديل لاستعراض باقي الألوان والتفاصيل.</p>
+        <p>اضغطي على أي موديل للانتقال مباشرة إلى صفحته الخاصة واستعراض التفاصيل والتريكو.</p>
       </div>
 
       <div class="grid" id="productsGrid"></div>
     </div>
   </main>
 
-  <!-- النافذة التفاعلية لعرض تفاصيل الموديل -->
-  <div class="modal-backdrop" id="productModal">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeModal()">×</button>
-      
-      <div class="zoom-container" id="zoomArea">
-        <img id="modalMainImg" src="" alt="الموديل">
-        <span class="zoom-hint">🔍 مرري لتكبير خيوط التريكو</span>
-      </div>
-
-      <div class="modal-thumbs" id="modalThumbsList"></div>
-
-      <div class="modal-body">
-        <div class="modal-title-row">
-          <div class="modal-title" id="modalTitle">اسم الموديل</div>
-          <div class="modal-price" id="modalPrice">5.50 $</div>
-        </div>
-
-        <div class="spec-box">
-          الكود: <span id="modalCode">m100</span> | القماش: <span id="modalFabric">بوليستر</span> | المقاسات: <span id="modalSizes">S-M-L</span>
-        </div>
-
-        <div class="spec-box">
-          الحد الأدنى للطلب (MOQ): <span id="modalMoq">400 قطعة</span>
-        </div>
-
-        <div class="spec-box">
-          الألوان المتاحة: <span id="modalColors">أحمر، أسود، كحلي، رمادي</span>
-        </div>
-
-        <button class="btn-action" id="goToProductPageBtn">عرض صفحة التفاصيل المستقلة ↵</button>
-      </div>
-    </div>
-  </div>
-
   <footer>
     <div class="container">جميع الحقوق محفوظة Dragon Triko 2026 ©</div>
   </footer>
 
   <script>
-    let globalProducts = [];
-
-    // جلب البيانات مباشرة من ملف products.json
+    // جلب البيانات من ملف products.json والانتقال مباشرة لصفحة product.html عند الضغط
     async function loadProducts() {
       try {
-        const response = await fetch('products.json');
-        globalProducts = await response.json();
-        renderProducts(globalProducts);
+        const response = await fetch('products.json?v=' + new Date().getTime());
+        const products = await response.json();
+        
+        const grid = document.getElementById('productsGrid');
+        grid.innerHTML = products.map(item => {
+          const mainImg = Array.isArray(item.images) ? item.images[0] : (item.image || 'M102.jpg');
+          const code = item.code || item['الكود'] || item.id;
+          const title = item.title || item['اسم الموديل'] || 'موديل بدون اسم';
+          const price = item.price || item['السعر'] || '';
+          const colors = item.colors || item['الألوان'] || 'متعددة';
+          const tag = item.tag || item['التصنيف'] || 'أحدث الموديلات';
+
+          return `
+            <div class="product-card" onclick="goToProduct('${code}')">
+              <span class="badge-tag">${tag}</span>
+              <div class="product-thumb">
+                <img src="${mainImg}" alt="${title}" loading="lazy" onerror="this.src='logo.png';">
+              </div>
+              <div class="product-info">
+                <div class="product-title">${title}</div>
+                <div class="price-tag">${price}</div>
+                <div class="colors-info">الألوان: ${colors}</div>
+                <div class="product-code">الكود: ${code}</div>
+                
+                <div class="glow-btn-wrapper" onclick="event.stopPropagation(); goToProduct('${code}')">
+                  <button class="btn-action">عرض التفاصيل الكاملة ↵</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
       } catch (error) {
-        console.error('خطأ في تحميل ملف المنتجات:', error);
+        console.error('خطأ في تحميل المنتجات:', error);
       }
     }
 
-    function renderProducts(products) {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = products.map(item => {
-        // يدعم مصفوفة الصور أو السلسلة العادية
-        const mainImg = Array.isArray(item.images) ? item.images[0] : (item.image || 'M102.jpg');
-        return `
-          <div class="product-card" onclick="openModal('${item.code}')">
-            <span class="badge-tag">${item.tag || 'أحدث الموديلات'}</span>
-            <div class="product-thumb">
-              <img src="${mainImg}" alt="${item.title}" loading="lazy" onerror="this.src='logo.png';">
-            </div>
-            <div class="product-info">
-              <div class="product-title">${item.title}</div>
-              <div class="price-tag">${item.price}</div>
-              <div class="colors-info">الألوان: ${item.colors}</div>
-              <div class="product-code">الكود: ${item.code}</div>
-              <button class="btn-action">عرض التفاصيل الكاملة ↵</button>
-            </div>
-          </div>
-        `;
-      }).join('');
+    function goToProduct(code) {
+      window.location.href = `product.html?code=${code}`;
     }
-
-    function openModal(productCode) {
-      const product = globalProducts.find(p => p.code === productCode);
-      if (!product) return;
-
-      const productImages = Array.isArray(product.images) ? product.images : [product.image || 'M102.jpg'];
-
-      document.getElementById('modalTitle').textContent = product.title;
-      document.getElementById('modalPrice').textContent = product.price;
-      document.getElementById('modalCode').textContent = product.code;
-      document.getElementById('modalFabric').textContent = product.fabric || 'تريكو';
-      document.getElementById('modalSizes').textContent = product.sizes || 'S-M-L-XL';
-      document.getElementById('modalMoq').textContent = product.moq || '350 قطعة';
-      document.getElementById('modalColors').textContent = product.colors;
-
-      const mainImg = document.getElementById('modalMainImg');
-      mainImg.src = productImages[0];
-
-      document.getElementById('goToProductPageBtn').onclick = function() {
-        window.location.href = `product.html?code=${product.code}`;
-      };
-
-      const thumbsContainer = document.getElementById('modalThumbsList');
-      thumbsContainer.innerHTML = productImages.map((imgUrl, index) => `
-        <div class="modal-thumb-item ${index === 0 ? 'active' : ''}" onclick="switchModalImage('${imgUrl}', this)">
-          <img src="${imgUrl}" alt="صورة ${index + 1}" onerror="this.src='logo.png';">
-        </div>
-      `).join('');
-
-      document.getElementById('productModal').classList.add('active');
-    }
-
-    function switchModalImage(imgSrc, thumbElem) {
-      const mainImg = document.getElementById('modalMainImg');
-      mainImg.src = imgSrc;
-      document.querySelectorAll('.modal-thumb-item').forEach(el => el.classList.remove('active'));
-      thumbElem.classList.add('active');
-      resetZoom();
-    }
-
-    function closeModal() {
-      document.getElementById('productModal').classList.remove('active');
-      resetZoom();
-    }
-
-    // تزويم الصورة
-    const zoomArea = document.getElementById('zoomArea');
-    const modalMainImg = document.getElementById('modalMainImg');
-
-    function applyZoom(clientX, clientY) {
-      const rect = zoomArea.getBoundingClientRect();
-      const x = ((clientX - rect.left) / rect.width) * 100;
-      const y = ((clientY - rect.top) / rect.height) * 100;
-      modalMainImg.style.transformOrigin = `${x}% ${y}%`;
-      modalMainImg.style.transform = 'scale(2)';
-    }
-
-    function resetZoom() {
-      modalMainImg.style.transform = 'scale(1)';
-      modalMainImg.style.transformOrigin = 'center center';
-    }
-
-    zoomArea.addEventListener('mousemove', (e) => applyZoom(e.clientX, e.clientY));
-    zoomArea.addEventListener('mouseleave', resetZoom);
-    zoomArea.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) applyZoom(e.touches[0].clientX, e.touches[0].clientY);
-    });
-    zoomArea.addEventListener('touchend', resetZoom);
 
     loadProducts();
   </script>
