@@ -47,7 +47,7 @@
     .brand-text strong { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 18px; color: var(--primary-black); display: block; line-height: 1.1; }
     .brand-text span { color: var(--primary-red); font-size: 11px; font-weight: 800; display: block; }
 
-    /* البانر */
+    /* البانر الرئيسي */
     .hero { padding: 16px 0 10px; }
     .hero-banner {
       background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
@@ -61,7 +61,7 @@
     .hero h1 { font-size: 22px; font-weight: 900; color: var(--primary-black); }
     .hero p { color: var(--text-muted); font-size: 12.5px; font-weight: 600; }
 
-    /* شبكة المنتجات */
+    /* شبكة عرض الموديلات */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px; }
     @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
@@ -89,7 +89,7 @@
     .colors-info { font-size: 11px; color: var(--text-muted); font-weight: 700; }
     .product-code { font-size: 11px; background: var(--accent-gray); padding: 2px 7px; border-radius: 4px; font-weight: 800; display: inline-block; width: fit-content; }
 
-    /* زر الأكشن */
+    /* الأزرار */
     .btn-action {
       margin-top: 8px; width: 100%; padding: 10px; border-radius: 8px;
       background: var(--primary-black); color: #ffffff; text-align: center;
@@ -98,7 +98,7 @@
     }
     .btn-action:hover, .btn-action:active { background: var(--primary-red); }
 
-    /* النافذة التفاعلية والتزويم */
+    /* النافذة التفاعلية (Modal) والتزويم */
     .modal-backdrop {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px);
@@ -160,7 +160,6 @@
   <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-        <!-- استخدام الشعار الموجود في نفس المجلد مباشرة -->
         <img src="logo.png" alt="Dragon Triko" class="brand-logo-img" onerror="this.style.display='none'">
         <div class="brand-text">
           <strong>DRAGON TRIKO</strong>
@@ -175,14 +174,14 @@
       <div class="hero-banner">
         <span class="hero-tag">الكتالوج التفاعلي</span>
         <h1>كتالوج المنتجات بخصائص مطورة</h1>
-        <p>حركي الماوس أو الإصبع فوق الصورة لتكبير النسيج، واضغطي على الموديل لاستعراض باقي الألوان.</p>
+        <p>حركي الماوس أو الإصبع فوق الصورة لتكبير النسيج، واضغطي على الموديل لاستعراض باقي الألوان والتفاصيل.</p>
       </div>
 
       <div class="grid" id="productsGrid"></div>
     </div>
   </main>
 
-  <!-- النافذة التفاعلية -->
+  <!-- النافذة التفاعلية لعرض تفاصيل الموديل -->
   <div class="modal-backdrop" id="productModal">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">×</button>
@@ -197,15 +196,19 @@
       <div class="modal-body">
         <div class="modal-title-row">
           <div class="modal-title" id="modalTitle">اسم الموديل</div>
-          <div class="modal-price" id="modalPrice">$ 5.50</div>
+          <div class="modal-price" id="modalPrice">5.50 $</div>
         </div>
 
         <div class="spec-box">
-          الكود: <span id="modalCode">m102</span> | التصنيف: <span id="modalTag">تريكو شتوي</span>
+          الكود: <span id="modalCode">m100</span> | القماش: <span id="modalFabric">بوليستر</span> | المقاسات: <span id="modalSizes">S-M-L</span>
         </div>
 
         <div class="spec-box">
-          الألوان المتاحة: <span id="modalColors">متعدد الألوان</span>
+          الحد الأدنى للطلب (MOQ): <span id="modalMoq">400 قطعة</span>
+        </div>
+
+        <div class="spec-box">
+          الألوان المتاحة: <span id="modalColors">أحمر، أسود، كحلي، رمادي</span>
         </div>
 
         <button class="btn-action" id="goToProductPageBtn">عرض صفحة التفاصيل المستقلة ↵</button>
@@ -218,74 +221,67 @@
   </footer>
 
   <script>
-    // ربط صورك الموجودة في GitHub مباشرة بأسماء الملفات المحلية
-    const demoProducts = [
-      {
-        id: "m102",
-        title: "موديل تريكو فاخر 102",
-        code: "M102",
-        price: "$ 5.50",
-        tag: "أحدث الموديلات",
-        colors: "ألوان متعددة",
-        images: [
-          "M102.jpg",
-          "M103.jpg"
-        ]
-      },
-      {
-        id: "m104",
-        title: "موديل تريكو فاخر 104",
-        code: "M104",
-        price: "$ 5.50",
-        tag: "مميز",
-        colors: "ألوان متعددة",
-        images: [
-          "M104.jpg",
-          "M105.jpg"
-        ]
-      }
-    ];
+    let globalProducts = [];
 
-    function renderProducts() {
-      const grid = document.getElementById('productsGrid');
-      grid.innerHTML = demoProducts.map(item => `
-        <div class="product-card" onclick="openModal('${item.id}')">
-          <span class="badge-tag">${item.tag}</span>
-          <div class="product-thumb">
-            <img src="${item.images[0]}" alt="${item.title}" loading="lazy" onerror="this.src='logo.png';">
-          </div>
-          <div class="product-info">
-            <div class="product-title">${item.title}</div>
-            <div class="price-tag">${item.price}</div>
-            <div class="colors-info">الألوان: ${item.colors}</div>
-            <div class="product-code">الكود: ${item.code}</div>
-            <button class="btn-action">عرض التفاصيل الكاملة ↵</button>
-          </div>
-        </div>
-      `).join('');
+    // جلب البيانات مباشرة من ملف products.json
+    async function loadProducts() {
+      try {
+        const response = await fetch('products.json');
+        globalProducts = await response.json();
+        renderProducts(globalProducts);
+      } catch (error) {
+        console.error('خطأ في تحميل ملف المنتجات:', error);
+      }
     }
 
-    function openModal(productId) {
-      const product = demoProducts.find(p => p.id === productId);
+    function renderProducts(products) {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = products.map(item => {
+        // يدعم مصفوفة الصور أو السلسلة العادية
+        const mainImg = Array.isArray(item.images) ? item.images[0] : (item.image || 'M102.jpg');
+        return `
+          <div class="product-card" onclick="openModal('${item.code}')">
+            <span class="badge-tag">${item.tag || 'أحدث الموديلات'}</span>
+            <div class="product-thumb">
+              <img src="${mainImg}" alt="${item.title}" loading="lazy" onerror="this.src='logo.png';">
+            </div>
+            <div class="product-info">
+              <div class="product-title">${item.title}</div>
+              <div class="price-tag">${item.price}</div>
+              <div class="colors-info">الألوان: ${item.colors}</div>
+              <div class="product-code">الكود: ${item.code}</div>
+              <button class="btn-action">عرض التفاصيل الكاملة ↵</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function openModal(productCode) {
+      const product = globalProducts.find(p => p.code === productCode);
       if (!product) return;
+
+      const productImages = Array.isArray(product.images) ? product.images : [product.image || 'M102.jpg'];
 
       document.getElementById('modalTitle').textContent = product.title;
       document.getElementById('modalPrice').textContent = product.price;
       document.getElementById('modalCode').textContent = product.code;
-      document.getElementById('modalTag').textContent = product.tag;
+      document.getElementById('modalFabric').textContent = product.fabric || 'تريكو';
+      document.getElementById('modalSizes').textContent = product.sizes || 'S-M-L-XL';
+      document.getElementById('modalMoq').textContent = product.moq || '350 قطعة';
       document.getElementById('modalColors').textContent = product.colors;
 
       const mainImg = document.getElementById('modalMainImg');
-      mainImg.src = product.images[0];
+      mainImg.src = productImages[0];
 
       document.getElementById('goToProductPageBtn').onclick = function() {
-        window.location.href = `product.html?id=${product.id}`;
+        window.location.href = `product.html?code=${product.code}`;
       };
 
       const thumbsContainer = document.getElementById('modalThumbsList');
-      thumbsContainer.innerHTML = product.images.map((imgUrl, index) => `
+      thumbsContainer.innerHTML = productImages.map((imgUrl, index) => `
         <div class="modal-thumb-item ${index === 0 ? 'active' : ''}" onclick="switchModalImage('${imgUrl}', this)">
-          <img src="${imgUrl}" alt="صورة ${index + 1}">
+          <img src="${imgUrl}" alt="صورة ${index + 1}" onerror="this.src='logo.png';">
         </div>
       `).join('');
 
@@ -295,7 +291,6 @@
     function switchModalImage(imgSrc, thumbElem) {
       const mainImg = document.getElementById('modalMainImg');
       mainImg.src = imgSrc;
-
       document.querySelectorAll('.modal-thumb-item').forEach(el => el.classList.remove('active'));
       thumbElem.classList.add('active');
       resetZoom();
@@ -306,7 +301,7 @@
       resetZoom();
     }
 
-    // تزويم الصورة بالماوس واللمس على الجوال
+    // تزويم الصورة
     const zoomArea = document.getElementById('zoomArea');
     const modalMainImg = document.getElementById('modalMainImg');
 
@@ -314,7 +309,6 @@
       const rect = zoomArea.getBoundingClientRect();
       const x = ((clientX - rect.left) / rect.width) * 100;
       const y = ((clientY - rect.top) / rect.height) * 100;
-      
       modalMainImg.style.transformOrigin = `${x}% ${y}%`;
       modalMainImg.style.transform = 'scale(2)';
     }
@@ -326,15 +320,12 @@
 
     zoomArea.addEventListener('mousemove', (e) => applyZoom(e.clientX, e.clientY));
     zoomArea.addEventListener('mouseleave', resetZoom);
-
     zoomArea.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        applyZoom(e.touches[0].clientX, e.touches[0].clientY);
-      }
+      if (e.touches.length > 0) applyZoom(e.touches[0].clientX, e.touches[0].clientY);
     });
     zoomArea.addEventListener('touchend', resetZoom);
 
-    renderProducts();
+    loadProducts();
   </script>
 </body>
 </html>
