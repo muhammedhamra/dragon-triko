@@ -19,47 +19,104 @@
       --accent-gray: #f1f5f9;
       --border-color: #e2e8f0;
       --radius-lg: 20px;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+      --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; padding-bottom: 40px; }
 
     .container { width: min(1000px, 92%); margin: 0 auto; }
 
+    /* الهيدر */
     header {
-      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 14px 0; margin-bottom: 24px;
+      background: #ffffff; border-bottom: 1px solid var(--border-color); padding: 12px 0; margin-bottom: 24px; box-shadow: var(--shadow-sm);
     }
     .nav { display: flex; align-items: center; justify-content: space-between; }
-    .back-link { text-decoration: none; color: var(--text-main); font-weight: 800; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+    .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text-main); }
+    .brand img { height: 40px; width: auto; border-radius: 6px; }
 
+    /* زر العودة بحواف متحركة خفيفة */
+    .back-btn-wrapper {
+      position: relative; border-radius: 8px; overflow: hidden; padding: 2px; display: inline-flex;
+    }
+    .back-btn-wrapper::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, #d90429, #0f172a, #d90429);
+      animation: rotateGlow 4s linear infinite; z-index: 1;
+    }
+    .back-link {
+      position: relative; z-index: 2; text-decoration: none; color: #ffffff; background: var(--primary-black);
+      font-weight: 800; font-size: 13px; padding: 6px 14px; border-radius: 6px; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* كرت المنتج الرئيسي */
     .product-page {
       display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: #ffffff;
       padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-color);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+      box-shadow: var(--shadow-md);
     }
-    @media (max-width: 768px) { .product-page { grid-template-columns: 1fr; padding: 16px; } }
+    @media (max-width: 768px) { .product-page { grid-template-columns: 1fr; padding: 16px; gap: 20px; } }
 
-    .image-box { width: 100%; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden; background: #f1f5f9; }
-    .image-box img { width: 100%; height: 100%; object-fit: cover; }
+    /* حاوية الصورة مع التزويم */
+    .image-container { display: flex; flex-direction: column; gap: 10px; }
+    .zoom-box {
+      width: 100%; aspect-ratio: 3/4; border-radius: 14px; overflow: hidden;
+      background: #f1f5f9; position: relative; cursor: zoom-in; touch-action: none;
+    }
+    .zoom-box img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      transition: transform 0.2s ease-out; transform-origin: center center;
+    }
+    .zoom-hint {
+      position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.65);
+      color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; pointer-events: none;
+    }
 
-    .details-box { display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+    /* مصغرات الصور */
+    .thumbs-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .thumb-item {
+      width: 65px; height: 80px; border-radius: 8px; border: 2px solid transparent;
+      overflow: hidden; cursor: pointer; flex-shrink: 0; opacity: 0.6; transition: all 0.2s;
+    }
+    .thumb-item.active { border-color: var(--primary-red); opacity: 1; transform: scale(1.03); }
+    .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* صندوق التفاصيل */
+    .details-box { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
     .tag { display: inline-block; background: #ffe5e5; color: var(--primary-red); padding: 4px 12px; border-radius: 99px; font-weight: 800; font-size: 12px; width: fit-content; }
     .title { font-size: 24px; font-weight: 900; color: var(--primary-black); }
     .price { font-size: 22px; font-weight: 900; color: var(--primary-red); }
 
-    .info-list { display: grid; gap: 10px; margin: 10px 0; }
+    .info-list { display: grid; gap: 8px; margin: 6px 0; }
     .info-item {
-      display: flex; justify-content: space-between; padding: 12px 14px;
-      background: var(--accent-gray); border-radius: 10px; font-weight: 700; font-size: 14px;
+      display: flex; justify-content: space-between; padding: 10px 14px;
+      background: var(--accent-gray); border-radius: 10px; font-weight: 700; font-size: 13.5px;
     }
     .info-item span { color: var(--text-muted); }
 
-    .btn-wa-big {
-      background: #25d366; color: #fff; text-decoration: none; text-align: center;
-      padding: 16px; border-radius: 12px; font-weight: 900; font-size: 16px;
-      display: block; transition: transform .2s; margin-top: 10px;
+    /* الأزرار بالحواف الملونة المتحركة (Animated Border Glow) */
+    .glow-btn-wrapper {
+      position: relative; margin-top: 10px; border-radius: 12px; overflow: hidden; padding: 2.5px; display: flex;
     }
-    .btn-wa-big:hover { transform: translateY(-2px); }
+    .glow-btn-wrapper::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: conic-gradient(from 0deg, #25d366, #ff007f, #3a86ef, #25d366);
+      animation: rotateGlow 3s linear infinite; z-index: 1;
+    }
+
+    @keyframes rotateGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .btn-wa-animated {
+      position: relative; z-index: 2; width: 100%; background: #25d366; color: #ffffff;
+      text-decoration: none; text-align: center; padding: 15px; border-radius: 10px;
+      font-weight: 900; font-size: 16px; border: none; cursor: pointer; transition: background 0.3s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-wa-animated:hover { background: #1eb956; }
   </style>
 </head>
 
@@ -68,38 +125,31 @@
   <header>
     <div class="container nav">
       <a class="brand" href="index.html">
-  <img src="logo.png" alt="Dragon Triko" style="height: 42px; width: auto; border-radius: 6px;">
+        <img src="logo.png" alt="Dragon Triko" onerror="this.style.display='none'">
+        <strong style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:18px;">DRAGON TRIKO</strong>
       </a>
       
-      <strong style="font-family:'Montserrat',sans-serif; font-weight:900;">DRAGON TRIKO</strong>
+      <div class="back-btn-wrapper">
+        <a href="index.html" class="back-link">العودة للكتالوج ↵</a>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <div class="product-page" id="productContainer">
-      <div style="text-align:center; padding:40px; grid-column: 1 / -1;">جاري تحميل تفاصيل الموديل...</div>
+      <div style="text-align:center; padding:40px; grid-column: 1 / -1; font-weight:800;">جاري تحميل تفاصيل الموديل...</div>
     </div>
   </main>
 
   <script>
     const WHATSAPP_NUMBER = '905343265940';
 
-    function formatImageUrl(url) {
-      if (!url) return '';
-      url = String(url).trim();
-      const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
-      if (matchId && matchId[1]) {
-        return `https://lh3.googleusercontent.com/d/${matchId[1]}`;
-      }
-      return url;
-    }
-
     async function loadProductDetails() {
       const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
+      const searchKey = urlParams.get('code') || urlParams.get('id');
 
-      if (!productId) {
-        document.getElementById('productContainer').innerHTML = '<div>عفواً، لم يتم تحديد الموديل.</div>';
+      if (!searchKey) {
+        document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">عفواً، لم يتم تحديد الموديل المطلوب.</div>';
         return;
       }
 
@@ -107,33 +157,61 @@
         const response = await fetch('products.json?v=' + new Date().getTime());
         const data = await response.json();
         
-        const item = data.find(p => String(p.id) === String(productId));
+        // البحث عن طريق الكود أولاً ثم عن طريق ID
+        const item = data.find(p => 
+          (p.code && String(p.code).toLowerCase() === String(searchKey).toLowerCase()) ||
+          (p.id && String(p.id) === String(searchKey))
+        );
 
         if (!item) {
-          document.getElementById('productContainer').innerHTML = '<div>عفواً، الموديل غير موجود.</div>';
+          document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">عفواً، الموديل غير موجود بالكتالوج.</div>';
           return;
         }
 
-        const rawImg = item.image || item['الصورة'] || '';
-        const imgUrl = formatImageUrl(rawImg) || 'https://via.placeholder.com/400x530/f1f5f9/0f172a?text=Dragon+Triko';
+        // تجهيز مصفوفة الصور
+        let imagesList = [];
+        if (Array.isArray(item.images) && item.images.length > 0) {
+          imagesList = item.images;
+        } else if (item.image) {
+          imagesList = [item.image];
+        } else {
+          imagesList = ['logo.png'];
+        }
+
         const title = item.title || item['اسم الموديل'] || 'موديل بدون اسم';
         const code = item.code || item['الكود'] || item.id;
         const price = item.price || item['السعر'] || 'غير محدد';
-        const colors = item.colors || item['الألوان'] || item['الوان'] || 'متعددة';
-        const fabric = item.fabric || item['الخامة'] || '-';
-        const sizes = item.sizes || item['المقاسات'] || '-';
-        const moq = item.moq || item['اقل كمية'] || item['أقل كمية'] || '-';
+        const colors = item.colors || item['الألوان'] || 'متعددة';
+        const fabric = item.fabric || item['الخامة'] || 'تريكو';
+        const sizes = item.sizes || item['المقاسات'] || 'S-M-L-XL';
+        const moq = item.moq || item['اقل كمية'] || '350 قطعة';
         const notes = item.notes || item['ملاحظات'] || '-';
-        const tag = item.tag || item['التصنيف'] || 'تريكو';
+        const tag = item.tag || item['التصنيف'] || 'أحدث الموديلات';
 
         const waMsg = encodeURIComponent(`السلام عليكم، أود حجز/طلب موديل: ${title} (الكود: ${code}) بسعر: ${price}`);
 
         document.title = `${title} | Dragon Triko`;
 
-        document.getElementById('productContainer').innerHTML = `
-          <div class="image-box">
-            <img src="${imgUrl}" alt="${title}">
+        // توليد صور المصغرات إذا كانت متعددة
+        const thumbsHTML = imagesList.length > 1 ? `
+          <div class="thumbs-row">
+            ${imagesList.map((img, idx) => `
+              <div class="thumb-item ${idx === 0 ? 'active' : ''}" onclick="changeMainImage('${img}', this)">
+                <img src="${img}" alt="صورة ${idx + 1}" onerror="this.src='logo.png';">
+              </div>
+            `).join('')}
           </div>
+        ` : '';
+
+        document.getElementById('productContainer').innerHTML = `
+          <div class="image-container">
+            <div class="zoom-box" id="detailZoomArea">
+              <img id="detailMainImg" src="${imagesList[0]}" alt="${title}" onerror="this.src='logo.png';">
+              <span class="zoom-hint">🔍 حركي لتكبير الخيوط</span>
+            </div>
+            ${thumbsHTML}
+          </div>
+
           <div class="details-box">
             <span class="tag">${tag}</span>
             <h1 class="title">${title}</h1>
@@ -148,15 +226,57 @@
               <div class="info-item"><span>ملاحظات:</span> <strong>${notes}</strong></div>
             </div>
 
-            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}" target="_blank" class="btn-wa-big">
-              طلب هذا الموديل مباشرة عبر الواتساب
-            </a>
+            <!-- زر الطلب بالحواف الملونة المتحركة -->
+            <div class="glow-btn-wrapper">
+              <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}" target="_blank" class="btn-wa-animated">
+                طلب هذا الموديل مباشرة عبر الواتساب 💬
+              </a>
+            </div>
           </div>
         `;
 
+        initZoomLogic();
+
       } catch (err) {
-        document.getElementById('productContainer').innerHTML = '<div>حدث خطأ أثناء تحميل البيانات.</div>';
+        document.getElementById('productContainer').innerHTML = '<div style="grid-column: 1 / -1; text-align:center;">حدث خطأ أثناء تحميل تفاصيل الموديل.</div>';
       }
+    }
+
+    function changeMainImage(imgSrc, thumbElem) {
+      const mainImg = document.getElementById('detailMainImg');
+      if (mainImg) {
+        mainImg.src = imgSrc;
+        document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
+        thumbElem.classList.add('active');
+        resetDetailZoom();
+      }
+    }
+
+    // منطق التزويم للصورة
+    function initZoomLogic() {
+      const zoomArea = document.getElementById('detailZoomArea');
+      const img = document.getElementById('detailMainImg');
+      if (!zoomArea || !img) return;
+
+      function applyZoom(clientX, clientY) {
+        const rect = zoomArea.getBoundingClientRect();
+        const x = ((clientX - rect.left) / rect.width) * 100;
+        const y = ((clientY - rect.top) / rect.height) * 100;
+        img.style.transformOrigin = `${x}% ${y}%`;
+        img.style.transform = 'scale(2.2)';
+      }
+
+      window.resetDetailZoom = function() {
+        img.style.transform = 'scale(1)';
+        img.style.transformOrigin = 'center center';
+      };
+
+      zoomArea.addEventListener('mousemove', (e) => applyZoom(e.clientX, e.clientY));
+      zoomArea.addEventListener('mouseleave', resetDetailZoom);
+      zoomArea.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) applyZoom(e.touches[0].clientX, e.touches[0].clientY);
+      });
+      zoomArea.addEventListener('touchend', resetDetailZoom);
     }
 
     loadProductDetails();
