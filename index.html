@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Dragon Triko | الكتالوج المطور</title>
+  <title>Dragon Triko | كتالوج التريكو الشتوي</title>
 
   <!-- الخطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
     /* الهيدر */
     .top-bar {
       background: var(--primary-black); color: #fff; text-align: center;
-      padding: 6px 10px; font-size: 11.5px; font-weight: 700;
+      padding: 7px 10px; font-size: 11.5px; font-weight: 700;
     }
 
     header {
@@ -44,8 +44,8 @@
     .nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
     .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-main); }
     .brand-logo-img { height: 42px; width: auto; border-radius: 6px; object-fit: contain; }
-    .brand-text strong { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 17px; color: var(--primary-black); display: block; line-height: 1.1; }
-    .brand-text span { color: var(--primary-red); font-size: 10.5px; font-weight: 800; display: block; }
+    .brand-text strong { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 18px; color: var(--primary-black); display: block; line-height: 1.1; }
+    .brand-text span { color: var(--primary-red); font-size: 11px; font-weight: 800; display: block; }
 
     /* البانر */
     .hero { padding: 16px 0 10px; }
@@ -64,7 +64,7 @@
     /* شبكة المنتجات */
     .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px; }
     @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 8px; } }
+    @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
 
     .product-card {
       background: var(--bg-card); border-radius: var(--radius);
@@ -77,70 +77,28 @@
     .badge-tag {
       position: absolute; top: 8px; right: 8px; z-index: 5;
       background: var(--primary-black); color: #fff;
-      font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 4px;
+      font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px;
     }
 
-    .product-thumb { aspect-ratio: 3/4; background: #f8fafc; overflow: hidden; position: relative; }
-    .product-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .product-thumb { aspect-ratio: 3/4; background: #f1f5f9; overflow: hidden; position: relative; }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 
-    .product-info { padding: 10px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .product-title { font-size: 13.5px; font-weight: 800; color: var(--text-main); }
-    .price-tag { font-size: 15px; font-weight: 900; color: var(--primary-red); }
+    .product-info { padding: 12px; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+    .product-title { font-size: 14px; font-weight: 800; color: var(--text-main); }
+    .price-tag { font-size: 16px; font-weight: 900; color: var(--primary-red); }
     .colors-info { font-size: 11px; color: var(--text-muted); font-weight: 700; }
-    .product-code { font-size: 11px; background: var(--accent-gray); padding: 1px 6px; border-radius: 4px; font-weight: 800; display: inline-block; width: fit-content; }
+    .product-code { font-size: 11px; background: var(--accent-gray); padding: 2px 7px; border-radius: 4px; font-weight: 800; display: inline-block; width: fit-content; }
 
-    /* ======================================================== */
-    /* 3. تأثير الأزرار مع الحواف الملونة المتحركة (Animated Glowing Border) */
-    /* ======================================================== */
-    .glow-btn-wrapper {
-      position: relative;
-      margin-top: 8px;
-      border-radius: 8px;
-      overflow: hidden;
-      padding: 2px; /* سماكة الحافة المتحركة */
-      display: flex;
+    /* زر الأكشن */
+    .btn-action {
+      margin-top: 8px; width: 100%; padding: 10px; border-radius: 8px;
+      background: var(--primary-black); color: #ffffff; text-align: center;
+      font-weight: 800; font-size: 12px; border: none; cursor: pointer;
+      transition: all 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 6px;
     }
+    .btn-action:hover, .btn-action:active { background: var(--primary-red); }
 
-    .glow-btn-wrapper::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%; width: 200%; height: 200%;
-      background: conic-gradient(
-        from 0deg,
-        #d90429, #ff7b00, #ff007f, #3a86ef, #d90429
-      );
-      animation: rotateGlow 3.5s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .glow-btn {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      background: var(--primary-black);
-      color: #ffffff;
-      text-align: center;
-      font-weight: 800;
-      font-size: 11.5px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .glow-btn:hover {
-      background: #1e293b;
-    }
-
-    /* ======================================================== */
-    /* 1 & 2. النافذة والتزويم (Zoom) والصور المتعددة */
-    /* ======================================================== */
+    /* النافذة التفاعلية والتزويم */
     .modal-backdrop {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(5px);
@@ -161,30 +119,20 @@
       border: none; border-radius: 50%; font-size: 18px; cursor: pointer; display: grid; place-items: center;
     }
 
-    /* حاوية التزويم Zoom Container */
     .zoom-container {
       width: 100%; height: 380px; background: #f1f5f9; position: relative;
-      overflow: hidden; cursor: zoom-in;
+      overflow: hidden; cursor: zoom-in; touch-action: none;
     }
-
     .zoom-container img {
       width: 100%; height: 100%; object-fit: cover; object-position: top;
-      transition: transform 0.25s ease-out;
-      transform-origin: center center;
+      transition: transform 0.2s ease-out; transform-origin: center center;
     }
-
-    /* تأثير التكبير عند الوقوف فوق الصورة */
-    .zoom-container:hover img {
-      transform: scale(1.8);
-    }
-
     .zoom-hint {
       position: absolute; bottom: 8px; right: 8px;
-      background: rgba(0, 0, 0, 0.6); color: #fff;
-      font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; pointer-events: none;
+      background: rgba(0, 0, 0, 0.65); color: #fff;
+      font-size: 10px; font-weight: 700; padding: 4px 9px; border-radius: 6px; pointer-events: none;
     }
 
-    /* المصغرات للصوّر المتعددة */
     .modal-thumbs { display: flex; gap: 8px; padding: 10px 14px; overflow-x: auto; background: #fafafa; border-bottom: 1px solid var(--border-color); }
     .modal-thumb-item {
       width: 60px; height: 75px; border-radius: 6px; border: 2px solid transparent;
@@ -211,8 +159,9 @@
 
   <header>
     <div class="container nav">
-      <a class="brand" href="#">
-        <img src="Logo.png" alt="Dragon Triko" class="brand-logo-img" onerror="this.style.display='none'">
+      <a class="brand" href="index.html">
+        <!-- استخدام الشعار الموجود في نفس المجلد مباشرة -->
+        <img src="logo.png" alt="Dragon Triko" class="brand-logo-img" onerror="this.style.display='none'">
         <div class="brand-text">
           <strong>DRAGON TRIKO</strong>
           <span>ألبسة شتوية فاخرة</span>
@@ -226,28 +175,25 @@
       <div class="hero-banner">
         <span class="hero-tag">الكتالوج التفاعلي</span>
         <h1>كتالوج المنتجات بخصائص مطورة</h1>
-        <p>حركي الماوس/الإصبع فوق الصورة لتكبير النسيج، واضغطي على الموديل لاستعراض باقي الصور.</p>
+        <p>حركي الماوس أو الإصبع فوق الصورة لتكبير النسيج، واضغطي على الموديل لاستعراض باقي الألوان.</p>
       </div>
 
       <div class="grid" id="productsGrid"></div>
     </div>
   </main>
 
-  <!-- النافذة التفاعلية (Modal) -->
+  <!-- النافذة التفاعلية -->
   <div class="modal-backdrop" id="productModal">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">×</button>
       
-      <!-- منطقة الصورة والتزويم -->
-      <div class="zoom-container" id="zoomArea" onmousemove="handleZoom(event)" onmouseleave="resetZoom()">
+      <div class="zoom-container" id="zoomArea">
         <img id="modalMainImg" src="" alt="الموديل">
-        <span class="zoom-hint">🔍 مرري للتكبير</span>
+        <span class="zoom-hint">🔍 مرري لتكبير خيوط التريكو</span>
       </div>
 
-      <!-- المعرض المصغر للصور المتعددة -->
       <div class="modal-thumbs" id="modalThumbsList"></div>
 
-      <!-- تفاصيل الموديل -->
       <div class="modal-body">
         <div class="modal-title-row">
           <div class="modal-title" id="modalTitle">اسم الموديل</div>
@@ -255,80 +201,70 @@
         </div>
 
         <div class="spec-box">
-          الكود: <span id="modalCode">m100</span> | التصنيف: <span id="modalTag">بولو</span>
+          الكود: <span id="modalCode">m102</span> | التصنيف: <span id="modalTag">تريكو شتوي</span>
         </div>
 
         <div class="spec-box">
-          الألوان والخيارات المتاحة: <span id="modalColors">كحلي، أحمر، رمادي</span>
+          الألوان المتاحة: <span id="modalColors">متعدد الألوان</span>
         </div>
 
-        <!-- زر الطلب مع الحواف المضيئة والمتحركة -->
-        <div class="glow-btn-wrapper">
-          <button class="glow-btn" onclick="alert('تم اختيار الموديل للطلب!')">تأكيد طلب هذا الموديل ↵</button>
-        </div>
+        <button class="btn-action" id="goToProductPageBtn">عرض صفحة التفاصيل المستقلة ↵</button>
       </div>
     </div>
   </div>
 
   <footer>
-    <div class="container">جميع الحقوق محفوظة © Dragon Triko 2026</div>
+    <div class="container">جميع الحقوق محفوظة Dragon Triko 2026 ©</div>
   </footer>
 
   <script>
-    // 1. مصفوفة المنتجات (تحتوي على صور متعددة لكل موديل)
+    // ربط صورك الموجودة في GitHub مباشرة بأسماء الملفات المحلية
     const demoProducts = [
       {
-        id: "m100",
-        title: "ظفر بولو",
-        code: "m100",
+        id: "m102",
+        title: "موديل تريكو فاخر 102",
+        code: "M102",
         price: "$ 5.50",
         tag: "أحدث الموديلات",
-        colors: "أحمر / كحلي / رمادي",
+        colors: "ألوان متعددة",
         images: [
-          "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80",
-          "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&auto=format&fit=crop&q=80",
-          "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&auto=format&fit=crop&q=80"
+          "M102.jpg",
+          "M103.jpg"
         ]
       },
       {
-        id: "m101",
-        title: "Casablanca",
-        code: "m101",
+        id: "m104",
+        title: "موديل تريكو فاخر 104",
+        code: "M104",
         price: "$ 5.50",
-        tag: "أحدث الموديلات",
-        colors: "بيج / بني / أسود",
+        tag: "مميز",
+        colors: "ألوان متعددة",
         images: [
-          "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&auto=format&fit=crop&q=80",
-          "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&auto=format&fit=crop&q=80"
+          "M104.jpg",
+          "M105.jpg"
         ]
       }
     ];
 
-    // عرض المنتجات
     function renderProducts() {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = demoProducts.map(item => `
         <div class="product-card" onclick="openModal('${item.id}')">
           <span class="badge-tag">${item.tag}</span>
           <div class="product-thumb">
-            <img src="${item.images[0]}" alt="${item.title}" loading="lazy">
+            <img src="${item.images[0]}" alt="${item.title}" loading="lazy" onerror="this.src='logo.png';">
           </div>
           <div class="product-info">
             <div class="product-title">${item.title}</div>
             <div class="price-tag">${item.price}</div>
             <div class="colors-info">الألوان: ${item.colors}</div>
             <div class="product-code">الكود: ${item.code}</div>
-            
-            <!-- زر تحسين الحواف المتحركة -->
-            <div class="glow-btn-wrapper">
-              <button class="glow-btn">عرض التفاصيل الكاملة ↵</button>
-            </div>
+            <button class="btn-action">عرض التفاصيل الكاملة ↵</button>
           </div>
         </div>
       `).join('');
     }
 
-    // فتح النافذة وعرض الصور المتعددة
     function openModal(productId) {
       const product = demoProducts.find(p => p.id === productId);
       if (!product) return;
@@ -342,7 +278,10 @@
       const mainImg = document.getElementById('modalMainImg');
       mainImg.src = product.images[0];
 
-      // إنشاء شريط الصور المصغرة
+      document.getElementById('goToProductPageBtn').onclick = function() {
+        window.location.href = `product.html?id=${product.id}`;
+      };
+
       const thumbsContainer = document.getElementById('modalThumbsList');
       thumbsContainer.innerHTML = product.images.map((imgUrl, index) => `
         <div class="modal-thumb-item ${index === 0 ? 'active' : ''}" onclick="switchModalImage('${imgUrl}', this)">
@@ -359,6 +298,7 @@
 
       document.querySelectorAll('.modal-thumb-item').forEach(el => el.classList.remove('active'));
       thumbElem.classList.add('active');
+      resetZoom();
     }
 
     function closeModal() {
@@ -366,22 +306,33 @@
       resetZoom();
     }
 
-    // 2. منطق التزويم المباشر (Zoom) بتبعية حركة الماوس
-    function handleZoom(e) {
-      const container = document.getElementById('zoomArea');
-      const img = document.getElementById('modalMainImg');
-      const rect = container.getBoundingClientRect();
+    // تزويم الصورة بالماوس واللمس على الجوال
+    const zoomArea = document.getElementById('zoomArea');
+    const modalMainImg = document.getElementById('modalMainImg');
 
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-      img.style.transformOrigin = `${x}% ${y}%`;
+    function applyZoom(clientX, clientY) {
+      const rect = zoomArea.getBoundingClientRect();
+      const x = ((clientX - rect.left) / rect.width) * 100;
+      const y = ((clientY - rect.top) / rect.height) * 100;
+      
+      modalMainImg.style.transformOrigin = `${x}% ${y}%`;
+      modalMainImg.style.transform = 'scale(2)';
     }
 
     function resetZoom() {
-      const img = document.getElementById('modalMainImg');
-      img.style.transformOrigin = `center center`;
+      modalMainImg.style.transform = 'scale(1)';
+      modalMainImg.style.transformOrigin = 'center center';
     }
+
+    zoomArea.addEventListener('mousemove', (e) => applyZoom(e.clientX, e.clientY));
+    zoomArea.addEventListener('mouseleave', resetZoom);
+
+    zoomArea.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        applyZoom(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    });
+    zoomArea.addEventListener('touchend', resetZoom);
 
     renderProducts();
   </script>
