@@ -90,26 +90,150 @@
     .product-code { font-size: 11px; background: var(--accent-gray); padding: 2px 7px; border-radius: 4px; font-weight: 800; display: inline-block; width: fit-content; }
 
     /* الأزرار بحواف ملونة متحركة */
-    .glow-btn-wrapper {
-      position: relative; margin-top: 8px; border-radius: 8px; overflow: hidden; padding: 2px; display: flex;
-    }
-    .glow-btn-wrapper::before {
-      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, #d90429, #0f172a, #ff007f, #d90429);
-      animation: rotateGlow 3.5s linear infinite; z-index: 1;
-    }
-    @keyframes rotateGlow {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
+    
+/* ===== أزرار Dragon Triko بإضاءة نيون احترافية ===== */
 
-    .btn-action {
-      position: relative; z-index: 2; width: 100%; padding: 9px; border-radius: 6px;
-      background: var(--primary-black); color: #ffffff; text-align: center;
-      font-weight: 800; font-size: 11.5px; border: none; cursor: pointer;
-      transition: background 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
-    .btn-action:hover { background: #1e293b; }
+.glow-btn-wrapper {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+  padding: 2px;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* طبقة الألوان الدوارة */
+.glow-btn-wrapper::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: conic-gradient(
+    from 0deg,
+    #0f172a 0deg,
+    #d90429 65deg,
+    #ff007f 120deg,
+    #ffffff 145deg,
+    #ff007f 180deg,
+    #d90429 240deg,
+    #0f172a 300deg,
+    #0f172a 360deg
+  );
+  animation: dragonGlowRotate 3.5s linear infinite;
+}
+
+/* الزر الداخلي */
+.btn-action {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 8px;
+
+  border: none;
+  border-radius: 7px;
+  background: linear-gradient(
+    135deg,
+    #0f172a 0%,
+    #172033 55%,
+    #0f172a 100%
+  );
+
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 900;
+  line-height: 1.6;
+  text-align: center;
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* دوران الحواف */
+@keyframes dragonGlowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* توهج عند المرور */
+.glow-btn-wrapper:hover {
+  box-shadow:
+    0 0 8px rgba(217, 4, 41, 0.35),
+    0 0 18px rgba(255, 0, 127, 0.18);
+  transform: translateY(-1px);
+}
+
+.glow-btn-wrapper:hover .btn-action {
+  background: linear-gradient(
+    135deg,
+    #202c43,
+    #281323,
+    #202c43
+  );
+}
+
+/* تأثير الضغط */
+.glow-btn-wrapper:active {
+  transform: scale(0.985);
+}
+
+/* التركيز بلوحة المفاتيح */
+.btn-action:focus-visible {
+  outline: 2px solid #ff4d94;
+  outline-offset: -4px;
+}
+
+/* الهواتف */
+@media (max-width: 640px) {
+  .glow-btn-wrapper {
+    margin-top: 8px;
+  }
+
+  .btn-action {
+    min-height: 42px;
+    padding: 9px 5px;
+    font-size: 11px;
+  }
+}
+
+/* تقليل الحركة حسب إعدادات الجهاز */
+@media (prefers-reduced-motion: reduce) {
+  .glow-btn-wrapper,
+  .btn-action {
+    transition: none;
+  }
+
+  .glow-btn-wrapper::before {
+    animation: none;
+    background: linear-gradient(
+      135deg,
+      #d90429,
+      #ff007f,
+      #d90429
+    );
+  }
+}
 
     footer { text-align: center; padding: 25px 0; color: var(--text-muted); font-size: 12px; font-weight: 700; margin-top: 30px; }
   </style>
