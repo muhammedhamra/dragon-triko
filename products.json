@@ -164,5 +164,20 @@
     "images": [
       "M110.png"
     ]
+  },
+  {
+    "id": "12",
+    "title": "polo yaka renkli  ",
+    "code": "m111",
+    "tag": "polo",
+    "fabric": "بوليستر",
+    "sizes": "S - M - L-XL",
+    "moq": "400 قطعة",
+    "price": "🔥",
+    "colors": "أسود ،أخضر ،أبيض ،بيج ،كحلي ،خمري ،بني ،ريشي",
+    "notes": "كنزت شتوية ",
+    "images": [
+      "M111.png"
+    ]
   }
 ]
