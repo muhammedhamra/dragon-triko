@@ -183,7 +183,7 @@
   {
     "id": "13",
     "title": " لوربيان ظفر ",
-    "code": "m111",
+    "code": "m112",
     "tag": "لوربيان",
     "fabric": "بوليستر",
     "sizes": "S - M - L-XL",
@@ -196,9 +196,9 @@
     ]
   },
   {
-    "id": "13",
+    "id": "14",
     "title": " polo fitli balkgi ",
-    "code": "m111",
+    "code": "m113",
     "tag": "polo",
     "fabric": "بوليستر",
     "sizes": "S - M - L-XL",
@@ -208,6 +208,21 @@
     "notes": "كنزت شتوية ",
     "images": [
       "M113.jpg"
+    ]
+  },
+  {
+    "id": "15",
+    "title": " polo saç örgü",
+    "code": "m114",
+    "tag": "polo",
+    "fabric": "بوليستر",
+    "sizes": "S - M - L-XL",
+    "moq": "400 قطعة",
+    "price": "🔥",
+    "colors": "أسود ،أخضر ،أبيض ،بيج ،كحلي ،خمري ،بني ،ريشي",
+    "notes": "كنزت شتوية ",
+    "images": [
+      "M114.jpg"
     ]
   }
 ]
